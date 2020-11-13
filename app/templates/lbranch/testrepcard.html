@@ -1,0 +1,54 @@
+{% extends "newbase.html" %}
+
+{% block content %}
+
+<<<<<<< HEAD
+<div class='repcard-wrapper'>
+</div>
+
+<style>
+	.repcard-wrapper{margin:10px;width:300px;height:400px;box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);}
+</style>
+
+=======
+<div class='repcard-wrapper R-background'>
+	<div class='rc-head'>
+		<div class='rc-head-pic'></div>
+		<div class='rc-head-text'><h3 class='pol-name-wrap'>{{politicianname}}</h3>District: {{politiciandistrict}}<br>Party:<br>Years In Office:</div>
+		<div class='rc-head-socialmedia'>
+			<a href='https://www.facebook.com/' target='blank'><img src='/images/rep-card-facebook.png' class='rc-head-smimg'></a>
+			<a href='https://www.twitter.com/' target='blank'><img src='/images/rep-card-twitter.png' class='rc-head-smimg'></a>
+			<a href='' target='blank'><img src='/images/rep-card-web.png' class='rc-head-smimg'></a>
+		</div>
+	</div>
+
+	<div class='rc-content'>
+		Party Loyalty 80%
+		<div class='rc-content-bar-wrapper'>
+			<div class='rc-content-bar' style='width:80%'></div>
+		</div><br>
+		Attendance 90%
+		<div class='rc-content-bar-wrapper'>
+			<div class='rc-content-bar' style='width:90%'></div>
+		</div><br>
+
+		<h3>Bills</h3>
+		<div class='rc-content-billnums'>
+			Sponsored: <span class='number'>6</span><br>
+			Co-sponsored: <span class='number'>54</span>
+		</div>
+		<br>
+		Sponsored and Co-sponsored Enacted 20%
+		<div class='rc-content-bar-wrapper'>
+			<div class='rc-content-bar' style='width:20%'></div>
+		</div><br>
+
+	</div>
+
+	<div class='rc-foot'>
+		Call: (502) 867-5309
+	</div>
+</div>
+>>>>>>> a1371101682c01cf4aee362704fc9ed9be7080c7
+
+{% endblock %}

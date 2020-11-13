@@ -1,0 +1,534 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id='bipanel' ng-controller='LegislativeController' ng-init='legislativeInit()'>
+	<div id='mob-menu-close' ng-click='mob_menu_close(); $event.stopPropagation();' ng-show='mob_closer == 1'>X</div>
+	<div id='leftpanel' class='whiteback'>
+		<div id='tab-wrapper'>
+			<div id='tab1-select' ng-if='legislatbill' ng-click='legislatorTab()' class='leftpanel-tab'>Legislators</div>
+			<div id='tab2-select' ng-if='!legislatbill' ng-click='billTab()' class='leftpanel-tab'>Bills</div>
+		</div>
+		<div id='bill-header-wrap'>
+			<div id='bill-header-track-switch' ng-show='!isTrackedBill' ng-click='isTrackedBill = true'>Tracked Bills</div>
+			<div id='bill-header-all-switch' ng-show='isTrackedBill' ng-click='isTrackedBill = false'>All Bills</div>
+			<div id='bill-header-filter-button' class='bill-header-circle' ng-click='filtersortbutton(1)'><img src='/images/buttons/filter64x64.png'></div>
+			<div id='bill-header-sort-button' class='bill-header-circle' ng-click='filtersortbutton(2)'><img src='/images/buttons/sort64x64.png'></div>
+		</div>
+		<div id='leftpanel-1' class='leftpanel-container' ng-show='current_leftpanel == 1'>
+			<div class='left-panel-search-wrap' ng-click='mob_menu_raise()'>
+				<img src='/images/search_mag_glass.png' class='text-search-img'>
+				<input type="text" class='text-search' ng-model='queryTerm' ng-model-options="{debounce: 500}" ng-change="runRepsQuery(queryTerm)" placeholder='Representative Search'>
+				<div class='z-index-3 search-panel' ng-show='queryTerm.length > 0'>
+					<div ng-repeat="results in searchResultsR track by $index">
+						<div class='bill-result-head' ng-click="repsPressed([[results.bioguide_id]])">[[results.name]]&nbsp([[results.party]])&nbsp-&nbsp[[results.state_code]]:[[results.real_distrank]]</div>
+					</div>
+				</div>
+			</div>
+			<h3>My Legislators <span ng-show='$parent.district'>[[ $parent.district ]]</span></h3>
+			<div class='blue-ghost-btn leftpanel-btn' ng-if='$parent.district == "" || $parent.district == null' ng-click="get_settings()">Find My Legislators</div>
+			<div id='reps-module' class='module-left' ng-if='$parent.district != "" && $parent.district != null'>
+				<!--<h3 class='module-title'>My Legislators </h3>-->
+				<div class='left-legislator-wrapper' ng-click='get_legislator("hr", "main")'>
+					<div id='hr-pic-wrapper' class='legislator-pic-wrapper [[$parent.legislators.hr.party]]-border' style='background:url("/images/headshots/[[$parent.legislators.hr.pic]].png");'></div>
+					<div class='legislator-info'>
+						<b>House Representative</b></br>
+						[[$parent.legislators.hr.name]]
+					</div>
+				</div>
+				<div class='left-legislator-wrapper' ng-click='get_legislator("ss", "main")'>
+					<div id='ss-pic-wrapper' class='legislator-pic-wrapper [[$parent.legislators.ss.party]]-border' style='background:url("/images/headshots/[[$parent.legislators.ss.pic]].png");'></div>
+					<div class='legislator-info'>
+						<b>Senior Senator</b></br>
+						[[$parent.legislators.ss.name]]
+					</div>
+				</div>
+				<div class='left-legislator-wrapper' ng-click='get_legislator("js", "main")'>
+					<div id='js-pic-wrapper' class='legislator-pic-wrapper [[$parent.legislators.js.party]]-border' style='background:url("/images/headshots/[[$parent.legislators.js.pic]].png");'></div>
+					<div class='legislator-info'>
+						<b>Junior Senator</b></br>
+						[[$parent.legislators.js.name]]
+					</div>
+				</div>
+				<div style='position:relative;height:30px;'>
+					<div class='left-legislator-wrapper' ng-click='get_all_legislators()' style='position:absolute;left:0px;color:#376cea;font-size:16px;font-weight:bold;display:block'>See All</div>
+					<div class='left-legislator-wrapper' ng-click='get_settings()' style='position:absolute;right:0px;color:#376cea;font-size:16px;font-weight:bold;display:block'>Change District</div>
+				</div>
+			</div>
+			<h3>Congressional Leadership</h3>
+			<div id='leadership-module'>
+				<div class='left-legislator-wrapper' ng-click='get_legislator("house-speaker", "main")'>
+					<div id='house-speaker-pic-wrapper' class='legislator-pic-wrapper [[$parent.legislators.speaker.party]]-border' style='background:url("/images/headshots/[[$parent.legislators.speaker.pic]].png");'></div>
+					<div class='legislator-info'>
+						<b>Speaker for the House</b></br>
+						[[$parent.legislators.speaker.name]]
+					</div>
+				</div>
+				<div class='left-legislator-wrapper' ng-click='get_legislator("senate-leader", "main")'>
+					<div id='senate-leader-pic-wrapper' class='legislator-pic-wrapper [[$parent.legislators.leader.party]]-border' style='background:url("/images/headshots/[[$parent.legislators.leader.pic]].png");'></div>
+					<div class='legislator-info'>
+						<b>Senate Majority Leader</b></br>
+						[[$parent.legislators.leader.name]]
+					</div>
+				</div>
+			</div>
+			<div style='height:20px;margin-top:30px;text-align:center;font-weight:bold;'>**Rep data covers 1/1/2011 - 11/21/2016**</div>
+		</div>
+		<div id='leftpanel-2' class='leftpanel-container' ng-show='current_leftpanel == 2'>
+			<div class='left-panel-search-wrap' ng-click='mob_menu_raise()'>
+				{#h3 style='text-align:center;margin:5px 0px'>Data Search</h3>#}
+				<img src='/images/search_mag_glass.png' class='text-search-img'>
+				<input type="text" class='text-search' ng-model='queryTerm' ng-model-options="{debounce: 500}" ng-change="runBillQuery(queryTerm)" placeholder='Bill Search'>
+				<div class='z-index-3 search-panel' ng-show='queryTerm.length > 0'>
+					<div ng-repeat="results in searchResultsB track by $index">
+						<div class='bill-result-head' ng-click="billPressed(results.bill_id)">[[results.official_title]]</div>
+						<div style='margin-bottom:5px;'>[[results.summary]]</div>
+					</div>
+				</div>
+			</div>
+			{#<div id='tracked-bills-module' class='module-left' style='min-height:100px'>
+				<h3>Recently Tracked Bills</h3>
+				<ul id='left-panel-tracked' bind-unsafe-html="left_panel_tracking">
+				</ul>
+				<div class='module-action-button' ng-click="get_bill_tracking()">See All Tracked Bills</div>
+								<div id='reps-module-obscure' class='module-obscure' ng-if='user.bills_tracked == null'>
+					<div id='reps-blue-action-button' class='module-obscure-button blue-action-button' ng-click='get_bill_tracking()'>Track Important Bills</div>
+				</div>
+				
+			</div>#}
+			<h2 class='panel-title'>Bills Before Our Congress</h2>
+
+			{% for bill in bills %}
+				<div class='module'>
+					<div class='rp-bill-name' ng-click="get_bill('{{ bill.bill_id }}')">{{bill.official_title}}</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div id='leftpanel-clear-background' style='z-index:100;position:fixed;width:100%;height:100%;top:0px;left:0px;' ng-if='current_leftpanel == 3' ng-click='closeFilterSort()'></div>
+		<div id='leftpanel-3' class='leftpanel-container z-index-1' ng-show='current_leftpanel == 3'>
+			<div class='scrnsht-popup-close' style='z-index:20;' ng-click='closeFilterSort()'>X</div>
+			<div id='bill-left-filter-panel' ng-if='filtersort'>
+				<h2 style='text-align:center;margin-top:5px;'>Filter</h2>
+				<div style='display:flex;margin:10px 0 20px;'>
+					<input type='text' id='bill-left-name-search' class='search-text-box' name='namesearch' ng-model='billsearch.namesearch' ng-model-options="{debounce: 500}" placeholder='Search by Bill Name'>
+					<div id='bill-left-search-button'><img src='/images/search_mag_glass.png'></div>
+				</div>
+				<div style='height:1px;background:#c9c9c9;width:90%;margin-left:5%;'></div>
+				<div style='margin:20px 0px 5px;font-weight:bold;font-size:115%;'>Pick a Topic:</div>
+				<select id='bill-left-search-topic'>
+					<option value='test'>None</option>
+					<option value='test1'>test1</option>
+					<option value='test2'>test2</option>
+					<option value='test3'>test3</option>
+				</select>
+				<div style='margin:10px 0px 5px;font-weight:bold;font-size:115%;'>Years:</div>
+				<div style='display:flex;margin-bottom:10px;'>
+					<div id='bill-left-start-year'>Start year:&nbsp<input id='bill-left-start-year-box' name='startyear' class='search-text-box' ng-model='billsearch.startyear' ng-model-options="{debounce: 500}" type='text' placeholder='2011'></div>
+					<div id='bill-left-end-year'>End year:&nbsp&nbsp&nbsp<input id='bill-left-end-year-box' name='endyear' class='search-text-box' ng-model='billsearch.endyear' ng-model-options="{debounce: 500}" type='text' placeholder='2017'></div>
+				</div>
+				<div style='margin:20px 0px 5px;font-weight:bold;font-size:115%;'>Bill Sponsor Search:</div>
+				<input type='text' id='bill-left-sponsor-search' name='sponsearch' class='search-text-box' ng-model='tempsearch.tempsponsor' ng-model-options="{debounce: 500}" ng-change="runRepsQuery(tempsearch.tempsponsor)" placeholder='Sponsor Name' value="">
+				<div class='z-index-3 search-panel-2' ng-show='tempsearch.tempsponsor.length > 0 && showsponsearch'>
+					<div ng-repeat="results in searchResultsR track by $index">
+						<div class='bill-result-head' ng-click='setFilterID(results)'>[[results.name]]&nbsp([[results.party]])&nbsp-&nbsp[[results.state_code]]:[[results.real_distrank]]</div>
+					</div>
+				</div>
+				<div style='display:flex;position:relative;margin-bottom:10px;'>
+					<div id='bill-left-is-sponsor'><input type='checkbox' name='isspon' ng-click='billCheckBox("spo")' ng-checked='billsearch.isspon == 1'>Sponsor</div>
+					<div id='bill-left-is-cosponsor'><input type='checkbox' name='iscospon' ng-click='billCheckBox("cos")'>Co-sponsor</div>
+				</div>
+				<div id='bill-left-status-wrap'>
+					<div style='font-weight:bold;font-size:115%;'>Bill Status:</div>
+					<div style='display:flex;'>
+						<div id='bill-left-status-active'><input type='checkbox' ng-checked='billsearch.statusact == 1' name='statusact' ng-click='billCheckBox("act")'>Active</div>
+						<div id='bill-left-status-inactive'><input type='checkbox' ng-checked='billsearch.statusina == 1' name='statusina' ng-click='billCheckBox("ina")'>Inactive</div>
+						<div id='bill-left-status-passed'><input type='checkbox' ng-checked='billsearch.statuslaw == 1' name='statuslaw' ng-click='billCheckBox("law")'>Law</div>
+					</div>
+				</div>
+				<div style='margin:20px 0px 5px;font-weight:bold;font-size:115%;'>Select a Committee:</div>
+				<select name='committee' ng-model='billsearch.committee' id='bill-left-search-commit'>
+					<option value='all'>All Committees</option>
+					<option value='HSHM'>HC Homeland Security</option>
+					<option value='HLIG'>HC Intelligence</option>
+					<option value='HSSM'>HC Small Business</option>
+					<option value='HSBU'>HC Budget</option>
+					<option value='HSWM'>HC Ways and Means</option>
+					<option value='HSVR'>HC Veterans Affairs</option>
+					<option value='HSSY'>HC Science, Space, and Technology</option>
+					<option value='HSRU'>HC Rules</option>
+					<option value='HSPW'>HC Transportation and Infrastructure</option>
+					<option value='HSJU'>HC Judiciary</option>
+					<option value='HSIF'>HC Energy and Commerce</option>
+					<option value='HSII'>HC Natural Resources</option>
+					<option value='HSHA'>HC House Administration</option>
+					<option value='HSGO'>HC Oversight and Government Reform</option>
+					<option value='HSFA'>HC Foreign Affairs</option>
+					<option value='HSED'>HC Education and the Workforce</option>
+					<option value='HSBA'>HC Financial Services</option>
+					<option value='HSAS'>HC Armed Services</option>
+					<option value='HSAP'>HC Appropriations</option>
+					<option value='HSAG'>HC Agriculture</option>
+					<option value='HSSO'>HC Ethics</option>
+					<option value='JSTX'>JC Taxation</option>
+					<option value='JSPR'>JC Printing</option>
+					<option value='JSLC'>JC Library</option>
+					<option value='JSEC'>Joint Economic Committee</option>
+					<option value='JCSE'>Joint Commission on Security and Cooperation in Europe</option>
+					<option value='SSSB'>SC Small Business and Entrepreneurship</option>
+					<option value='SLIA'>SC Indian Affairs</option>
+					<option value='SLET'>SC Ethics</option>
+					<option value='SLIN'>SC Intelligence</option>
+					<option value='SSVA'>SC Veterans Affairs</option>
+					<option value='SSRA'>SC Rules and Administration</option>
+					<option value='SSEV'>SC Environment and Public Works</option>
+					<option value='SSHR'>SC Health, Education, Labor, and Pensions</option>
+					<option value='SSJU'>SC Judiciary</option>
+					<option value='SSEG'>SC Energe and Natural Resources</option>
+					<option value='SSGA'>SC Homeland Security and Governmental Affairs</option>
+					<option value='SSFR'>SC Foreign Relations</option>
+					<option value='SSFI'>SC Finance</option>
+					<option value='SSCM'>SC Commerce, Science, and Transportation</option>
+					<option value='SSBU'>SC Budget</option>
+					<option value='SSBK'>SC Banking, Housing, and Urban Affairs</option>
+					<option value='SSAS'>SC Armed Services</option>
+					<option value='SSAP'>SC Appropriations</option>
+					<option value='SSAF'>SC Agriculture, Nutrition, and Forestry</option>
+					<option value='SPAG'>SC Aging</option>
+					<option value='SCNC'>SC Caucus on International Narcotics Control</option>
+				</select>
+			</div>
+			<div id='bill-left-sort-panel' ng-if='!filtersort'>
+				{#<h2 style='text-align:center;margin-top:5px;'>Sort</h2>#}
+				<div id='bill-left-sort-1' style='font-weight:[[ sortbackground[0] ]];' ng-model='billsearch.sort' ng-click='setSortOrder(0)' class='bill-left-sort-cat'>By Date Newest First</div>
+				<div id='bill-left-sort-2' style='font-weight:[[ sortbackground[1] ]];' ng-model='billsearch.sort' ng-click='setSortOrder(1)' class='bill-left-sort-cat'>By Date Oldest First</div>
+				<div id='bill-left-sort-3' style='font-weight:[[ sortbackground[2] ]];' ng-model='billsearch.sort' ng-click='setSortOrder(2)' class='bill-left-sort-cat'>By Popularity</div>
+			</div>
+		</div>
+	</div>
+
+	<div id='mainpanel' bind-unsafe-html='mainpanel' style='[[newbillsmainpanelstyle]]' ng-if='showAllLegislators == false || !legislatbill'></div>
+
+	<div id='alllegislators' ng-if='showAllLegislators && legislatbill'>
+		{#<div id='alllegislatortop' ng-if='alllegislatortop != "skip"' bind-unsafe-html='alllegislatortop'></div>#}
+		<div id='legislator1' bind-unsafe-html='legislator1' style='margin-bottom:100px'>Leg 1</div>
+		<div id='legislator2' bind-unsafe-html='legislator2' style='margin-bottom:100px'>Leg 2</div>
+		<div id='legislator3' bind-unsafe-html='legislator3' style='margin-bottom:100px'>Leg 3</div>
+	</div>
+
+	<div id='bill-detail-wrap' bind-unsafe-html='singlebillinfo' ng-show='!showBillDetail'>
+		<div id='bill-detail-background' ng-click='changeBillDetail(0, -1)'></div>
+		<div id='bill-detail-box-left' ng-click='billInfoSlider(1, 0)'>
+		</div>
+		<div id='bill-detail-container' ng-click='changeBillDetail(0, -1)' ng-style='billDetailContainerStyle'>
+			<div id='bill-detail-box-1' class='bill-detail-box' ng-click='stopEventProp($event)'>
+				<div class='bill-detail-box-header'>
+					<div class='bill-detail-box-single-head box-header-selected' ng-click='billInfoSlider(2, 1)'>Background</div>
+					<div class='bill-detail-box-single-head' ng-click='billInfoSlider(2, 2)'>Bill Info</div>
+					<div class='bill-detail-box-single-head' ng-click='billInfoSlider(2, 3)'>Vote Record</div>
+					{#<div class='bill-detail-box-single-head' ng-click='billInfoSlider(2, 4)'>Other Info</div>#}
+				</div>
+				<h1 style='width:100%;text-align:center;line-height:35px;'>[[billmaster[curbillselection].bill.bill_id.toUpperCase() ]]: [[billmaster[curbillselection].billtitle ]][[billmaster[curbillselection].billtitle2 ]]</h1>
+				<div class='bill-basic-info-text4' style='width:60%;margin:50px auto 30px;'>
+					<div class='bill-detail-sponsor-pic-wrapper [[billmaster[curbillselection].sponparty]]-border' style='background:url("/images/headshots/[[billmaster[curbillselection].sponimg]].png");'></div>
+					<div style='margin-left:50px;width:calc(100% - 176px);'>
+						<h2>Sponsor:&nbsp&nbsp[[billmaster[curbillselection].sponsorname.trim()]]</h2>
+						<div id='bill-detail-sponsor-data'>SPONSOR DATA HERE</div>
+					</div>
+				</div>
+				<div class='bill-basic-info-text7'>
+					<h2>Cosponsors:</h2>
+					<div id='bill-detail-cosponsors' bind-unsafe-html='billdetailcosponsors'></div>
+				</div>
+				<div class='bill-basic-info-text7'>
+					<h2>Committees:</h2>
+					<div style='font-size:110%;' bind-unsafe-html='billdetailcommittees'></div>
+				</div>
+				<div class='bill-basic-info-text7'>
+					<h2>Amendments:</h2>
+					<div style='font-size:110%;' bind-unsafe-html='billdetailamendments'></div>
+				</div>
+			</div>
+			<div id='bill-detail-box-2' class='bill-detail-box' ng-click='stopEventProp($event)'>
+				<div class='bill-detail-box-header'>
+					<div class='bill-detail-box-single-head' ng-click='billInfoSlider(2, 1)'>Background</div>
+					<div class='bill-detail-box-single-head box-header-selected' ng-click='billInfoSlider(2, 2)'>Bill Info</div>
+					<div class='bill-detail-box-single-head' ng-click='billInfoSlider(2, 3)'>Vote Record</div>
+					{#<div class='bill-detail-box-single-head' ng-click='billInfoSlider(2, 4)'>Other Info</div>#}
+				</div>
+				<h1 style='width:100%;text-align:center;line-height:35px;'>[[billmaster[curbillselection].bill.bill_id.toUpperCase() ]]: [[billmaster[curbillselection].billtitle ]][[billmaster[curbillselection].billtitle2 ]]</h1>
+				<div class='bill-summary-progress-wrap'>
+					<div class='bill-summary-progress-bar'>
+						<div class='bill-summary-progress-unit [[billmaster[curbillselection].progressbarcolor[0] ]]'>
+							Proposed
+						</div>
+						<div class='bill-summary-progress-unit [[billmaster[curbillselection].progressbarcolor[1] ]]'>
+							In Committee
+						</div>
+						<div class='bill-summary-progress-unit [[billmaster[curbillselection].progressbarcolor[2] ]]'>
+							In House
+						</div>
+						<div class='bill-summary-progress-unit [[billmaster[curbillselection].progressbarcolor[3] ]]'>
+							In Senate
+						</div>
+						<div class='bill-summary-progress-unit [[billmaster[curbillselection].progressbarcolor[4] ]]'>
+							To President
+						</div>
+						<div class='bill-summary-progress-unit [[billmaster[ curbillselection].progressbarcolor[5] ]]'>
+							Enacted
+						</div>
+					</div>
+					<div class='bill-summary-progress-pointer'>
+					</div>
+				</div>
+				<div class='bill-basic-info-text3'>
+					<div class='bill-basic-info-text0'>
+						<div class='bill-basic-info-text5'>
+							<div class='bill-basic-info-text5'>
+								<h3>Bill ID:</h3>[[billmaster[curbillselection].bill.bill_id]]
+							</div>
+							<div class='bill-basic-info-text5'>
+								<h3>Introduced On:</h3>[[ monthCode[billmaster[curbillselection].bill.introduced.split('T')[0].split('-')[1] ] ]]-[[ billmaster[curbillselection].bill.introduced.split('T')[0].split('-')[2] ]]-[[ billmaster[curbillselection].bill.introduced.split('T')[0].split('-')[0] ]]&nbsp-&nbspIntroduced in Congress [[billmaster[curbillselection].introdays]] days ago
+							</div>
+							<div class='bill-basic-info-text5'>
+								<h3>Last Action At:</h3>[[ monthCode[billmaster[curbillselection].bill.last_action.split('T')[0].split('-')[1] ] ]]-[[ billmaster[curbillselection].bill.last_action.split('T')[0].split('-')[2] ]]-[[ billmaster[curbillselection].bill.last_action.split('T')[0].split('-')[0] ]]&nbsp-&nbsp[[billmaster[curbillselection].idledays]]
+							</div>
+						</div>
+						<div class='bill-basic-info-text5'>
+							<h3>Bill Actions:</h3>
+							<div bind-unsafe-html='billdetailactionlist'></div>
+						</div>
+						<div class='bill-basic-info-text5'>
+							<h3>Related Bills:</h3>
+							<div bind-unsafe-html='billdetailrelated'></div>
+						</div>
+					</div>
+					<div class='bill-basic-info-text0'>
+						<div class='bill-basic-info-text4'>
+							<h3>Full&nbspBill&nbspText:</h3>&nbsp<a href='[[billmaster[curbillselection].bill.url]]/text' target='/blank' class='redlink'>Visit congress.gov to read more</a>
+						</div>
+						<div class='bill-basic-info-text5'>
+							<h3>Bill Summary:</h3>
+							{#<div id='expand-summary' class='bill-basic-info-text2' ng-show='showBillSummary%4 != 0'>
+								[[billmaster[curbillselection].billsummary ]]<span id='expand-summary1' ng-click='expandBillSummary()'>&nbspShow&nbspAll</span>
+							</div>#}
+							<div id='bill-summary-all' class='bill-basic-info-text2' ng-show='showBillSummary%4 != 0'>
+								[[billmaster[curbillselection].billsummary ]][[billmaster[curbillselection].billsummary2 ]]{#<span style='color:blue;font-weight:bold;cursor:pointer;' ng-click='expandBillSummary()'>Close</span>#}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id='bill-detail-box-3' class='bill-detail-box' ng-click='stopEventProp($event)'>
+				<div class='bill-detail-box-header'>
+					<div class='bill-detail-box-single-head' ng-click='billInfoSlider(2, 1)'>Background</div>
+					<div class='bill-detail-box-single-head' ng-click='billInfoSlider(2, 2)'>Bill Info</div>
+					<div class='bill-detail-box-single-head box-header-selected' ng-click='billInfoSlider(2, 3)'>Vote Record</div>
+					{#<div class='bill-detail-box-single-head' ng-click='billInfoSlider(2, 4)'>Other Info</div>#}
+				</div>
+				<h1 style='width:100%;text-align:center;line-height:35px;'>[[billmaster[curbillselection].bill.bill_id.toUpperCase() ]]: [[billmaster[curbillselection].billtitle ]][[billmaster[curbillselection].billtitle2 ]]</h1>
+				<div class='bill-basic-info-text3'>
+					<div class='bill-basic-info-text0' ng-show='billdetailhvotetype == 0'>
+						<h1 style='text-align:center;'>House</h1>
+						<h3 style='width:90%;margin:30px auto 10px;border-bottom:#d9d9d9 solid 1px;line-height:35px;'>
+							[[billmaster[curbillselection].votelist.housevote.question]]
+						</h3>
+						<div class='bill-basic-info-text4'>
+							<div class='bill-basic-info-text8'>Percent Required to Pass:&nbsp[[billmaster[curbillselection].votelist.housevote.required]]</div>
+							<div class='bill-basic-info-text9'>Result:&nbsp[[billmaster[curbillselection].votelist.housevote.result]]</div>
+						</div>
+						<div class='google-charts-wrap-for-title'>
+							<div class='google-charts-title'>Overall House Vote</div>
+							<div id='house-vote-graph-wrapper' class='cstanding-graph-wrapper3'></div>
+						</div>
+						<div style='display:flex;'>
+							<div class='google-charts-wrap-for-title2'>
+								<div class='google-charts-title'>House GOP Breakdown</div>
+								<div id='house-gop-graph-wrapper' class='cstanding-graph-wrapper4'></div>
+							</div>
+							<div class='google-charts-wrap-for-title2'>
+								<div class='google-charts-title'>House Dem Breakdown</div>
+								<div id='house-dem-graph-wrapper' class='cstanding-graph-wrapper4'></div>
+							</div>
+						</div>
+					</div>
+					<div class='bill-basic-info-text0' ng-show='billdetailhvotetype == 1'>
+						<h1 style='text-align:center;'>House</h1>
+						<h2 style='text-align:center;width:90%;margin:30px auto 10px;border-bottom:#d9d9d9 solid 1px;line-height:35px;'>
+							[[billmaster[curbillselection].votelist.housevote.text]]
+						</h2>
+						<div class='bill-basic-info-text10'>
+							{#<h3>Passed by a Voice Vote</h3>#}
+							Voice voting is how most legislation is passed in congress. It is typically called for by the Speaker of the House. Support for the bill is measured by the number of congressmen saying 'Aye', while dissent is measures by the number of congressmen saying 'Nay'. In the event of a close vote any congressman may request a standing vote. Also, if one-fifth of the representatives request, a recorded vote will be performed instead.
+						</div>
+					</div>
+					<div class='bill-basic-info-text0' ng-show='billdetailhvotetype == 2'>
+						<h1 style='text-align:center;'>House</h1>
+						<h2 style='text-align:center;width:90%;margin:30px auto 10px;border-bottom:#d9d9d9 solid 1px;line-height:35px;'>
+							[[billmaster[curbillselection].votelist.housevote.text]]
+						</h2>
+						<div class='bill-basic-info-text10'>
+							{#<h3>Passed by Unamious Consent</h3>#}
+							Unanimous Consent is a form of voting where legislation is passed provided no representatives object. This should not be confused with a unanimous vote, in this case there may be representatives who don't agree but don't see it worthwhile to object to the legislation.
+						</div>
+					</div>
+					<div class='bill-basic-info-text0' ng-show='billdetailhvotetype == 3'>
+						<h1 style='text-align:center;'>House</h1>
+						<h2 style='text-align:center;width:90%;margin:30px auto 10px;border-bottom:#d9d9d9 solid 1px;line-height:35px;'>
+							[[billmaster[curbillselection].votelist.housevote.text]]
+						</h2>
+						<div class='bill-basic-info-text10'>
+							[[billdeathstep[billmaster[curbillselection].actionsteps[0] ] ]]<br>Last Action:&nbsp[[billmaster[curbillselection].billactions[0].text]]
+						</div>
+					</div>
+					<div class='bill-basic-info-text0' ng-show='billdetailsvotetype == 0'>
+						<h1 style='text-align:center;'>Senate</h1>
+						<h3 style='width:90%;margin:30px auto 10px;border-bottom:#d9d9d9 solid 1px;line-height:35px;'>
+							[[billmaster[curbillselection].votelist.senatevote.question]]
+						</h3>
+						<div class='bill-basic-info-text4'>
+							<div class='bill-basic-info-text8'>Percent Required to Pass:&nbsp[[billmaster[curbillselection].votelist.senatevote.required]]</div>
+							<div class='bill-basic-info-text9'>Result:&nbsp[[billmaster[curbillselection].votelist.senatevote.result]]</div>
+						</div>
+						<div class='google-charts-wrap-for-title'>
+							<div class='google-charts-title'>Overall Senate Vote</div>
+							<div id='senate-vote-graph-wrapper' class='cstanding-graph-wrapper3'></div>
+						</div>
+						<div style='display:flex;'>
+							<div class='google-charts-wrap-for-title2'>
+								<div class='google-charts-title'>Senate GOP Breakdown</div>
+								<div id='senate-gop-graph-wrapper' class='cstanding-graph-wrapper4'></div>
+							</div>
+							<div class='google-charts-wrap-for-title2'>
+								<div class='google-charts-title'>Senate Dem Breakdown</div>
+								<div id='senate-dem-graph-wrapper' class='cstanding-graph-wrapper4'></div>
+							</div>
+						</div>
+					</div>
+					<div class='bill-basic-info-text0' ng-show='billdetailsvotetype == 1'>
+						<h1 style='text-align:center;'>Senate</h1>
+						<h2 style='text-align:center;width:90%;margin:30px auto 10px;border-bottom:#d9d9d9 solid 1px;line-height:35px;'>
+							[[billmaster[curbillselection].votelist.senatevote.text]]
+						</h2>
+						<div class='bill-basic-info-text10'>
+							{#<h3>Passed by a Voice Vote</h3>#}
+							Voice voting is how most legislation is passed in congress. It is typically called for by the Speaker of the House. Support for the bill is measured by the number of congressmen saying 'Aye', while dissent is measures by the number of congressmen saying 'Nay'. In the event of a close vote any congressman may request a standing vote. Also, if one-fifth of the representatives request, a recorded vote will be performed instead.
+						</div>
+					</div>
+					<div class='bill-basic-info-text0' ng-show='billdetailsvotetype == 2'>
+						<h1 style='text-align:center;'>Senate</h1>
+						<h2 style='text-align:center;width:90%;margin:30px auto 10px;border-bottom:#d9d9d9 solid 1px;line-height:35px;'>
+							[[billmaster[curbillselection].votelist.senatevote.text]]
+						</h2>
+						<div class='bill-basic-info-text10'>
+							{#<h3>Passed by Unamious Consent</h3>#}
+							Unanimous Consent is a form of voting where legislation is passed provided no senators object. This should not be confused with a unanimous vote, in this case there may be senators who don't agree but don't see it worthwhile to object to the legislation.
+						</div>
+					</div>
+					<div class='bill-basic-info-text0' ng-show='billdetailsvotetype == 3'>
+						<h1 style='text-align:center;'>Senate</h1>
+						<h2 style='text-align:center;width:90%;margin:30px auto 10px;border-bottom:#d9d9d9 solid 1px;line-height:35px;'>
+							[[billmaster[curbillselection].votelist.senatevote.text]]
+						</h2>
+						<div class='bill-basic-info-text10'>
+							[[billdeathstep[billmaster[curbillselection].actionsteps[0] ] ]]<br>Last Action:&nbsp[[billmaster[curbillselection].billactions[0].text]]
+						</div>
+					</div>
+				</div>
+			</div>
+			{#<div id='bill-detail-box-4' class='bill-detail-box' ng-click='stopEventProp($event)'>
+				<div class='bill-detail-box-header'>
+					<div class='bill-detail-box-single-head' ng-click='billInfoSlider(2, 1)'>Background</div>
+					<div class='bill-detail-box-single-head' ng-click='billInfoSlider(2, 2)'>Bill Info</div>
+					<div class='bill-detail-box-single-head' ng-click='billInfoSlider(2, 3)'>Vote Record</div>
+					<div class='bill-detail-box-single-head box-header-selected' ng-click='billInfoSlider(2, 4)'>Other Info</div>
+				</div>
+				<h1 style='width:100%;text-align:center;line-height:30px;'>[[billmaster[curbillselection].bill.bill_id ]]: [[billmaster[curbillselection].bill.short_title ]]</h1>
+			OTHER
+			</div>#}
+		</div>
+		<div id='bill-detail-box-share-wrap'>
+			<div class='bill-share-status-button-wrap2' style='background:green;' ng-if='billmaster[curbillselection].tracked == 0' ng-click='trackBill(1, billmaster[curbillselection].bill.bill_id, curbillselection); $event.stopPropagation();'>
+				<h1>+</h1>
+			</div>
+			<div class='bill-share-status-button-wrap2' style='background:red;' ng-if='billmaster[curbillselection].tracked == 1' ng-click='trackBill(0, billmaster[curbillselection].bill.bill_id, curbillselection); $event.stopPropagation();'>
+				<h1>-</h1>
+			</div>
+			<div ng-show='trackedloginbox == curbillselection' class='bill-status-tracked-box z-index-3' ng-click='closeTrackedLoginBox(); $event.stopPropagation();'>
+				<div class='bill-vote-login-login' ng-click='showPopup("#login-flow-popup", curbillselection, 1)'>Login</div>
+				&nbspOr&nbsp
+				<div class='bill-vote-login-login' ng-click='showPopup("#login-flow-popup", curbillselection, 0)'>Signup</div>
+				&nbspto track this bill
+			</div>
+			<div class='bill-share-status-button-wrap' ng-style='billmaster[curbillselection].ayebackground2' ng-click='$event.stopPropagation();billVote2(1, billmaster[curbillselection].bill.bill_id, curbillselection);'>
+				<div class='bill-share-status-button' style='background:#ccc;'>{#<img src='/images/buttons/phone64x64.png'>#}</div>
+				<h2>Aye</h2>
+			</div>
+			<div class='bill-share-status-button-wrap' ng-style='billmaster[curbillselection].naybackground2' ng-click='$event.stopPropagation();billVote2(-1, billmaster[curbillselection].bill.bill_id, curbillselection); '>
+				<div class='bill-share-status-button' style='background:#ccc;'>{#<img src='/images/buttons/phone64x64.png'>#}</div>
+				<h2>Nay</h2>
+			</div>
+			<div class='bill-share-status-button-wrap' ng-click='showPopup("#bill-phonebook-popup", curbillselection); $event.stopPropagation();'>
+				<div class='bill-share-status-button' ng-click='showPopup("#bill-phonebook-popup", curbillselection); $event.stopPropagation();'><img src='/images/buttons/phone64x64.png'></div>
+				<h2>Call Your Reps</h2>
+			</div>
+			<div class='bill-share-status-button-wrap' ng-click='showPopup("#bill-scrnsht-popup", curbillselection); $event.stopPropagation();'>
+				<div class='bill-share-status-button' ng-click='showPopup("#bill-scrnsht-popup", curbillselection); $event.stopPropagation();'><img src='/images/buttons/share_megaphone_black.png'></div>
+				<h2>Share</h2>
+			</div>
+		</div>
+		<div id='bill-detail-box-right' ng-click='billInfoSlider(0, 0)'>
+		</div>
+	</div>
+</div>
+{#<div id='beta-feedback-wrap' ng-init='beta_feedback_init()'>
+	<div id='beta-feedback-intro'><h2 id='beta-feedback-intro-head'>Beta Feedback - We want your help improving this page. Start talking with the TGC team!</div>
+	<div id='beta-feedback-top-wrap'>
+		<div id='beta-feedback-questions' bind-unsafe-html="feedbackqs">
+		</div>
+		<div id='beta-feedback-responses' style='display:none;' bind-unsafe-html="feedbackrs">
+		</div>
+	</div>
+</div>
+<div id='beta-feedback-top-bar'>
+	<div id='bfeedqs' class='beta-feedback-top-button' style='background:#ec4670;z-index:2;' onclick='javascript:loadQuestions();return false;'>
+		Questions
+	</div>
+	<div id='bfeedrs' class='beta-feedback-top-button' style='background:#BB133E;z-index:1;' onclick='javascript:loadResponses();return false;'>
+		Responses
+	</div>
+</div>#}
+<link rel='stylesheet' href='/css/legislative.css'/>
+<script type="text/javascript" src="/js/feedback.js"></script>
+<script type='text/javascript' src='/js/controllers/LegislativeController.js'></script>
+<script type="text/javascript" src="/js/controllers/DistrictFinder.js"></script>
+
+<style>
+	#find-legislators{text-align:center;margin:30px 20px 0;padding:10px;border:solid 1px #376cea;color:#376cea;cursor:pointer;}
+	#find-legislators:hover{background:#376cea;color:white;}
+	#bipanel{position:relative;display:flex;}
+	#leftpanel{width:23%;max-width:396px;border-top:none;border-left:none;padding:0;min-height:50px;}
+	#tab-wrapper{display:flex;}
+	.leftpanel-tab{width:100%;font-size:125%;background:#BB133E;color:white;text-align:center;padding:10px;font-weight:bold;border-radius:0;cursor:pointer;}
+	.leftpanel-tab:hover{background:#e8174b;}
+	.leftpanel-tab-selected{background:#BB133E !important;}
+	.bill-result-head{color:#376cea;font-weight:bold;cursor:pointer;border-top:solid 1px #c9c9c9;}
+	.bill-result-head:hover{text-decoration:underline;}
+	#alllegislators{padding:50px;width:calc(77% - 100px);}
+	@media screen and (max-width: 1023px){
+		#leftpanel{z-index:20;max-width:1024px;border:none;position:fixed;overflow-y:auto;top:calc(100vh - 41px);width:100vw;}
+		#mainpanel{padding-left:0px;padding-right:0px;width:100vw;}
+		#mob-menu-close{position:absolute;top:15px;right:15px;font-size:150%;font-weight:bold;}
+		#alllegislators{padding-left:3px;padding-right:3px;width:100vw;}
+		.legislator-panel{padding:0 !important;}
+		h1{line-height:45px;}
+		@keyframes menu_animation1 {
+			from {top:calc(100vh - 41px);}
+			to {top:41px;}
+		}
+		@keyframes menu_animation2 {
+			from {top:41px;}
+			to {top:calc(100vh - 41px);}
+		}
+	}
+</style>
+{% endblock %}
+

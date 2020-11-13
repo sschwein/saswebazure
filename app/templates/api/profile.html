@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript" src="/js/controllers/api.js"></script>
+<link rel="stylesheet" href="/css/api.css">
+
+<div id='api-profile-wrapper' class='w-1280-container' ng-controller='APIController' ng-init='init_profile()'>
+    <div id='api-profile-header'>
+        <h1>API</h1>
+        <div style='display:flex;margin-top:16px;'>
+            <input class='api-input' type='text' placeholder='Enter API Key Label' ng-model='new_key_label'>
+            <input class="btn btn-outline-success signup-btn api-input" type="submit" ng-click='createAPIKey()' value='Create New Key'>
+        </div>
+        <div class='error-text' ng-cloak>[[error]]</div>
+    </div>
+    <div id='api-profile-body-wrap'>
+        <div class='w-250-left'>
+            <h4>Quick Links</h4>
+            <ul class='quick-link-ul'>
+                <li><a href='/api/congress' target='_self'>Congress Bill API Docs</a></li>
+                <li><a href='/stocks' target='_self'>Stock Tracker</a></li>
+                <li><a href='/crypto/tracker' target='_self'>My Crypto Tracker</a></li>
+                <li><a href='/api/crypto' target='_self'>Crypto API Docs</a></li>
+                <li>Crypto Analysis*</li>
+                <li>US Congress Bill Tracker*</li>
+            </ul>
+        </div>
+        <div class='w-1000-center'>
+            <h3>Manage API Keys</h3>
+            <div class='api-key-wrapper' ng-repeat='key in key_list track by $index' ng-cloak>
+                <div class='api-key-head'>
+                    <div class='api-key-head-left'>[[key.label]]</div>
+                    <div ng-if='!key_edit[$index]' class='api-key-head-right btn btn-outline-success api-input' ng-click='editSlide($index)' style='right:132px;'>Edit</div>
+                    <div ng-if='key_edit[$index]' class='api-key-head-right btn btn-outline-success api-input' ng-click='editSlide($index)' style='right:132px;'>Save</div>
+                    <div class='api-key-head-right btn btn-outline-success api-input' ng-click='deleteKey(key.label)'>Delete</div>
+                </div>
+                <div class='api-key-body'>
+                    <div class='api-key-body-text'>
+                        [[key.key]]
+                    </div>
+                    <div class='api-key-body-sub-text'>
+                        Security Level: <span ng-if='key.sec_level == 1'>Generic</span><span ng-if='key.sec_level == 2'>Private/Crypto</span>
+                    </div>
+                    <div ng-show='key_edit[$index]' class='api-key-body-edit'>
+                        <h5>Adjust the Security Level</h5>
+                        <div class="radio centered-300">
+                            <label><input type="radio" name='security_[[key.label]]' ng-model='key.sec_level' value=1>Generic Usage</label>
+                        </div>
+                        <div class="radio centered-300">
+                            <label><input type="radio" name='security_[[key.label]]' ng-model='key.sec_level' value=2>Sensitive Usage (One per account only)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

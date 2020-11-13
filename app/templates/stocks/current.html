@@ -1,0 +1,85 @@
+<h3>Current Holdings</h3>
+<input class="sm-btn btn-black btn-float-top float-right" type="submit" ng-click='loadHoldings()' value='Refresh'>
+
+<img class='loading-img' ng-show='show_loading' src='/images/Pacman.gif'>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Last Day's Price</th>
+            <th>Shares</th>
+            <th>Equity</th>
+            <th>Exposure</th>
+            <th>Yield</th>
+            <th>Yearly Dividend</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat='row in stockData track by $index'>
+            <td>
+                [[row.symbol]]
+            </td>
+            <td ng-show='row.is_showing'>
+                $[[row.close]]
+            </td>
+            <td ng-show='row.is_showing'>
+                [[row.shares]]
+            </td>
+            <td ng-show='row.is_showing'>
+                $[[(row.close * row.shares).toFixed(2)]]
+            </td>
+            <td ng-show='row.is_showing'>
+                [[(100 * row.close * row.shares / total_value).toFixed(2)]]%
+            </td>
+            <td ng-show='row.is_showing'>
+                [[(row.dividend_yield * 100).toFixed(2)]]%
+            </td>
+            <td ng-show='row.is_showing'>
+                $[[(row.dividend_price * row.shares / 2500).toFixed(2)]]
+            </td>
+            <td ng-show='!row.is_showing' colspan="5">
+                Number of Shares: <input class='textinput centered-150 text-center' type='text' ng-model='row.shares' style='height:22px;'>
+                &nbsp&nbsp&nbsp&nbsp&nbsp
+                Average Purchase Price: <input class='textinput centered-150 text-center' type='text' ng-model='row.average_price' style='height:22px;'>
+            </td>
+            <td ng-show='row.is_showing' style='width:85px;'>
+                <a ng-click='editHolding([[$index]])' class='btn-black sm-btn'>Edit</a>
+            </td>
+            <td ng-show='!row.is_showing' style='width:85px;'>
+                <a ng-click='editHolding([[$index]])' class='btn-black sm-btn'>Save</a>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Total
+            </th>
+            <td></td>
+            <td></td>
+            <td>
+                $[[total_value.toFixed(2)]]
+            </td>
+            <td>
+                100%
+            </td>
+            <td>
+                [[(total_dividend * 100 / total_value).toFixed(2) ]]%
+            </td>
+            <td>
+                $[[(total_dividend).toFixed(2)]]
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h5 ng-if='stockData.length == 0' style='margin-bottom:50px;'>No Holdings To Show</h5>
+
+<div id='add-stock-wrap'>
+    <h3>Add New Holding</h3>
+    <div style='display:flex;margin-top:16px;'>
+        <input class='textinput centered-150 text-center' type='text' placeholder='Symbol' ng-model='newHolding.symbol'>
+        <input class='textinput centered-150 text-center' type='text' placeholder='Number of Shares' ng-model='newHolding.shares'>
+        <input class="btn btn-outline-success btn-submit" type="submit" ng-click='addNewHolding()' value='Sumbit'>
+    </div>
+</div>

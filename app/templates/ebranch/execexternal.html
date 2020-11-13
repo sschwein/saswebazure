@@ -1,0 +1,123 @@
+{% extends "newbase.html" %}
+
+{% block feedback %}
+<div id='page-feedback' value='500'>
+	<input type='hidden' name='type' value='news'>
+	<form id='pfb-10' class='pfb'>
+		<input class='test-email' type='text' size='25' value='' name='form-email'>
+		<input type='hidden' name='type' value='news-1'>
+		<h3>Were you able to find any articles that interested you?</h3>
+		Yes:<input type='radio' name='news-1-1' value='yes'><br>
+		No:<input type='radio' name='news-1-1' value='no'><br>
+		<textarea cols="3" name='news-1-2' placeholder="Comments"></textarea>
+		<div class='pfb-button redbutton' onclick="javascript:pfbScroll('right','','4','');return false;">Next</div>
+	</form>
+	<form id='pfb-11' class='pfb'>
+		<input class='test-email' type='text' size='25' value='' name='form-email'>
+		<input type='hidden' name='type' value='news-2'>
+		<h3>What kind of news are you most interested in?</h3>
+		<input type='radio' name='news-2-1' value='blogs'> blogs<br>
+		<input type='radio' name='news-2-1' value='major news sources'> major news sources<br>
+		<input type='radio' name='news-2-1' value='non-partisan news only'> non-partisan news only<br>
+		<input type='radio' name='news-2-1' value='research studies'> research studies<br>
+		<input type='radio' name='news-2-1' value='other'> other<br>
+		<div class='pfb-button redbutton' onclick="javascript:pfbScroll('right','','4','thanks');return false;">Next</div>
+	</form>
+	<div id='pfb-12' class='pfb'>
+		<h2 style="margin:0 auto;">Done exploring the site? Would you be willing to answer a few final questions?</h2>
+		<h3 style='margin:10px auto;text-align:center;'>( If not, don't worry. You can get to this final survey from every page)</h3>
+		<a href='/feedback' class='pfb-button redbutton'>Yes, I'll help out</a>
+	</div>	
+</div>
+{% endblock %}
+
+{% block content %}
+<div id='executive' class='tab t1'>
+	<h1 style='text-align:center;'>How the U.S. is performing abroad</h1>
+	<h2 style='text-align:center;margin-top:30px;'>Jump to Region</h2>
+	<div id='external-head'>
+		<div class='region' style='background:#fcc;border-color:#f66;' onclick='javascript:scrollTo("ext-6");return false;'>
+			The Americas
+		</div>
+		<div class='region' style='background:#ccf;border-color:#66f;' onclick='javascript:scrollTo("ext-2");return false;'>
+			Europe
+		</div>
+		<div class='region' style='background:#fcc;border-color:#f66;' onclick='javascript:scrollTo("ext-3");return false;'>
+			Africa
+		</div>
+		<div class='region' style='background:#ccf;border-color:#66f;' onclick='javascript:scrollTo("ext-4");return false;'>
+			The Pacific
+		</div>
+		<div class='region' style='background:#fcc;border-color:#f66;' onclick='javascript:scrollTo("ext-5");return false;'>
+			Asia
+		</div>
+		<div class='region' style='background:#ccf;border-color:#66f;' onclick='javascript:scrollTo("ext-1");return false;'>
+			The Middle East
+		</div>
+	</div>
+	<div id='external-content'>
+		<div id='left-col-wrapper'>
+			<div id='ext-1' class='full-interactive'>
+				<h2>The Middle East</h2>
+				<div class='ext-content'>
+					This is where da text will go
+				</div>
+			</div>
+			<div id='ext-2' class='full-interactive'>
+				<h2>Europe</h2>
+				<div class='ext-content'>
+					This is where da text will go
+				</div>
+			</div>
+			<div id='ext-3' class='full-interactive'>
+				<h2>Africa</h2>
+				<div class='ext-content'>
+					This is where da text will go
+				</div>
+			</div>
+		</div>
+		<div id='right-col-wrapper'>
+			<div class='half-interactive'>
+				<h2>Upcoming Foreign Policy</h2>
+				<div class='ext-content'>
+					This is where da text will go
+				</div>
+			</div>
+			<div id='ext-4' class='full-interactive'>
+				<h2>The Pacific</h2>
+				<div class='ext-content'>
+					This is where da text will go
+				</div>
+			</div>
+			<div id='ext-5' class='full-interactive'>
+				<h2>Asia</h2>
+				<div class='ext-content'>
+					This is where da text will go
+				</div>
+			</div>
+			<div id='ext-6' class='full-interactive'>
+				<h2>The Americas</h2>
+				<div class='ext-content'>
+					This is where da text will go
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+#external-content{display:flex;width:100%;max-width:1280px;margin:0 auto;padding:15px;}
+#left-col-wrapper{position:relative;width:calc(50% - 8px);left:0px;}
+#right-col-wrapper{position:relative;width:calc(50% - 8px);left:16px;}
+.full-interactive{position:relative;width:100%;margin-bottom:16px;height:400px;}
+.half-interactive{position:relative;width:100%;margin-bottom:16px;height:200px;}
+.full-interactive h2{text-align:center;padding-top:10px;}
+.half-interactive h2{text-align:center;padding-top:10px;}
+#external-head{position:relative;width:1280px;margin:10px auto;display:flex;}
+.region{position:relative;width:150px;margin:0 auto;font-weight:600;height:30px;padding-top:10px;text-align:center;border:solid 3px;cursor:pointer;}
+.ext-content{background:#bbb;text-align:center;height:calc(100% - 50px);}
+#content{padding:0px;}
+</style>
+<script>
+
+</script>
+{% endblock %}

@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script type="text/javascript" src="/static/js/controllers/home.js"></script>
+
+<style>
+    #content{padding:0;}
+</style>
+
+<div id='home-wrapper' ng-controller='HomeController'>
+    <!--<div id='home-head'>
+        <img src='/images/profile.jpg' id='profile-pic'>
+        <h1>Steven Schweinhart</h1>
+        <h3>Web Developer & Data Engineer</h3>
+        <div id='soc-media-toolbar-wrap' class="btn-toolbar" role="toolbar" aria-label="Social Media">
+            <div id='soc-media-toolbar' class="btn-group mr-2" role="group">
+                <a class="custom-btn" target="_blank" role="button" href="https://www.linkedin.com/in/sschweinhart/"><img class='soc-img' src='/images/logos/facebook.png'></a>
+                <a class="custom-btn" target='_blank' role='button' href='https://www.facebook.com/steven.schweinhart'><img class='soc-img' src='/images/logos/facebook.png'></a>
+                <a class="custom-btn" target='_blank' role='button' href='https://twitter.com/sschweinhart'><img class='soc-img' src='/images/logos/twitter.png'></a>
+                <a class="custom-btn" target='_blank' role='button' href='https://www.instagram.com/sschwein/'><img class='soc-img' src='/images/logos/instagram.png'></a>
+                {#<a class="custom-btn" target='_blank' role='button' href='https://anchor.fm/postcap'><img class='soc-img' src='/images/logos/anchorfm.png'></a>#}
+                <a class="custom-btn" target='_self' role='button' href='mailto:steven.a.schweinhart@gmail.com'><img class='soc-img' src='/images/logos/email.png'></a>
+            </div>
+        </div>
+    </div>-->
+
+    <div class='full-panel static-background image-banner-background'>
+        <div class='home-landing-text'>
+            <div class='h-100-px font-white-blue font-black-outline'>
+                <h2 class='font-size-250'>Hey, I'm</h2>
+                <h1 class='font-size-300'>Steven Schweinhart</h1>
+            </div>
+        </div>
+        <div id='home-slider-panel'>
+            <div id='home-slider-header'>
+                <div class='slider-header-cell ng-class: home_slider_highlight[0];' ng-click='home_slider_select(0)'>
+                    <h4>Skills</h4>
+                </div>
+                <div class='slider-header-cell ng-class: home_slider_highlight[1];' ng-click='home_slider_select(1)'>
+                    <h4>Experience</h4>
+                </div>
+                <div class='slider-header-cell ng-class: home_slider_highlight[2];' ng-click='home_slider_select(2)'>
+                    <h4>Volunteer Work</h4>
+                </div>
+            </div>
+            <div id='home-slider-panel-wrap' ng-style='slider_panel_margin_left'>
+                <div class='slider-panel' ng-if='slider_panel_selection == 0'>
+                    <div class='interests-panel-section-whole'>
+                        <div class='interests-panel-image-row'>
+                            <div class='interests-image-wrap'><img class='interests-image' src='/static/images/logos/angularjs_tint.png'></div>
+                            <div class='interests-image-wrap'><img class='interests-image' src='/static/images/logos/docker_tint.png'></div>
+                            <div class='interests-image-wrap'><img class='interests-image' src='/static/images/logos/gcp_tint.png'></div>
+                            <div class='interests-image-wrap'><img class='interests-image' src='/static/images/logos/git_tint.png'></div>
+                        </div>
+                        <div class='interests-panel-image-row'>
+                            <div class='interests-image-wrap'><img class='interests-image' src='/static/images/logos/hadoop_tint.png'></div>
+                            <div class='interests-image-wrap'><img class='interests-image' src='/static/images/logos/java_tint.png'></div>
+                            <div class='interests-image-wrap'><img class='interests-image' src='/static/images/logos/python_tint.png'></div>
+                            <div class='interests-image-wrap'><img class='interests-image' src='/static/images/logos/spark_tint.png'></div>
+                        </div>
+                    </div>
+                    <div class='d-flex' style='width:700px;margin:0 auto;'>
+                        <div class='interests-panel-section'>
+                            <h4>Day to Day Experience</h4>
+                            <ul>
+                                <li>Data Engineering</li>
+                                <li>Python</li>
+                                <li>Hadoop</li>
+                                <li>Pyspark</li>
+                                <li>Google Cloud Platform</li>
+                                <li>HTML5/CSS3</li>
+                                <li>Javascript/AJAX</li>
+                                <li>AngularJs</li>
+                                <li>Git</li>
+                                <li>REST APIs</li>
+                                <li>Full Stack Web Development</li>
+                                <li>Azure Dev Ops</li>
+                                <li>Docker</li>
+                            </ul>
+                        </div>
+                        <div class='interests-panel-section'>
+                            <h4>Other Experience</h4>
+                            <ul>
+                                <li>Machine Learning</li>
+                                <li>Java</li>
+                                <li>C</li>
+                                <li>C++</li>
+                                <li>C#</li>
+                                <li>Blockchain</li>
+                                <li>Cyber Security</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class='slider-panel' ng-if='slider_panel_selection == 1'>
+                    <div class='experience-cell-wrap'>
+                        <div class='experience-cell-left'>
+                            <img src='/static/images/logos/humana.png'>
+                        </div>
+                        <div class='experience-cell-right'>
+                            <h5 class='home-section-subhead'><a href='https://www.humana.com' target='_blank'>Humana</a></h5>
+                            <div class='home-section-subhead1 font-green'>Software Engineer - Since 2018</div>
+                            <div class='home-section-subhead2 font-grey'>Louisville, KY</div>
+                            <div class='home-section-p'>I worked as a Data Engineer inside the Retail Digital Health & Analytics Organization. My team created a data science platform for our data scientists and managed exiting data analytics solutions. My focus was automating legacy data solutions using Python; engineering new analytics solutions using frameworks like Airflow, Pyspark, and Django; and implementing Python packages to facilitate data science projects.</div>
+                        </div>
+                    </div>
+                    <div class='experience-cell-wrap'>
+                        <div class='experience-cell-left'>
+                            <img src='/static/images/logos/glasscapitol.png'>
+                        </div>
+                        <div class='experience-cell-right'>
+                            <h5 class='home-section-subhead'><a href='https://glasscapitol.org' target='_blank'>The Glass Capitol</a></h5>
+                            <div class='home-section-subhead1 font-green'>CTO/Cofounder - 2016-2018</div>
+                            <div class='home-section-subhead2 font-grey'>Louisville, KY</div>
+                            <div class='home-section-p'>The Glass Capitol is a digital civic engagement platform dedicated to helping grassroots organizations effectively leverage the voices of their members. As CTO my focus was leading the development of the website's technical framework.  This included designing and building the site back-end using Google App Engine's Python web framework; leading a team of developers with site development; and helping to create the site front-end using HTML5, CSS, and AngularJS. </div>
+                        </div>
+                    </div>
+                    <div class='experience-cell-wrap'>
+                        <div class='experience-cell-left'>
+                            <img src='/static/images/logos/humanamilitary.png'>
+                        </div>
+                        <div class='experience-cell-right'>
+                            <h5 class='home-section-subhead'><a href='https://www.humanamilitary.com/' target='_blank'>Humana Military</a></h5>
+                            <div class='home-section-subhead1 font-green'>Applications Engineer – 2016-2018</div>
+                            <div class='home-section-subhead2 font-grey'>Louisville, KY</div>
+                            <div class='home-section-p'>I worked at Humana Military as a member of a BI reporting team. My responsibilities involved creating and maintaining reports for both government and business users. Data movement and ingestion was performed with SSIS, data querying was performed with MS SQL, and the reports were generated using Actuate E.Report software and Microsoft Excel.</div>
+                        </div>
+                    </div>
+                    <div class='experience-cell-wrap'>
+                        <div class='experience-cell-left' style='background:none;'>
+                            <img src='/static/images/logos/speedschool.jpeg' style='max-width:300px;max-height:200px;border-radius:40px;'>
+                        </div>
+                        <div class='experience-cell-right'>
+                            <h5 class='home-section-subhead'><a href='https://louisville.edu/speed/computer' target='_blank'>University of Louisville J.B. Speed School of Engineering</a></h5>
+                            <div class='home-section-subhead1 font-green'>M.Eng. Computer Engineering & Computer Science – 2016</div>
+                            <div class='home-section-subhead2 font-grey'>Louisville, KY</div>
+                            <div class='home-section-p'>My graduate year at U of L challenged me, expanding my knowledge of computer engineering topics like machine learning, parallel programming, and network security. For my master's project I applied a genetic learning algorithm to create a lossy compression algorithm. While the resulting algorithm was ineffective as a form of compression, it could be improved with more iterations.</div>
+                        </div>
+                    </div>
+                    <div class='experience-cell-wrap'>
+                        <div class='experience-cell-left'>
+                            <img src='/static/images/logos/louisville.png'>
+                        </div>
+                        <div class='experience-cell-right'>
+                            <h5 class='home-section-subhead'><a href='https://louisville.edu/speed/computer' target='_blank'>University of Louisville J.B. Speed School of Engineering</a></h5>
+                            <div class='home-section-subhead1 font-green'>B.S. Computer Engineering & Computer Science – 2011-2015</div>
+                            <div class='home-section-subhead2 font-grey'>Louisville, KY</div>
+                            <div class='home-section-p'>University of Louisville is where I fostered my love for engineering. My course work taught me the foundations of computer science that I needed in my day to day work as a computer engineer. I was able to grow my skills through projects such as creating a doodlebot, building an AI to play Tetris, and creating VR video games.</div>
+                        </div>
+                    </div>
+                    <div class='experience-cell-wrap'>
+                        <div class='experience-cell-left'>
+                            <img src='/static/images/logos/siemens.png'>
+                        </div>
+                        <div class='experience-cell-right'>
+                            <h5 class='home-section-subhead'><a href='https://www.mobility.siemens.com/mobility/global/en/rail-solutions/rail-automation/pages/rail-automation.aspx' target='_blank'>Siemens Rail Automation</a></h5>
+                            <div class='home-section-subhead1 font-green'>Cooperative Education Intern – 2013-2015</div>
+                            <div class='home-section-subhead2 font-grey'>Louisville, KY</div>
+                            <div class='home-section-p'>During my undergraduate years at UofL, I participated in their co-operative education program as an intern at Siemens Rail Automation. Over three semesters, I designed and constructed a Factory Testing Simulator for a subway interlocking control project. I also redesigned the testing simulator for training subway operators upon installation of the final interlocking project.</div>
+                        </div>
+                    </div>
+                    <div class='experience-cell-wrap'>
+                        <div class='experience-cell-left' style='background:none;'>
+                            <img src='/static/images/logos/manual.png' style='max-width:300px;max-height:200px;border-radius:40px;'>
+                        </div>
+                        <div class='experience-cell-right'>
+                            <h5 class='home-section-subhead'><a href='https://louisville.edu/speed/computer' target='_blank'>duPont Manual High School</a></h5>
+                            <div class='home-section-subhead1 font-green'>Diploma: Math, Science, & Technology Magnet – 2007-2011</div>
+                            <div class='home-section-subhead2 font-grey'>Louisville, KY</div>
+                            <div class='home-section-p'>Participating in the Math, Science, and Technology (MST) magnet at Manual was a strenuous 4 years that pushed me to adapt and grow into an adult. I enjoyed and learned a lot from extracurricular activities like Science Fair, Science Olympiad, and Key Club. I also discovered my love for computer programming at Manual, leading me to pursue it in college and later in my career.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class='slider-panel' ng-if='slider_panel_selection == 2'>
+                    <table id='vol-table'>
+                        <tr>
+                            <td>
+                                <h5 class='home-section-subhead3 font-orange'>Kentuckians for the Commonwealth</h5>
+                                <div class='home-section-subhead1 font-green'>Member and Work Team Coordinator</div>
+                                <div class='home-section-subhead2 font-grey'>Since 2017; Louisville, KY</div>
+                            </td>
+                            <td>
+                                <h5 class='home-section-subhead3 font-orange'>Code Louisville</h5>
+                                <div class='home-section-subhead1 font-green'>Python Cohort Mentor</div>
+                                <div class='home-section-subhead2 font-grey'>2017-2018; Louisville, KY</div>
+                            </td>
+                            <td>
+                                <h5 class='home-section-subhead3 font-orange'>Josie Raymond for KY State House</h5>
+                                <div class='home-section-subhead1 font-green'>Campaign Volunteer</div>
+                                <div class='home-section-subhead2 font-grey'>2018; Jeffersontown, KY</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5 class='home-section-subhead3 font-orange'>Ryan Fenwick for Mayor</h5>
+                                <div class='home-section-subhead1 font-green'>Campaign Volunteer</div>
+                                <div class='home-section-subhead2 font-grey'>2018; Louisville, KY</div>
+                            </td>
+                            <td>
+                                <h5 class='home-section-subhead3 font-orange'>Boy Scouts of America</h5>
+                                <div class='home-section-subhead1 font-green'>Eagle Scout Project</div>
+                                <div class='home-section-subhead2 font-grey'>2010; Louisville, KY</div>
+                            </td>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class='home-landing-text bg-dark-grey-transparent'>
+            <div class='w-700-center font-white-blue text-justify font-size-125'>
+                <p class='my-5'>I am a software engineer based in Louisville KY that enjoys building tools to solve problems. This includes building video games for school projects to this website.</p>
+                <p class='my-5'>Over the past decade as a programmer, I have built up a collection of projects scattered across my many computers. Historically these projects have been scattered across multiple locations and environments. I plan on using this domain to host all of my ideas in one place. </p>
+                <p class='my-5'>When I'm not sitting in front of a screen I find myself exploring on my bike, distracted online, enjoying a bottle of wine, or finding a way to eat Indian food (chicken curry and naan is my weakness).</p>
+            </div>
+        </div>
+    </div>
+
+    <!--
+    <div id='projects' class='bipanel home-panel'>
+        <div class='left-slider-background bipanel-center bg-off-white' ng-style='background_slide_style[0]' ng-show='background_slide == 1' ng-cloak>
+            <div class='slider-content-wrap'>
+                <h2>US National Data Visualizer</h2>
+                <p>Government data is free and available for the public to use, however most of this data is hard to read or understand. The mission behind this data visualizer is to bring context to our government and help explain what's going on behind the scenes.</p>
+                <a href='/data' target='_self'>Explore</a>
+                <img class='slider-teaser-img' src='/images/scrn/natdatateaser.png'>
+            </div>
+        </div>
+        <div class='left-slider-background bipanel-center bg-off-white' ng-style='background_slide_style[1]' ng-show='background_slide == 2' ng-cloak>
+            <div class='slider-content-wrap'>
+                <h2>US Congressional Bill Tracker and API</h2>
+                <p>While building a tool to better visualize bills before Congress, I found that other Congressional API's are lacking in quality. So I built my own version using the most up to date information from <a href='https://www.congress.gov/' target='_new'>congress.gov</a>. The data is updated hourly, and is good back to the 103rd congress (1993-1994).</p>
+                <a href='/congress/bill/search' target='_self'>Bill Tracker</a><br><br>
+                <a href='/api/congress' target='_self'>Access API</a><br><br>
+                <div style='font-size:85%;position:absolute;bottom:50px;left:5%;width:90%;'>Note: I can't promise that this data is perfect, or will always be available. If there is an issue, let me know **here** and I will do my best to correct it.</div>
+                {#<img class='slider-teaser-img' src='/images/scrn/natdatateaser.png'>#}
+            </div>
+        </div>
+        <div class='left-slider-background bipanel-center bg-off-white' ng-style='background_slide_style[2]' ng-show='background_slide == 3' ng-cloak>
+            <div class='slider-content-wrap'>
+                <h2>Playing Tetris with Machine Learning</h2>
+                <p></p>
+                {#<img class='slider-teaser-img' src='/images/scrn/natdatateaser.png'>#}
+            </div>
+        </div>
+        <div class='left-slider-background bipanel-center bg-off-white' ng-style='background_slide_style[3]' ng-show='background_slide == 4' ng-cloak>
+            <div class='slider-content-wrap'>
+
+            </div>
+        </div>
+        <div class='bipanel-center bg-off-white' style='z-index:0;'>
+            <h1 class='home-section-header'>Personal Projects</h1>
+        </div>
+        <div class='bipanel-center bg-lt-blue'>
+            <ul class='ul-no-dot home-section-project-ul'>
+                <li ng-click='background_slider(1)'>
+                    US Data Visualizer
+                </li>
+                <li ng-click='background_slider(2)'>
+                    Congress Bill API/Tracker
+                </li>
+                <li ng-click='background_slider(3)'>
+                    Genetic Tetris
+                </li>
+                <li ng-click='background_slider(4)'>
+                    Compression With Machine Learning
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id='contact' class='bipanel home-panel-60'>
+        <div class='bipanel-center bg-lt-blue'>
+            <h4 class='home-section-subhead' style='margin-top:130px;'>Reach Me</h4>
+            <div class='home-section-p'>If you want to discuss more about how I can help your business, feel free to contact me through email or phone.</div>
+            <div class='home-section-row'>
+                <span style='font-weight:bold;'>Via Email:</span>&nbsp<a target='_self' role='button' href='mailto:steven.a.schweinhart@gmail.com'>steven.a.schweinhart@gmail.com</a>
+            </div>
+            <div class='home-section-row'>
+                <span style='font-weight:bold;'>Via Phone:</span>&nbsp(502) 409-4417
+            </div>
+        </div>
+        <div class='bipanel-center bg-off-white'>
+            <h1 class='home-section-header-60'>Contact</h1>
+        </div>
+    </div>
+</div>-->
+{% endblock %}

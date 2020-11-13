@@ -1,0 +1,83 @@
+{% extends "newbase.html" %}
+
+{% block content %}
+<div id='bipanel' ng-controller='LegislativeController' ng-init='legislativeInit()'>
+	<div id='leftpanel' class='whiteback'>
+		<div id='tab2-select' class='leftpanel-tab leftpanel-tab-selected' style='width:calc(100% - 20px);background:#BB133E !important'>Bills</div>
+		<div id='leftpanel-2' class='leftpanel-container' ng-show='current_leftpanel == 2'>
+			<div class='left-panel-search-wrap' ng-click='mob_menu_raise()'>
+				{#h3 style='text-align:center;margin:5px 0px'>Data Search</h3>#}
+				<img src='/images/search_mag_glass.png' class='text-search-img'>
+				<input type="text" class='text-search' ng-model='queryTerm' ng-model-options="{debounce: 500}" ng-change="runBillQuery(queryTerm)" placeholder='Bill Search'>
+				<div class='z-index-3 search-panel' ng-show='queryTerm.length > 0'>
+					<div ng-repeat="results in searchResultsB track by $index">
+						<div class='bill-result-head' ng-click="billPressed(results.bill_id)">[[results.official_title]]</div>
+						<div style='margin-bottom:5px;'>[[results.summary]]</div>
+					</div>
+				</div>
+			</div>
+			{#<div id='tracked-bills-module' class='module-left' style='min-height:100px'>
+				<h3>Recently Tracked Bills</h3>
+				<ul id='left-panel-tracked' bind-unsafe-html="left_panel_tracking">
+				</ul>
+				<div class='module-action-button' ng-click="get_bill_tracking()">See All Tracked Bills</div>
+								<div id='reps-module-obscure' class='module-obscure' ng-if='user.bills_tracked == null'>
+					<div id='reps-blue-action-button' class='module-obscure-button blue-action-button' ng-click='get_bill_tracking()'>Track Important Bills</div>
+				</div>
+				
+			</div>#}
+			<h2 class='panel-title'>Bills Before Our Congress</h2>
+
+			{% for bill in bills %}
+				<div class='module'>
+					<div class='rp-bill-name' ng-click="get_bill('{{ bill.bill_id }}')">{{bill.official_title}}</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<div id='mainpanel' bind-unsafe-html='mainpanel' ng-if='showAllLegislators == false || !legislatbill'></div>
+
+	<div id='alllegislators' style='padding:50px;width:calc(77% - 100px);' ng-if='showAllLegislators == true && legislatbill'>
+		<div id='alllegislatortop' ng-if='alllegislatortop != "skip"' bind-unsafe-html='alllegislatortop'></div>
+		<div id='legislator1' bind-unsafe-html='legislator1' style='margin-bottom:100px'>Leg 1</div>
+		<div id='legislator2' bind-unsafe-html='legislator2' style='margin-bottom:100px'>Leg 2</div>
+		<div id='legislator3' bind-unsafe-html='legislator3' style='margin-bottom:100px'>Leg 3</div>
+	</div>
+</div>
+<div id='beta-feedback-wrap' ng-init='beta_feedback_init()'>
+	<div id='beta-feedback-intro'><h2 id='beta-feedback-intro-head'>Beta Feedback - We want your help improving this page. Start talking with the TGC team!</div>
+	<div id='beta-feedback-top-wrap'>
+		<div id='beta-feedback-questions' bind-unsafe-html="feedbackqs">
+		</div>
+		<div id='beta-feedback-responses' style='display:none;' bind-unsafe-html="feedbackrs">
+		</div>
+	</div>
+</div>
+<div id='beta-feedback-top-bar'>
+	<div id='bfeedqs' class='beta-feedback-top-button' style='background:#ec4670;z-index:2;' onclick='javascript:loadQuestions();return false;'>
+		Questions
+	</div>
+	<div id='bfeedrs' class='beta-feedback-top-button' style='background:#BB133E;z-index:1;' onclick='javascript:loadResponses();return false;'>
+		Responses
+	</div>
+</div>
+<link rel='stylesheet' href='/css/usersystem.css'/>
+<link rel='stylesheet' href='/css/legislative.css'/>
+<script type="text/javascript" src="/js/feedback.js"></script>
+<script type="text/javascript" src="/js/legislative.js"></script>
+
+<style>
+	#find-legislators{text-align:center;margin:30px 20px 0;padding:10px;border:solid 1px #376cea;color:#376cea;cursor:pointer;}
+	#find-legislators:hover{background:#376cea;color:white;}
+	#legislative-link{color:#BB133E !important;border-bottom:solid 2px red;}
+	#bipanel{position:relative;display:flex;}
+	#leftpanel{width:23%;max-width:396px;border-top:none;border-left:none;padding:0;min-height:600px;}
+	#tab-wrapper{display:flex;border-bottom:solid 8px #BB133E;}
+	.leftpanel-tab{width:50%;font-size:125%;background:#740b26;color:white;text-align:center;padding:10px;font-weight:bold;border-radius:0;cursor:pointer;}
+	.leftpanel-tab:hover{background:#e8174b;}
+	.leftpanel-tab-selected{background:#BB133E !important;}
+	.bill-result-head{color:#376cea;font-weight:bold;cursor:pointer;border-top:solid 1px #c9c9c9;}
+	.bill-result-head:hover{text-decoration:underline;}
+</style>
+{% endblock %}

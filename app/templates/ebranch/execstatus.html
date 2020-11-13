@@ -1,0 +1,355 @@
+{% extends "newbase.html" %}
+
+
+{% block feedback %}
+<div id='page-feedback' value='500'>
+	<input type='hidden' name='type' value='news'>
+	<form id='pfb-10' class='pfb'>
+		<input class='test-email' type='text' size='25' value='' name='form-email'>
+		<input type='hidden' name='type' value='news-1'>
+		<h3>Were you able to find any articles that interested you?</h3>
+		Yes:<input type='radio' name='news-1-1' value='yes'><br>
+		No:<input type='radio' name='news-1-1' value='no'><br>
+		<textarea cols="3" name='news-1-2' placeholder="Comments"></textarea>
+		<div class='pfb-button redbutton' onclick="javascript:pfbScroll('right','','4','');return false;">Next</div>
+	</form>
+	<form id='pfb-11' class='pfb'>
+		<input class='test-email' type='text' size='25' value='' name='form-email'>
+		<input type='hidden' name='type' value='news-2'>
+		<h3>What kind of news are you most interested in?</h3>
+		<input type='radio' name='news-2-1' value='blogs'> blogs<br>
+		<input type='radio' name='news-2-1' value='major news sources'> major news sources<br>
+		<input type='radio' name='news-2-1' value='non-partisan news only'> non-partisan news only<br>
+		<input type='radio' name='news-2-1' value='research studies'> research studies<br>
+		<input type='radio' name='news-2-1' value='other'> other<br>
+		<div class='pfb-button redbutton' onclick="javascript:pfbScroll('right','','4','thanks');return false;">Next</div>
+	</form>
+	<div id='pfb-12' class='pfb'>
+		<h2 style="margin:0 auto;">Done exploring the site? Would you be willing to answer a few final questions?</h2>
+		<h3 style='margin:10px auto;text-align:center;'>( If not, don't worry. You can get to this final survey from every page)</h3>
+		<a href='/feedback' class='pfb-button redbutton'>Yes, I'll help out</a>
+	</div>	
+</div>
+{% endblock %}
+
+{% block content %}
+<script>
+    var w = window.innerWidth;
+    if (w < 1024){
+        window.location = "/nomobile";
+    }
+</script>
+<div id='executive' class='tab t1 tgcbluetextpage'>
+	<h1 style='text-align:center;margin-bottom:40px;'>The Status of the Presidency</h1>
+	<div id='president-header'>
+		<img src='/images/Obama_Headshot.jpg' id='president-pic'>
+		<div id='president-header-text'>
+			<h2>Barack Obama</h2>
+			<h3>44th President of the United States of America</h3>
+			<h3>In office since January 20, 2009</h3>
+			<h3>Born in Hawaii on August 4, 1961</h3>
+			<div id='president-social-wrapper'>
+				<h3>Follow the President on Social Media</h3>
+				<div id='president-social-media'>
+					<ul class="soc"><li><a class="soc-facebook social-button" href="https://www.facebook.com/potus/"></a></li></ul>
+					<ul class="soc"><li><a class='social-button soc-twitter' href='https://twitter.com/potus'></a></li></ul>
+					<ul class="soc"><li><a class='social-button soc-youtube' href='https://www.youtube.com/user/whitehouse'></a></li></ul>
+					<ul class="soc"><li><a class='social-button soc-instagram' href='https://www.instagram.com/whitehouse/'></a></li></ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id='president-body'>
+		<div id='pres-left-col'>
+			<div class='pres-info-card'>
+				<h2>The Weekly Address</h2>
+				<iframe id='weekly-address-video' src="https://www.youtube.com/embed/hOmJPO9n2AY" frameborder="0" allowfullscreen></iframe>
+			</div>
+			<div class='pres-info-card'>
+				<h2>The President's Daily Schedule</h2>
+				<div id='schedule-wrapper'>
+					<div class='sched-table z-index-1'>
+						{% for each in tabletext1.split('$$$')[:-1] %}
+						<div class='sched-row'>
+							{% if each.split(',')[0] == '' %}
+							<div class='sched-none'><span>{{ each.split(',')[1] }}</span></div>
+							{% elif loop.index0%2 == 0 %}
+							<div class='sched-celll'><span>{{ each.split(',')[0] }}</span></div>
+							<div class='sched-cellr'>
+								<span>{{ each.split(',')[1] }}</span><br>
+								<span style='font-size:90%'>Location - {{ each.split(',')[2] }}</span>
+							</div>
+							{% else %}
+							<div class='sched-celll sched-even-row'>{{ each.split(',')[0] }}</div>
+							<div class='sched-cellr sched-even-row'>
+								<span>{{ each.split(',')[1] }}</span><br>
+								<span style='font-size:90%'>Location - {{ each.split(',')[2] }}</span>
+							</div>
+							{% endif %}
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id='pres-right-col'>
+			<div class='pres-info-card'>
+				<h2>How the President is Performing</h2>
+				<div id='pres-performance-wrapper'>
+					<div id='pres-performance-header'>
+						<div id='pres-approval' style='background:#f99' class='pres-perf-head' onclick='javascript:loadPerfStats("0")'>
+							Approval Ratings
+						</div>
+						<div id='pres-jobs' style='background:#99f' class='pres-perf-head' onclick='javascript:loadPerfStats("1")'>
+							Job Creation
+						</div>
+						<div id='pres-gdp' style='background:#ff9' class='pres-perf-head' onclick='javascript:loadPerfStats("2")'>
+							Economic Output (GDP)
+						</div>
+					</div>
+					<div id='pres-performance-body' class='pres-graph-body'>
+						<div class='linegraph whiteback'>
+							<div style='height:25px;text-align:center'>
+								Select a Time Length
+							</div>
+							<div class='pres-graph-header'>
+								<div id='graph-1h1' class='graph-head-button' onclick='javascript:pres_approval2(0,90);clearButtons(1);$("#graph-1h1").css("background","#aaa");return false;'>
+									All Data
+								</div>
+								<div id='graph-1h2' class='graph-head-button' onclick='javascript:pres_approval2(1470,90);clearButtons(1);$("#graph-1h2").css("background","#aaa");return false;'>
+									4 Years
+								</div>
+								<div id='graph-1h3' class='graph-head-button' onclick='javascript:pres_approval2(730,60);clearButtons(1);$("#graph-1h3").css("background","#aaa");return false;'>
+									2 Years
+								</div>
+								<div id='graph-1h4' class='graph-head-button' onclick='javascript:pres_approval2(365,45);clearButtons(1);$("#graph-1h4").css("background","#aaa");return false;'>
+									1 Year
+								</div>
+								<div id='graph-1h5' class='graph-head-button' onclick='javascript:pres_approval2(180,30);clearButtons(1);$("#graph-1h5").css("background","#aaa");return false;'>
+									6 Months
+								</div>
+							</div>
+							<div id='approve-graph-wrapper' class='cstanding-graph-wrapper3'></div>
+						</div>
+					</div>
+					<div id='pres-jobs-body' class='pres-graph-body'>
+						<div class='linegraph whiteback'>
+							<div style='height:25px;text-align:center'>
+								Select a Time Length
+							</div>
+							<div class='pres-graph-header'>
+								<div id='graph-2h1' class='graph-head-button' onclick='javascript:pres_nosmooth2(0, "presjobs");clearButtons(2);$("#graph-2h1").css("background","#aaa");return false;'>
+									All Data
+								</div>
+								<div id='graph-2h2' class='graph-head-button' onclick='javascript:pres_nosmooth2(1470, "presjobs");clearButtons(2);$("#graph-2h2").css("background","#aaa");return false;'>
+									4 Years
+								</div>
+								<div id='graph-2h3' class='graph-head-button' onclick='javascript:pres_nosmooth2(740, "presjobs");clearButtons(2);$("#graph-2h3").css("background","#aaa");return false;'>
+									2 Years
+								</div>
+								<div id='graph-2h4' class='graph-head-button' onclick='javascript:pres_nosmooth2(370, "presjobs");clearButtons(2);$("#graph-2h4").css("background","#aaa");return false;'>
+									1 Year
+								</div>
+								<div id='graph-2h5' class='graph-head-button' onclick='javascript:pres_nosmooth2(190, "presjobs");clearButtons(2);$("#graph-2h5").css("background","#aaa");return false;'>
+									6 Months
+								</div>
+							</div>
+							<div id='jobs-graph-wrapper' class='cstanding-graph-wrapper3'></div>
+						</div>
+					</div>
+					<div id='pres-gdp-body' class='pres-graph-body'>
+						<div class='linegraph whiteback'>
+							<div style='height:25px;text-align:center'>
+								Select a Time Length
+							</div>
+							<div class='pres-graph-header'>
+								<div id='graph-3h1' class='graph-head-button' onclick='javascript:pres_nosmooth2(0,"presgdp");clearButtons(3);$("#graph-3h1").css("background","#aaa");return false;'>
+									All Data
+								</div>
+								<div id='graph-3h2' class='graph-head-button' onclick='javascript:pres_nosmooth2(0,"presgdpchg");clearButtons(3);$("#graph-3h2").css("background","#aaa");return false;'>
+									All Data % Change
+								</div>
+								<div id='graph-3h3' class='graph-head-button' onclick='javascript:pres_nosmooth2(1470,"presgdp");clearButtons(3);$("#graph-3h3").css("background","#aaa");return false;'>
+									4 Years
+								</div>
+								<div id='graph-3h4' class='graph-head-button' onclick='javascript:pres_nosmooth2(1470,"presgdpchg");clearButtons(3);$("#graph-3h4").css("background","#aaa");return false;'>
+									4 Years % Change
+								</div>
+							</div>
+							<div id='gdp-graph-wrapper' class='cstanding-graph-wrapper3'></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class='pres-info-card'>
+				<h2>Presidency Hallmarks</h2>
+				<div id='pres-domestic-wrapper'>
+					<div style='width:100%;text-align:center;font-size:130%;'>Summary of Key Points</div>
+					<div id='pres-hallmark-summary'>
+					</div>
+				</div>
+			</div>
+			<div class='pres-info-card'>
+				<div style='width:100%;text-align:center;font-size:130%;'>Domestic Stats</div>
+				<div id='pres-domestic-wrapper'>
+					
+				</div>
+			</div>
+			<div class='pres-info-card'>
+				<div style='width:100%;text-align:center;font-size:130%;'>Foreign Stats</div>
+				<div id='pres-foreign-wrapper'>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+#executive-link{color:blue !important;border-bottom:solid 4px blue;}
+#executive{max-width:1280px;position:relative;margin:0 auto;}
+#president-header{width:75%;position:relative;margin:0 auto;height:333px;display:flex;}
+#president-pic{width:250px;height:333px;position:relative;border-radius:50%;}
+#president-header-text{width:calc(100% - 250px);padding:20px 40px;}
+#president-header-text h2{text-align:left;margin-bottom:13px;}
+#president-header-text h3{text-align:left;margin:7px 0px;}
+#president-social-wrapper{position:absolute;bottom:20px;width:calc(100% - 330px);}
+#president-social-wrapper h3{text-align:center;}
+#president-social-media{height:50px;display:flex;padding-top:5px;}
+.social-button{position:relative;height:48px;width:48px;margin:0 auto;}
+
+#president-body{display:flex;width:100%;margin-top:40px;}
+#president-body h2{width:90%;position:relative;margin:25px auto;text-align:center;border-bottom:solid 2px #000;}
+#president-body h3{text-align:center;font-weight:500;}
+#pres-left-col{position:relative;width:calc(50% - 10px);min-width:560px;}
+#pres-right-col{position:relative;width:calc(50% - 10px);min-width:560px;left:20px;}
+.pres-info-card{position:relative;margin:15px auto;}
+.sched-table{position:relative;background:#fff;border:solid 1px black;}
+.sched-row{position:relative;display:flex;}
+.sched-celll{position:relative;width:100px;margin:10px;margin-right:0px;padding-top:5px;background:#fff;position:relative;text-align:center;border-right:3px solid #ccc;}
+.sched-cellr{position:relative;width:400px;margin:10px;margin-left:0px;padding-left:10px;position:relative;background:#fff;border-left:3px solid #ccc;}
+.sched-even-row{background:#fff;}
+.sched-none{padding:20px;border: solid 1px black;background:#fff;width:500px;text-align:center;}
+
+#weekly-address-video{width:560px;height:315px;position:relative;margin-left:calc(50% - 280px);}
+#pres-performance-header{display:flex;height:40px;}
+.pres-perf-head{position:relative;width:30%;margin:0 auto;height:30px;text-align:center;padding-top:10px;}
+.pres-perf-head:hover{cursor:pointer;}
+.pres-graph-body{height:420px;background:#f99;}
+#pres-performance-body{display:block;}
+#pres-jobs-body{display:none;}
+#pres-gdp-body{display:none;}
+#schedule-wrapper{position:relative;margin:0px calc(50% - 250px);height:420px;}
+#pres-domestic-wrapper{height:200px;}
+#pres-foreign-wrapper{height:200px;}
+.linegraph{position:relative;min-height:calc(100% - 20px);width:calc(100% - 20px);left:10px;top:10px;}
+.cstanding-graph-wrapper3{height:300px;margin:0 20px;border:solid 1px #d9d9d9;}
+.pres-graph-header{display:flex;}
+.graph-head-button{position:relative;text-align:center;background:#ccc;width:17%;margin:10px auto;height:27px;padding-top:6px;}
+.graph-head-button:hover{cursor:pointer;}
+</style>
+<script>
+var FUNCTIONS = [];
+var toapproval = 0;
+var tojobs = 0;
+var togdp = 0;
+FUNCTIONS['pres_approval'] = function () { 
+	//$('#pfb-0').css('display','block')
+	if (toapproval == 0){
+		google.charts.setOnLoadCallback(pres_approval);
+		toapproval++;
+	}
+};
+FUNCTIONS['pres_jobs'] = function () { 
+	//$('#pfb-0').css('display','block')
+	if (tojobs == 0){
+		google.charts.setOnLoadCallback(pres_jobs);
+		tojobs++;
+	}
+};
+FUNCTIONS['pres_gdp'] = function () { 
+	//$('#pfb-0').css('display','block')
+	if (togdp == 0){
+		google.charts.setOnLoadCallback(pres_gdp);
+		togdp++;
+	}
+};
+
+function loadPerfStats(num){
+	if (num == '0'){
+		$('#pres-performance-body').css('display','block')
+		$('#pres-gdp-body').css('display','none')
+		$('#pres-jobs-body').css('display','none')
+		$('#pres-performance-body').css('background','#f99')
+		graphSwitcher('pres_approval');
+	} else if (num == '1'){
+		$('#pres-performance-body').css('display','none')
+		$('#pres-gdp-body').css('display','none')
+		$('#pres-jobs-body').css('display','block')
+		$('#pres-jobs-body').css('background','#99f')
+		graphSwitcher('pres_jobs');
+	} else {
+		$('#pres-performance-body').css('display','none')
+		$('#pres-gdp-body').css('display','block')
+		$('#pres-jobs-body').css('display','none')
+		$('#pres-gdp-body').css('background','#ff9')
+		graphSwitcher('pres_gdp');
+	}
+}
+
+function clearButtons(id){
+	$('#graph-'+id+'h1').css('background','#ccc');
+	$('#graph-'+id+'h2').css('background','#ccc');
+	$('#graph-'+id+'h3').css('background','#ccc');
+	$('#graph-'+id+'h4').css('background','#ccc');
+	$('#graph-'+id+'h5').css('background','#ccc');
+}
+
+function pres_approval(){
+	$.post('/vishandle', {'visualization':'presapproval', 'length':180, 'smooth':30, 'type':'poll', 'pres':'pres'},function(data){
+		chart_data = $.parseJSON(data);
+		console.log(chart_data)
+		drawLineChart(chart_data);
+	});
+	$("#graph-1h5").css("background","#aaa");
+}
+
+function pres_approval2(time, smooth){
+	$.post('/vishandle', {'visualization':'presapproval', 'length':time, 'smooth':smooth, 'type':'poll', 'pres':'pres'},function(data){
+		chart_data = $.parseJSON(data);
+		console.log(chart_data)
+		drawLineChart(chart_data);
+	});
+}
+
+function pres_nosmooth2(time, id){
+	$.post('/vishandle', {'visualization':id, 'length':time, 'pres':'pres'},function(data){
+		chart_data = $.parseJSON(data);
+		console.log(chart_data)
+		drawLineChart(chart_data);
+	});
+}
+
+function pres_jobs(){
+	$.post('/vishandle', {'visualization':'presjobs', 'length':0, 'pres':'pres'},function(data){
+		chart_data = $.parseJSON(data);
+		console.log(chart_data)
+		drawLineChart(chart_data);
+	});
+	$("#graph-2h1").css("background","#aaa");
+}
+
+function pres_gdp(){
+	$.post('/vishandle', {'visualization':'presgdp', 'length':0, 'pres':'pres'},function(data){
+		chart_data = $.parseJSON(data);
+		console.log(chart_data)
+		drawLineChart(chart_data);
+	});
+	$("#graph-3h1").css("background","#aaa");
+}
+
+$( document ).ready(function() {
+	google.charts.load('current', {'packages':['corechart']});
+	graphSwitcher('pres_approval');
+});
+</script>
+{% endblock %}

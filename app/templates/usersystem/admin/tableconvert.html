@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript" src="/js/controllers/AdminController.js"></script>
+
+<div id='convert-wrap' ng-controller='TDBConvertController'>
+	<h2>Datastore to TDB conversion</h2>
+	<span style='font-size:125%';>Datastore table name to convert (case sensitive)</span>
+	<input id='convert-input' type='text' ng-model='convertinput' ng-model-options='{debounce: 500}' ng-change='getTableCols()'>
+	<div ng-show='collist.length > 0'>
+		<h3>Select columns for each category that apply</h3>
+		<div id='col-select-wrap'>
+			<div class='col-select-head'>
+				<h4>Primary Key (1+ col)</h4>
+				<div class='col-select-col [[selcollist[$index]["ks"] ]]' ng-repeat='col in collist' ng-click='selectCol($index, "k")'>
+					[[col['key'] ]]
+				</div>
+			</div>
+			<div class='col-select-head'>
+				<h4>Date Modified (optional)</h4>
+				<div class='col-select-col [[selcollist[$index]["ms"] ]]' ng-repeat='col in coldatelist' ng-click='selectCol($index, "m")'>
+					[[col['key'] ]]
+				</div>
+			</div>
+			<div class='col-select-head'>
+				<h4>Date Created (optional)</h4>
+				<div class='col-select-col [[selcollist[$index]["cs"] ]]' ng-repeat='col in coldatelist' ng-click='selectCol($index, "c")'>
+					[[col['key'] ]]
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class='submitbutton redbutton' ng-click='submitConversion()'>Convert</div>
+	<div class='error-text'>[[error_text]]</div>
+</div>
+
+<style>
+h2{text-align:center;}
+h3{text-align:center;}
+h4{text-align:center;}
+h4{margin:5px;}
+#convert-wrap{width:700px;margin:0 auto;position:relative;}
+#convert-input{width:calc(100% - 6px);padding:3px;}
+.submitbutton{margin:20px auto;padding:8px;}
+#col-select-wrap{display:flex;width:100%;}
+.col-select-col{width:100%;border-bottom:solid 1px #e9e9e9;cursor:pointer;}
+.col-select-col:hover{background:#e9e9e9;}
+.col-select-head{width:200px;position:relative;margin:0 auto;background:white;border:1px solid #e9e9e9;}
+.col-selected{background:#e9e9e9;}
+</style>
+
+{% endblock %}

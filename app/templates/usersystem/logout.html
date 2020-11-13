@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class='row' style='min-height:600px'>
+	<h1>You've successfully logged out of TGC</h1>
+	<ul>
+		<li><a href='/' target='_self' class='redlink'>Home -></a></li>
+		<li><a href='/election' target='_self' class='redlink'>Election 2016 -></a></li>
+		<li><a href='/login' target='_self' class='redlink'>Log back in -></a></li>
+	</ul>
+</div>
+
+<style>
+	#feedback-wrapper{display:none;}
+	.row{max-width:1280px;position:relative;margin:25px auto;width:90vw;display:flex;flex-direction:row;justify-content:space-between;flex-wrap:wrap;}
+	.test-email{display:none;}
+	#beta-welcome{width:600px;max-width:100vw;}
+	#us-content{text-align:center;}
+	#us-content h2, h3, h4{text-align:center;}
+	#userform{width:274px;padding:40px;background:white;border-radius:2px;border:solid 1px #d9d9d9;}
+	.signupinput{height:44px;width:calc(100% - 12px);margin-bottom:10px;border-radius:2px;padding-left:10px;font-size:16px;border:solid 1px #d9d9d9;background:#F2F2F2;}
+	#footer{display:none !important;}
+	#footfoot{position:relative;background:white;border-top:solid 1px #d9d9d9;}
+</style>
+{% endblock %}

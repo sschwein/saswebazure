@@ -1,0 +1,76 @@
+<div id='bill-row-ARRAYLOC' class='bill-main-row'>
+	<div class='bill-row-col-info' ng-click='changeBillDetail(1, ARRAYLOC)'>
+		<div class='bill-info-id'>
+			<h3>[[billmaster[ARRAYLOC].amendments[AMENDLOC].aid]]</h3>
+		</div>
+		<div class='bill-info-sponsor'>
+			<div class='bill-info-sponsor-pic-wrapper [[billmaster[ARRAYLOC].sponparty]]-border' style='background:url(\"/images/headshots/[[billmaster[ARRAYLOC].sponimg]].png\");'></div>
+			<div>[[billmaster[ARRAYLOC].sponsorname.trim()]]</div>
+		</div>
+		<!--<div ng-show='billmaster[ARRAYLOC].amendments[AMENDLOC].bill_amends != \"None\"' class='bill-info-committee'>
+			<h3>Bill amended:</h3>[[ billmaster[ARRAYLOC].amendments[AMENDLOC].bill_amends ]]
+		</div>
+		<div ng-show='billmaster[ARRAYLOC].amendments[AMENDLOC].amend_amends != \"None\"' class='bill-info-committee'>
+			<h3>Amendment amended:</h3>[[ billmaster[ARRAYLOC].amendments[AMENDLOC].amend_amends ]]
+		</div>-->
+	</div>
+	<div class='bill-row-col-time'>
+		<div class='bill-row-col-time-square'></div>
+		<div>[[ monthCode[billmaster[ARRAYLOC].amendments[AMENDLOC].last_act.split('T')[0].split('-')[1] ] ]]<br>[[ billmaster[ARRAYLOC].amendments[AMENDLOC].last_act.split('T')[0].split('-')[2] ]]<br>[[ billmaster[ARRAYLOC].amendments[AMENDLOC].last_act.split('T')[0].split('-')[0] ]]</div>
+	</div>
+	<div class='bill-row-col-status' ng-click='changeBillDetail(2, ARRAYLOC)'>
+		<div ng-if='billmaster[ARRAYLOC].amendments[AMENDLOC].bill_amends != \"None\"' class='bill-status-top-row' style='border:solid 2px #ccc;'>
+			<div class='bill-status-top-row-left' style='background:#ccc;'>
+				Bill Amended
+			</div>
+			<div class='bill-status-top-row-left-arrow-right' style='border-left:15px solid #ccc;'></div>
+			<div class='bill-status-top-row-right'>
+				<div>
+					[[ billmaster[ARRAYLOC].amendments[AMENDLOC].bill_amends ]]
+				</div>
+			</div>
+		</div>
+		<div ng-if='billmaster[ARRAYLOC].amendments[AMENDLOC].amend_amends != \"None\"' class='bill-status-top-row' style='border:solid 2px #ccc;'>
+			<div class='bill-status-top-row-left' style='background:#ccc;'>
+				Amentment Amended
+			</div>
+			<div class='bill-status-top-row-left-arrow-right' style='border-left:15px solid #ccc;'></div>
+			<div class='bill-status-top-row-right'>
+				<div>
+					[[ billmaster[ARRAYLOC].amendments[AMENDLOC].amend_amends ]]
+				</div>
+			</div>
+		</div>
+		<div style='padding:5px;'>
+			<div class='bill-status-title' ng-show='billmaster[ARRAYLOC].amendments[AMENDLOC].purpose != \"None\"'>
+				<span style='font-weight:bold;font-size:125%;'>Purpose: [[ billmaster[ARRAYLOC].amendments[AMENDLOC].purpose ]]</span>
+			</div>
+			<div class='bill-status-title' ng-show='billmaster[ARRAYLOC].amendments[AMENDLOC].purpose == \"None\"'>
+				<span style='font-weight:bold;font-size:125%;'>Purpose: No purpose available at this time.</span>
+			</div>
+			<div class='bill-status-summary' ng-show='billmaster[ARRAYLOC].amendments[AMENDLOC].description != \"None\"'>
+				Description: [[ billmaster[ARRAYLOC].amendments[AMENDLOC].description ]]
+			</div>
+			<div class='bill-status-title' ng-show='billmaster[ARRAYLOC].amendments[AMENDLOC].description == \"None\"'>
+				Description: No description available at this time.
+			</div>
+		</div>
+	</div>
+	<div class='bill-row-col-vote' ng-click='changeBillDetail(3, ARRAYLOC)'>
+		<div class='bill-vote-full'>
+			<div class='bill-vote-top-row' style='border:solid 2px #66cc00;' ng-show='billmaster[ARRAYLOC].amendments[AMENDLOC].result == \"Passed\"'>
+				<span style='font-weight:bold;'>Amendment:</span>&nbspPassed
+			</div>
+			<div class='bill-vote-top-row' style='border:solid 2px #CC0000;' ng-show='billmaster[ARRAYLOC].amendments[AMENDLOC].result != \"Passed\"'>
+				<span style='font-weight:bold;'>Amendment:</span>&nbspFailed
+			</div>
+			<div class='bill-vote-main'>
+				<div style='margin:0 auto;'>[[ billmaster[ARRAYLOC].amendments[AMENDLOC].resulttext ]]</div>
+			</div>
+		</div>
+	</div>
+	<div class='bill-row-col-updown' ng-click='changeBillDetail()'>
+		test4
+	</div>
+</div>
+<!---ARRAYLOC---AMENDLOC---A---><!---->

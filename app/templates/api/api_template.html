@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="/css/api.css">
+
+<div id='api-header'>
+    <h1>{% block api_title %}{% endblock %}</h1>
+</div>
+<div id='api-body-wrap' class='w-1280-container'>
+    <div id='api-body-left-panel' class='bg-lt-grey w-250-left'>
+        <div class='left-panel-li'><a href='#api-overview'>Overview</a></div>
+        <div class='left-panel-li'><a href='#api-get-api-key'>Get an API Key</a></div>
+        <div class='left-panel-li'><a href='#api-terms'>Terms of Use</a></div>
+        <div class='left-panel-li'><a href='#api-auth'>Authentication</a></div>
+        <div class='left-panel-li'><a href='#api-requests'>Requests</a></div>
+        <div class='left-panel-li'><a href='#api-endpoints'>Endpoints</a></div>
+        <div class='left-panel-li'><a href='#api-responses'>Responses</a></div>
+        <div class='left-panel-li'><a href='#api-errors'>Errors</a></div>
+        <div class='left-panel-li'><a href='#api-data-sources'>Data Sources</a></div>
+        <div class='left-panel-li'><a href='#api-update-schedule'>Data Update Schedules</a></div>
+    </div>
+    <div id='api-body-left-panel-shadow' class='w-250-left' style='border:none;'></div>
+    <div id='api-body-center-panel' class='w-1000-center'>
+        <div id='api-overview'>
+            <h3>Overview</h3>
+            <div class='api-documentation-text'>
+                {% block overview %}{% endblock %}
+            </div>
+        </div>
+        <div id='api-get-api-key'>
+            <div class='api-documentation-text' style='display:flex;'>
+                {% block api_key %}{% endblock %}
+            </div>
+        </div>
+        <div id='api-terms'>
+            <h3>Terms of Use</h3>
+            <div class='api-documentation-text'>
+                {% block terms %}{% endblock %}
+            </div>
+        </div>
+        <div id='api-auth'>
+            <h3>Authentication</h3>
+            <div class='api-documentation-text'>
+                {% block auth %}{% endblock %}
+            </div>
+        </div>
+        <div id='api-requests'>
+            <h3>Requests</h3>
+            <div class='api-documentation-text'>
+                {% block requests %}{% endblock %}
+            </div>
+        </div>
+        <div id='api-endpoints'>
+            <h3>Endpoints</h3>
+            <div class='api-documentation-text'>
+                {% block endpoints %}{% endblock %}
+            </div>
+        </div>
+        <div id='api-responses'>
+            <h3>Responses</h3>
+            <div class='api-documentation-text'>
+                {% block responses %}{% endblock %}
+            </div>
+        </div>
+        <div id='api-errors'>
+            <h3>Errors</h3>
+            <div class='api-documentation-text'>
+                {% block errors %}{% endblock %}
+            </div>
+        </div>
+        <div id='api-data-sources'>
+            <h3>Data Sources</h3>
+            <div class='api-documentation-text'>
+                {% block data_sources %}{% endblock %}
+            </div>
+        </div>
+        <div id='api-update-schedule'>
+            <h3>Data Update Schedules</h3>
+            <div class='api-documentation-text'>
+                {% block update_schedule %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

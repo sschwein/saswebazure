@@ -1,0 +1,160 @@
+<div class='cpw'>
+	<link rel='stylesheet' href='/css/legislative.css'/>
+	<script type="text/javascript" src="/js/legislative.js"></script>
+	<div id='bill-title'>
+		{% if bill.popular_title != 'None' %}
+		<h1 style='line-height:normal;'>{{bill.popular_title}}</h1>
+		{% elif bill.short_title != 'None' %}
+		<h1 style='line-height:normal;'>{{bill.short_title}}</h1>
+		{% else %}
+		<h1 style='line-height:normal;'>{{bill.official_title}}</h1>
+		{% endif %}
+		<div class='bill-buttons'>
+			<div class='left-bills-button {{leftbuttoncolor}}'>{{leftbuttontext}}</div>
+			<div id='bill-track-button' class='right-bills-button blue-action-button' ng-click='trackBill()' style='display:[[bill_track]]'>Track</div>
+			<div id='bill-tracking-button' class='right-bills-button' ng-click='untrackBill()' ng-mouseenter='showUntrack()' ng-mouseleave='showTracking()' style='display:[[bill_untrack]]'>Tracking</div>
+		</div>
+	</div>
+	<div id='bill-basic-info' class='bill-module z-index-3'>
+		<h2 style='text-decoration:underline;'>Background Info</h2>
+		<div class='bill-basic-info-text3'><div style='left:20px;position:absolute;display:flex;'><h3>Bill&nbspID:</h3>&nbsp{{bill.bill_id}}</div><div style='right:30px;position:absolute;display:flex;'><h3>Introduced&nbspOn:</h3>&nbsp{{introduced}}</div></div>
+		<div class='bill-basic-info-text' style='margin-top:50px;'><h3>Sponsor:</h3>&nbsp{{sponsorname}}</div>
+		<div class='bill-basic-info-text'>
+			<div class='bill-basic-info-text'><h3>Cosponsors:</h3>&nbsp</div>
+			<div id='expand-cosponsors' class='bill-basic-info-text'>{{cosponsorlist}}...<div id='expand-cosponsors1' onclick='javascript:expandCospon();return false;'>&nbspList&nbspAll</div></div>
+			<div id='bill-cospon-all' class='bill-basic-info-text' style='display:none !important;'>{{cosponsorlist}}{{cosponsorlist2}}&nbsp&nbsp
+				<a style='color:blue;font-weight:bold;cursor:pointer;' onclick='javascript:expandCospon();return false;'>Close</a>
+			</div>
+		</div>
+		<div class='bill-basic-info-text'><h3>Committees:</h3>&nbsp{{committeelist}}</div>
+		<div class='bill-basic-info-text'><h3>Affiliations:</h3>&nbsp{{relatedbills}}</div>
+		<div class='bill-basic-info-text'><h3>Alternative&nbspNames:</h3>&nbsp{{bill.nicknames}}</div>
+	</div>
+	<div id='bill-summary' class='bill-module z-index-3'>
+		<h2 style='text-decoration:underline;'>Summary</h2>
+		<h3 style='margin-bottom:5px !important;text-align:left;'>Progress:</h3>
+		<div class='bill-summary-progress-wrap'>
+			<div class='bill-summary-progress-bar'>
+				<div class='bill-summary-progress-unit {{progressbarcolor[0]}}'>
+					Proposed
+				</div>
+				<div class='bill-summary-progress-unit {{progressbarcolor[1]}}'>
+					In Committee
+				</div>
+				<div class='bill-summary-progress-unit {{progressbarcolor[2]}}'>
+					In House
+				</div>
+				<div class='bill-summary-progress-unit {{progressbarcolor[3]}}'>
+					In Senate
+				</div>
+				<div class='bill-summary-progress-unit {{progressbarcolor[4]}}'>
+					To President
+				</div>
+				<div class='bill-summary-progress-unit {{progressbarcolor[5]}}'>
+					Enacted
+				</div>
+			</div>
+			<div class='bill-summary-progress-pointer'>
+			</div>
+		</div>
+		<div class='bill-basic-info-text' style='margin-bottom:0px !important;'>
+			<h3>Last&nbspAction&nbspTaken:</h3>
+			{% if lastaction.text != 'No Actions' and billactions|length != 0 %}
+				<div id='expand-actions' onclick='javascript:expandActions();return false;'>&nbsp&nbsp(Show&nbspAll)</div>
+			{% endif %}
+		</div>
+		<div class='bill-basic-info-text2'>
+			{{lastaction.acted_at}}&nbsp-&nbsp{{lastaction.text}}<br>
+			<div id='bill-basic-info-actions'>
+				{% for i in range(billactions|length) %}
+					<div id='bill-act-{{i}}' class='bill-action-row'>{{billactions[i].acted_at}}&nbsp-&nbsp{{billactions[i].text}}</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% if billsummary != 'No bill summary has been created yet' %}
+			<div class='bill-basic-info-text'>
+				<div class='bill-basic-info-text'><h3>Bill&nbspSummary:</h3>&nbsp</div>
+				<div id='expand-summary' class='bill-basic-info-text'>{{billsummary}}...<div id='expand-summary1' onclick='javascript:expandSummary();return false;'>&nbspShow&nbspAll</div></div>
+				<div id='bill-summary-all' class='bill-basic-info-text' style='display:none !important;'>{{billsummary}}{{billsummary2}}&nbsp&nbsp
+					<a style='color:blue;font-weight:bold;cursor:pointer;' onclick='javascript:expandSummary();return false;'>Close</a>
+				</div>
+			</div>
+		{% else %}
+			<div class='bill-basic-info-text'><h3>Bill&nbspSummary</h3>&nbsp{{billsummary}}</div>
+		{% endif %}
+		<div class='bill-basic-info-text'><h3>Full&nbspBill&nbspText:</h3>&nbsp<a href='{{bill.url}}/text' target='/blank' class='redlink'>Visit congress.gov to read more</a></div>
+	</div>
+	<div id='bill-votes' class='bill-module z-index-3'>
+		<h2 style='text-decoration:underline;'>Vote Record</h2>
+		{% if novote == 'No votes have been recorded yet.' %}
+			<h3>{{novote}}</h3>
+		{% else %}
+			<div class='bill-vote-row'>
+				<div class='bill-vote-cell'>
+					<div class='bill-vote-cell-title'><h3>House</h3></div>
+					{% if votelist.housevote == '' %}
+						<h4 style='margin-top:30px !important;text-align:center !important;'>-Not Voted-</h4>
+					{% else %}
+						<h4>Total Vote Breakdown</h4>
+						<div class='bill-basic-info-text4'><h4>Yes:</h4>&nbsp{{votelist.housevote.breakdown.split('_')[0]}}</div>
+						<div class='bill-basic-info-text4'><h4>No:</h4>&nbsp{{votelist.housevote.breakdown.split('_')[1]}}</div>
+						<div class='bill-basic-info-text4'><h4>Not Voting:</h4>&nbsp{{votelist.housevote.breakdown.split('_')[2]}}</div>
+						<div class='bill-basic-info-text4'><h4>Present:</h4>&nbsp{{votelist.housevote.breakdown.split('_')[3]}}</div><br>
+						<h4>Republican Vote Breakdown</h4>
+						<div class='bill-basic-info-text4'><h4>Yes:</h4>&nbsp{{votelist.housevote.break_gop.split('_')[0]}}</div>
+						<div class='bill-basic-info-text4'><h4>No:</h4>&nbsp{{votelist.housevote.break_gop.split('_')[1]}}</div>
+						<div class='bill-basic-info-text4'><h4>Not Voting:</h4>&nbsp{{votelist.housevote.break_gop.split('_')[2]}}</div>
+						<div class='bill-basic-info-text4'><h4>Present:</h4>&nbsp{{votelist.housevote.break_gop.split('_')[3]}}</div><br>
+						<h4>Democrat Vote Breakdown</h4>
+						<div class='bill-basic-info-text4'><h4>Yes:</h4>&nbsp{{votelist.housevote.break_dem.split('_')[0]}}</div>
+						<div class='bill-basic-info-text4'><h4>No:</h4>&nbsp{{votelist.housevote.break_dem.split('_')[1]}}</div>
+						<div class='bill-basic-info-text4'><h4>Not Voting:</h4>&nbsp{{votelist.housevote.break_dem.split('_')[2]}}</div>
+						<div class='bill-basic-info-text4'><h4>Present:</h4>&nbsp{{votelist.housevote.break_dem.split('_')[3]}}</div>
+					{% endif %}
+				</div>
+				<div class='bill-vote-cell'>
+					<div class='bill-vote-cell-title'><h3>Senate</h3></div>
+					{% if votelist.senatevote == '' %}
+						<h4 style='margin-top:30px !important;text-align:center !important;'>-Not Voted-</h4>
+					{% else %}
+						<h4>Total Vote Breakdown</h4>
+						<div class='bill-basic-info-text4'><h4>Yes:</h4>&nbsp{{votelist.senatevote.breakdown.split('_')[0]}}</div>
+						<div class='bill-basic-info-text4'><h4>No:</h4>&nbsp{{votelist.senatevote.breakdown.split('_')[1]}}</div>
+						<div class='bill-basic-info-text4'><h4>Not Voting:</h4>&nbsp{{votelist.senatevote.breakdown.split('_')[2]}}</div>
+						<div class='bill-basic-info-text4'><h4>Present:</h4>&nbsp{{votelist.senatevote.breakdown.split('_')[3]}}</div><br>
+						<h4>Republican Vote Breakdown</h4>
+						<div class='bill-basic-info-text4'><h4>Yes:</h4>&nbsp{{votelist.senatevote.break_gop.split('_')[0]}}</div>
+						<div class='bill-basic-info-text4'><h4>No:</h4>&nbsp{{votelist.senatevote.break_gop.split('_')[1]}}</div>
+						<div class='bill-basic-info-text4'><h4>Not Voting:</h4>&nbsp{{votelist.senatevote.break_gop.split('_')[2]}}</div>
+						<div class='bill-basic-info-text4'><h4>Present:</h4>&nbsp{{votelist.senatevote.break_gop.split('_')[3]}}</div><br>
+						<h4>Democrat Vote Breakdown</h4>
+						<div class='bill-basic-info-text4'><h4>Yes:</h4>&nbsp{{votelist.senatevote.break_dem.split('_')[0]}}</div>
+						<div class='bill-basic-info-text4'><h4>No:</h4>&nbsp{{votelist.senatevote.break_dem.split('_')[1]}}</div>
+						<div class='bill-basic-info-text4'><h4>Not Voting:</h4>&nbsp{{votelist.senatevote.break_dem.split('_')[2]}}</div>
+						<div class='bill-basic-info-text4'><h4>Present:</h4>&nbsp{{votelist.senatevote.break_dem.split('_')[3]}}</div><br>
+						<h4>Independent Vote Breakdown</h4>
+						<div class='bill-basic-info-text4'><h4>Yes:</h4>&nbsp{{votelist.senatevote.break_ind.split('_')[0]}}</div>
+						<div class='bill-basic-info-text4'><h4>No:</h4>&nbsp{{votelist.senatevote.break_ind.split('_')[1]}}</div>
+						<div class='bill-basic-info-text4'><h4>Not Voting:</h4>&nbsp{{votelist.senatevote.break_ind.split('_')[2]}}</div>
+						<div class='bill-basic-info-text4'><h4>Present:</h4>&nbsp{{votelist.senatevote.break_ind.split('_')[3]}}</div>
+					{% endif %}
+				</div>
+			</div>
+			<div class='bill-vote-row'>
+				<div class='bill-vote-cell'>
+					<div class='bill-vote-cell-title'><h3>Your House Rep</h3></div>
+					Coming Soon
+				</div>
+				<div class='bill-vote-cell'>
+					<div class='bill-vote-cell-title'><h3>Your Senators</h3></div>
+					Coming Soon
+				</div>
+			</div>
+		{% endif %}
+	</div>
+</div>
+
+<style>
+#bill-tracking-button{display:none;color:white;background:#376cea;border:solid #376cea 1px;}
+#bill-untrack-button{display:none;color:white;background:#CC0000;border:solid #CC0000 1px;}
+</style>

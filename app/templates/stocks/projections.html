@@ -1,0 +1,17 @@
+<h3>Income Projections</h3>
+
+<img class='loading-img' ng-show='show_loading' src='/images/Pacman.gif'>
+
+<div class='stock-summary-bar'>
+    <div class='stock-summary-bar' ng-repeat='row in fundData track by $index'>
+        <h5>Dividend Income - [[row.name]]</h5>
+        <div class='summary-row'>
+            <div class='summary-col-400 font-size-115 text-right'>
+                Projected Dividend Income (12 months)
+            </div>
+            <div style='width:20px;'></div>
+            <div class='summary-col-400 font-size-115'>
+                $[[row.yearly_dividend.toFixed(2)]]
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,144 @@
+<div id='executive' class='tab t1 tgcbluetextpage'>
+	<script type="text/javascript" src="/js/natdata.js"></script>
+	<h1 id='nat-data-center-head1'>The State of our Union: National Public Data</h1><br>
+	<div id='nat-data-center-head2'>{#A nation is the sum of its people, united under one governing body. Thus the success of a nation is directly reflected in the success of its people. Some major questions you may want to consider include: <br>1) Are the people safe from harm? <br>2) Are they provided a high level of health appropriate care in their environment? <br>3) Are they treated with equal fairness? <br>4) Do they have the freedoms and opportunities to do what they wish, with respect to others? <br>5) Can they seek education expand and improve their mind and skills? <br>6) Are they able to employ themselves in a fullfilling way?<br><br>#}Welcome to the TGC national data page! This is where you can view data from a number of governmental bureaus measuring the stat of our economy, our tax revenue, and spending, in full detail. With this you'll always be able to support your data driven arguments and share to help ensure we all know exactly how our nation is doing.</div>
+	{#<h1 style='text-align:center;margin-bottom:5px;'>How Do We Measure the United States as a Nation?</h1><br>
+	<div style='text-align:justify;width:80%;margin:0 auto;margin-bottom:25px;font-size:120%;'>A nation is the sum of its people, united under one governing body. Thus the success of a nation is directly reflected in the success of its people. Some major questions you may want to consider include: <br>1) Are the people safe from harm? <br>2) Are they provided a high level of health appropriate care in their environment? <br>3) Are they treated with equal fairness? <br>4) Do they have the freedoms and opportunities to do what they wish, with respect to others? <br>5) Can they seek education expand and improve their mind and skills? <br>6) Are they able to employ themselves in a fullfilling way?<br><br>A nation is the sum of its people, united under one governing body. Thus a nation's success is directly reflected in the success of its people. So to measure our nation, we must evaluate our people's access to these inalienable rights to life, liberty, and the pursuit of happiness</div>#}
+	{#<div id='int-header'>
+		<div id='qualolife' class='rights-header z-index-3' onmouseout='javascript:unDisplayTip("qualolifesub");return false;' onmouseover='javascript:displayTip("qualolifesub");return false;' onclick='javascript:filterCat(0, false);return false;' style='border:3px solid #5A8F29;'>
+			<h3 style='margin-top:5px;margin-bottom:5px;'>Quality of</h3>
+			<h2 style='margin-top:0px;'>Life</h2>
+			<div id='qualolifesub' class='sub-filter' style='background:#83CE3B;'>
+				<div style='padding-left:5px;font-weight:normal;'>Specifically:</div>
+				<div id='security-filter' style='padding-left:5px;display:flex;'><div class='bulletpoint'></div>Security</div>
+				<div id='well-being-filter' style='padding-left:5px;display:flex;'><div class='bulletpoint'></div>Health/Well-being</div>
+			</div>
+		</div>
+		<div id='acctolib' class='rights-header z-index-3' onmouseout='javascript:unDisplayTip("acctolibsub");return false;' onmouseover='javascript:displayTip("acctolibsub");return false;' onclick='javascript:filterCat(1, false);return false;' style='border:3px solid #B64BB8;'>
+			<h3 style='margin-top:5px;margin-bottom:5px;'>Access to</h3>
+			<h2 style='margin-top:0px;'>Liberty</h2>
+			<div id='acctolibsub' class='sub-filter' style='background:#C661C9;'>
+				<div style='padding-left:5px;font-weight:normal;'>Specifically:</div>
+				<div id='equality-filter' style='padding-left:5px;display:flex;'><div class='bulletpoint'></div>Equality</div>
+				<div id='economic-filter' style='padding-left:5px;display:flex;'><div class='bulletpoint'></div>Econ. Opportunity</div>
+			</div>
+		</div>
+		<div id='perofhap' class='rights-header z-index-3' onmouseout='javascript:unDisplayTip("perofhapsub");return false;' onmouseover='javascript:displayTip("perofhapsub");return false;' onclick='javascript:filterCat(2, false);return false;' style='border:3px solid #FF8F00;'>
+			<h3 style='margin-top:5px;margin-bottom:5px;'>Pursuit of</h3>
+			<h2 style='margin-top:0px;'>Happiness</h2>
+			<div id='perofhapsub' class='sub-filter' style='background:#FD9D32;'>
+				<div style='padding-left:5px;font-weight:normal;'>Specifically:</div>
+				<div id='education-filter' style='padding-left:5px;display:flex;'><div class='bulletpoint'></div>Education</div>
+				<div id='employment-filter' style='padding-left:5px;display:flex;'><div class='bulletpoint'></div>Employment</div>
+			</div>
+		</div>
+	</div>#}
+	<div id='right-col-wrapper'>
+		<div id='right-col'>
+			<div id='module-wrapper'>
+				<div id='internal-graph-wrapper' class='cstanding-graph-wrapper3 z-index-2'></div>
+				<div id='hover-buttons'>
+					<div ng-controller="ShareController" id='natsocialmedia' class='tooltipbutton z-index-1' style='padding-top:0px;height:40px;' ng-click='takeGraphScreenshot()'>
+						<img class='share-mini-megaphone-circle' src='/images/buttons/share_megaphone.png'>
+						<div id='socialmediahover' class='tooltiptext3'>Share</div>
+					</div>
+					<div id='natcontext' class='tooltipbutton z-index-1' onmouseout='javascript:unDisplayTip("contexthover");return false;' onmouseover='javascript:displayTip("contexthover");return false;' onclick='javascript:displayTip2("contexttip");return false;'>
+						C
+						<div id='contexthover' class='tooltiptext3'>Context</div>
+					</div>
+					<div id='natsources' class='tooltipbutton z-index-1' onmouseout='javascript:unDisplayTip("sourceshover");return false;' onmouseover='javascript:displayTip("sourceshover");return false;' onclick='javascript:displayTip2("sourcestip");return false;'>
+						S
+						<div id='sourceshover' class='tooltiptext3'>Sources</div>
+					</div>
+					{#<div id='natbiascheck' class='tooltipbutton z-index-1' onmouseout='javascript:unDisplayTip("biascheckhover");return false;' onmouseover='javascript:displayTip("biascheckhover");return false;' onclick='javascript:displayTip2("biaschecktip");return false;'>
+						B
+						<div id='biascheckhover' class='tooltiptext3'>Bias Check</div>
+					</div>#}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class='pres-graph-header'><div style='position:relative;width:100%;display:flex;margin-top:20px;'>
+		<div id='tlyear1' class='timelineyear graph-head-button' onclick='javascript:switchButton(1);return false;'>1961-1963</div>
+		<div id='tlyear2' class='timelineyear graph-head-button' onclick='javascript:switchButton(2);return false;'>1963-1969</div>
+		<div id='tlyear3' class='timelineyear graph-head-button' onclick='javascript:switchButton(3);return false;'>1969-1974</div>
+		<div id='tlyear4' class='timelineyear graph-head-button' onclick='javascript:switchButton(4);return false;'>1974-1977</div>
+		<div id='tlyear5' class='timelineyear graph-head-button' onclick='javascript:switchButton(5);return false;'>1977-1981</div>
+		<div id='tlyear6' class='timelineyear graph-head-button' onclick='javascript:switchButton(6);return false;'>1981-1989</div>
+		<div id='tlyear7' class='timelineyear graph-head-button' onclick='javascript:switchButton(7);return false;' style='background:#fc2;'>1989-1993</div>
+		<div id='tlyear8' class='timelineyear graph-head-button' onclick='javascript:switchButton(8);return false;' style='background:#fc2;'>1993-2001</div>
+		<div id='tlyear9' class='timelineyear graph-head-button' onclick='javascript:switchButton(9);return false;' style='background:#fc2;'>2001-2009</div>
+		<div id='tlyear10' class='timelineyear graph-head-button' onclick='javascript:switchButton(10);return false;' style='background:#fc2;'>2009-2017</div>
+	</div></div>
+	<div class='pres-graph-header'><div style='position:relative;width:100%;display:flex;'>
+		<div class='D-border pres-head-shot' ng-mouseleave='presheadshow = 0' ng-mouseover='presheadshow = 1' ng-click='switchHeadButton(1)'><img src='/images/pres_hdshts/JFK_Headshot.jpg' class='pres-head-shot'>
+			<div id='graph-h1' class='tooltiptext4' style='background:#ddf;' ng-show='presheadshow == 1'>
+				John<br>Kennedy
+			</div>
+		</div>
+		<div class='D-border pres-head-shot' ng-mouseleave='presheadshow = 0' ng-mouseover='presheadshow = 2' ng-click='switchHeadButton(2)'><img src='/images/pres_hdshts/LBJ_Headshot.jpg' class='pres-head-shot'>
+			<div id='graph-h2' class='tooltiptext4' style='background:#ddf;' ng-show='presheadshow == 2'>
+				Lyndon<br>Johnson
+			</div>
+		</div>
+		<div class='R-border pres-head-shot' ng-mouseleave='presheadshow = 0' ng-mouseover='presheadshow = 3' ng-click='switchHeadButton(3)'><img src='/images/pres_hdshts/Nixon_Headshot.jpg' class='pres-head-shot'>
+			<div id='graph-h3' class='tooltiptext4' style='background:#fdd;' ng-show='presheadshow == 3'>
+				Richard<br>Nixon
+			</div>
+		</div>
+		<div class='R-border pres-head-shot' ng-mouseleave='presheadshow = 0' ng-mouseover='presheadshow = 4' ng-click='switchHeadButton(4)'><img src='/images/pres_hdshts/Ford_Headshot.jpg' class='pres-head-shot'>
+			<div id='graph-h4' class='tooltiptext4' style='background:#fdd;' ng-show='presheadshow == 4'>
+				Gerald<br>Ford
+			</div>
+		</div>
+		<div class='D-border pres-head-shot' ng-mouseleave='presheadshow = 0' ng-mouseover='presheadshow = 5' ng-click='switchHeadButton(5)'><img src='/images/pres_hdshts/Carter_Headshot.jpg' class='pres-head-shot'>
+			<div id='graph-h5' class='tooltiptext4' style='background:#ddf;' ng-show='presheadshow == 5'>
+				Jimmy<br>Carter
+			</div>
+		</div>
+		<div class='R-border pres-head-shot' ng-mouseleave='presheadshow = 0' ng-mouseover='presheadshow = 6' ng-click='switchHeadButton(6)'><img src='/images/pres_hdshts/Reagan_Headshot.jpg' class='pres-head-shot'>
+			<div id='graph-h6' class='tooltiptext4' style='background:#fdd;' ng-show='presheadshow == 6'>
+				Ronald<br>Reagan
+			</div>
+		</div>
+		<div class='R-border pres-head-shot' ng-mouseleave='presheadshow = 0' ng-mouseover='presheadshow = 7' ng-click='switchHeadButton(7)'><img src='/images/pres_hdshts/BushSr_Headshot.jpg' class='pres-head-shot'>
+			<div id='graph-h7' class='tooltiptext4' style='background:#fdd;' ng-show='presheadshow == 7'>
+				George<br>Bush
+			</div>
+		</div>
+		<div class='D-border pres-head-shot' ng-mouseleave='presheadshow = 0' ng-mouseover='presheadshow = 8' ng-click='switchHeadButton(8)'><img src='/images/pres_hdshts/Clinton_Headshot.jpg' class='pres-head-shot'>
+			<div id='graph-h8' class='tooltiptext4' style='background:#ddf;' ng-show='presheadshow == 8'>
+				Bill<br>Clinton
+			</div>
+		</div>
+		<div class='R-border pres-head-shot' ng-mouseleave='presheadshow = 0' ng-mouseover='presheadshow = 9' ng-click='switchHeadButton(9)'><img src='/images/pres_hdshts/BushJr_Headshot.jpg' class='pres-head-shot'>
+			<div id='graph-h9' class='tooltiptext4' style='background:#fdd;' ng-show='presheadshow == 9'>
+				George W.<br>Bush
+			</div>
+		</div>
+		<div class='D-border pres-head-shot' ng-mouseleave='presheadshow = 0' ng-mouseover='presheadshow = 10' ng-click='switchHeadButton(10)'><img src='/images/pres_hdshts/Obama_Headshot2.jpg' class='pres-head-shot'>
+			<div id='graph-h10' class='tooltiptext4' style='background:#ddf;' ng-show='presheadshow == 10'>
+				Barack<br>Obama
+			</div>
+		</div>
+	</div></div>
+	<div class='pres-graph-header'><div style='position:relative;width:100%;display:flex;'>
+	</div></div>
+	<div id='tip-wrapper'>
+		{#<div id='tag-reps-tip'>
+			<input type='checkbox' name='include-reps'>Tag my representatives
+		</div>
+		<div id='socialmediatip' class='tooltiptext2' style='width:280px;background:none;border:none;position:relative;margin:0 auto;'>
+			<ul class="soc">
+				<li><a class="soc-facebook" href="#"></a></li>
+				<li><a class="soc-twitter" href="#"></a></li>
+				<li><a class="soc-google" href="#"></a></li>
+				<li><a class="soc-instagram" href="#"></a></li>
+				<li><a class="soc-reddit soc-icon-last" href="#"></a></li>
+			</ul>
+		</div>#}
+		<div id='contexttip' class='tooltiptext2 z-index-3'></div>
+		<div id='sourcestip' class='tooltiptext2 z-index-3'></div>
+		{#<div id='biaschecktip' class='tooltiptext2'></div>#}
+	</div>
+</div>

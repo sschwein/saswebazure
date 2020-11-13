@@ -1,0 +1,96 @@
+<link rel='stylesheet' href='/css/election.css'/>
+<h1 style='text-align:center;'>2016 Presidential Campaign Finance</h1>
+<p style='text-align:justify;width:100%;'>Campaigns need funding to get their message across to voters like you. Modern elections increasingly see money flow in from many sources and interest groups. Knowing where money comes from gives you an idea who has influence over your representatives.</p>
+<h2 style='text-align:center;border-bottom:2px solid black;height:25px;'>Presidential Campaign Committees</h2>
+<div class='camp-fin-module-wrap'>
+	<div style='position:relative;width:100%;display:flex;'>
+		<div class='camp-fin-tab' style='background:#9f9;' ng-click='prescamp1 = 1; drawCampFinBar("eleallcamfintotalrec", 0)'>
+			<h3>In</h3>
+		</div>
+		<div class='camp-fin-tab' style='background:#f99;' ng-click='console.log("test");prescamp1 = 2; drawCampFinBar("eleallcamfintotspent", 0)'>
+			<h3>Out</h3>
+		</div>
+	</div>
+	<div class='camp-fin-graph-wrap' style='[[campFinGraphBorder(1)]]'>
+		<div class='camp-fin-graph-head-wrap' ng-show='prescamp1 == 1' style='max-width:650px;'>
+			<div id='eleallcamfintotalrec' class='camp-fin-graph-head z-index-1 z-index-3' ng-click='drawCampFinBar("eleallcamfintotalrec", 0)' style='background:#d9d9d9;'>
+				Donation<br>Totals
+			</div>
+			<div id='eleallcamfincohtime' class='camp-fin-graph-head z-index-3' ng-click='drawCampFinLine("eleallcamfincohtime", 0)' style='background:#e9e9e9;'>
+				Cash on Hand<br>over time
+			</div>
+			{#<div id='eleallcamfindonocc' class='camp-fin-graph-head z-index-3' ng-click='drawCampFinQuadPie("eleallcamfindonocc", 0)' style='background:#e9e9e9;'>
+				Donations by<br>Occupation
+			</div>#}
+			<div id='eleallcamfinonsizeC' class='camp-fin-graph-head z-index-3' ng-click='drawCampFinQuadPie("eleallcamfinonsizeC$$$eleallcamfinonsizeT$$$eleallcamfinonsizeJ$$$eleallcamfinonsizeS", 0, 0)' style='margin-right:0px !important;background:#e9e9e9;'>
+				Donations<br>by Size
+			</div>
+		</div>
+		<div class='camp-fin-graph-head-wrap' ng-show='prescamp1 == 2' style='max-width:650px;'>
+			<div id='eleallcamfintotspent' class='camp-fin-graph-head z-index-3' ng-click='drawCampFinBar("eleallcamfintotspent", 0)' style='background:#e9e9e9;'>
+				Total<br>Spent
+			</div>
+			<div id='eleallcamfinspendtime' class='camp-fin-graph-head z-index-3' ng-click='drawCampFinLine("eleallcamfinspendtime", 0)' style='background:#e9e9e9;'>
+				Total Spent<br>over time
+			</div>
+			<div id='eleallcamfinspendcatC' class='camp-fin-graph-head z-index-3' ng-click='drawCampFinQuadPie("eleallcamfinspendcatC$$$eleallcamfinspendcatT$$$eleallcamfinspendcatJ$$$eleallcamfinspendcatS", 1, 0)' style='background:#e9e9e9;margin-right:0px !important;'>
+				Spending by<br>Purpose
+			</div>
+			{#<div class='camp-fin-graph-head z-index-3' style='background:#e9e9e9;'>
+				Spending by<br>Industry
+			</div>#}
+		</div>
+		<div id='campaign-graph-wrapper' ng-show='quadpietop == 1' class='cstanding-graph-wrapper3 z-index-3'></div>
+		<div class='campaign-graph-quad-wrap z-index-2' ng-show='quadpietop == 2'>
+			<h3 ng-show='quadpiehead == "eleallcamfinonsizeC"' style='height:35px;width:100%;margin:0;padding-top:15px;'>Campaign Contributions by Size</h3>
+			<h3 ng-show='quadpiehead == "eleallcamfinspendcatC"' style='height:35px;width:100%;margin:0;padding-top:15px;'>Spending by Purpose</h3>
+			<div class='campaign-graph-row'>
+				<div id='campaign-pie-graph-wrapper1' class='cstanding-graph-wrapper4'></div>
+				<div id='campaign-pie-graph-wrapper2' class='cstanding-graph-wrapper4'></div>
+			</div>
+			<div class='campaign-graph-row'>
+				<div id='campaign-pie-graph-wrapper3' class='cstanding-graph-wrapper4'></div>
+				<div id='campaign-pie-graph-wrapper4' class='cstanding-graph-wrapper4'></div>
+			</div>
+		</div>
+	</div> 
+</div>
+<h2 style='text-align:center;border-bottom:2px solid black;height:25px;margin:50px 0px 20px;'>Super PACS</h2>
+<div class='camp-fin-module-wrap'>
+	<div style='position:relative;width:100%;display:flex;'>
+		<div class='camp-fin-tab' style='background:#9f9;' ng-click='prescamp2 = 1; drawCampFinBar("eleallcamfinpactotraised", 1);'>
+			<h3>In</h3>
+		</div>
+		<div class='camp-fin-tab' style='background:#f99;' ng-click='prescamp2 = 2; drawCampFinDoubleBar("eleallcamfinpaccandtotfas$$$eleallcamfinpaccandtotfao", {vAxis: {minValue: 0, ticks: [0, 25000000, 50000000, 75000000, 100000000]}}, 1)'>
+			<h3>Out</h3>
+		</div>
+	</div>
+	<div class='camp-fin-graph-wrap' style='[[campFinGraphBorder(2)]]'>
+		<div class='camp-fin-graph-head-wrap' ng-show='prescamp2 == 1' style='max-width:425px;'>
+			<div id='eleallcamfinpactotraised' class='camp-fin-graph-head z-index-1 z-index-3' ng-click='drawCampFinBar("eleallcamfinpactotraised", 1)' style='background:#d9d9d9;'>
+				Money Raised by<br>Top Super PACS
+			</div>
+			{#<div class='camp-fin-graph-head z-index-3' ng-click='drawCampFinBar()' style='background:#e9e9e9;'>
+				Top Super PACS<br>Total War Chest
+			</div>#}
+			<div id='eleallcamfinpacwarchest' class='camp-fin-graph-head z-index-3' ng-click='drawCampFinBar("eleallcamfinpacwarchest", 1)' style='margin-right:0px !important;background:#e9e9e9;'>
+				Top Super PACS<br>Recent Cash on Hand
+			</div>
+		</div>
+		<div class='camp-fin-graph-head-wrap' ng-show='prescamp2 == 2' style='max-width:425px;'>
+			<div id='eleallcamfinpaccandtotfas' class='camp-fin-graph-head z-index-3' ng-click='drawCampFinDoubleBar("eleallcamfinpaccandtotfas$$$eleallcamfinpaccandtotfao", {vAxis: {minValue: 0, ticks: [0, 25000000, 50000000, 75000000, 100000000]}}, 1)' style='background:#e9e9e9;'>
+				Total Spending<br>FOR/AGAINST Candidates
+			</div>
+			<div id='eleallcamfinpacspendtime' class='camp-fin-graph-head z-index-3' ng-click='drawCampFinLine("eleallcamfinpacspendtime", 1)' style='margin-right:0px !important;background:#e9e9e9;'>
+				Super PAC Spending<br>Over Time
+			</div>
+		</div>
+		<div id='superpacs-graph-wrapper' ng-show='doublebartop == 1' class='cstanding-graph-wrapper3 z-index-3'></div>
+		<div class='campaign-graph-quad-wrap z-index-2' ng-show='doublebartop == 2'>
+			<div class='campaign-graph-double-row'>
+				<div id='superpacs-graph-wrapper1' class='cstanding-graph-wrapper4'></div>
+				<div id='superpacs-graph-wrapper2' class='cstanding-graph-wrapper4'></div>
+			</div>
+		</div>
+	</div>
+</div>

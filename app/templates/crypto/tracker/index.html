@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript" src="/js/controllers/api.js"></script>
+<link rel="stylesheet" href="/css/api.css">
+
+<div id='api-profile-wrapper' class='w-1280-container' ng-controller='APIController' ng-init='initTracker()'>
+    <div id='tracker-header'>
+        <h1>My Crypto Tracker</h1>
+    </div>
+    <div id='api-profile-body-wrap'>
+        <div class='w-250-left'>
+            <h4>Quick Links</h4>
+            <ul class='quick-link-ul'>
+                <li ng-click='loadTrackerPage(0)'>Current Value</li>
+                <li ng-click='loadTrackerPage(1)'>Projections</li>
+                <li ng-click='loadTrackerPage(2)'>Trade History</li>
+                <li ng-click='loadTrackerPage(3)'>Taxes 'n' shit</li>
+            </ul>
+        </div>
+        <div class='w-1000-center' bind-unsafe-html="bodyHTML"></div>
+    </div>
+</div>
+
+{% endblock %}

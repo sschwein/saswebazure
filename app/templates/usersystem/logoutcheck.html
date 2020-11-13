@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class='ssection' style='min-height:600px' ng-controller='logoutController' ng-init='logoutInit()'>
+	<h1>Are you sure you want to logout?</h1>
+	<div class='redbutton' ng-click='logout()'>Yes, Do It!</div>
+	<div class='bluebutton' ng-click='goback()'>No! Take Me Back</div>
+</div>
+
+<script>
+app.controller('logoutController', function($scope, $http, $location, $window) {
+	$scope.redirect = '';
+
+	$scope.logoutInit = function() {
+		potential = $location.$$url.split('=')[1]
+		if (potential) {
+			$scope.redirect = potential;
+		}
+	}
+
+	$scope.goback = function() {
+		console.log($scope.redirect)
+		$window.location.href = '/' + $scope.redirect.replace('%2F', '/');
+	}
+
+	$scope.logout = function() {
+		$http.post('/logout', {'redirect' : $scope.redirect.replace('%2F', '/')})
+		.then(function(response){
+			if (response.data = 'success') {
+				$window.location.href = '/' + $scope.redirect.replace('%2F', '/');
+			}
+		});
+	}
+
+});
+</script>
+
+<style>
+	.ssection{margin-top:100px;text-align:center}
+	h1{margin-bottom:50px;}
+	.bluebutton{margin:50px auto;width:200px;}
+	.redbutton{margin:0 auto;padding:10px;}
+</style>
+{% endblock %}

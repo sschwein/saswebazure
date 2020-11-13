@@ -1,0 +1,13 @@
+#profile-body-wrap{display:flex;width:100%;margin-top:40px;}
+#add-stock-wrap{width:500px;margin:0 auto;}
+.table tr{height:52px;}
+
+#add-fund-wrap{width:95%;margin:24px auto;}
+#new-holding-list{width:75%;margin:0 auto;display:flex;flex-wrap: wrap;}
+.new-holding{width:75px;padding:4px 12px;font-weight:bold;text-align:center;border:1px solid #d9d9d9;border-radius:10px;margin:0 24px;}
+
+.stock-summary-bar{width:100%;margin-top:24px;}
+.summary-row{display:flex;margin:16px auto;width:100%;}
+.summary-col-250{width:250px;margin:0 auto;}
+.summary-col-500{width:500px;margin:0 auto;}
+.summary-col-400{width:400px;margin:0 auto;}

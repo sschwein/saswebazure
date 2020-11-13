@@ -1,0 +1,391 @@
+{% extends "newbase.html" %}
+{% block content %}
+
+<div id='section1' class='section'>
+
+	<div id='chamber-selector'>
+		<a href='/stats?chamber=house' target='_self'><h1 class='{{houseactive}}'>House</h1></a>
+		<a href='/stats?chamber=senate' target='_self'><h1 class='{{senateactive}}'>Senate</h1></a>
+	</div>
+
+	<h2>Top Legislators</h2>
+	<div id='topstats-wrapper' class='stat-module-wrapper'>
+		<div class='stat-module'>
+			<h3>Party Loyalty (PLY)</h3>
+			<table>
+				<tr>
+					<td class='table-position'>1.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.ply.1.bioguide_id}}' target='_self'>{{toplegs.ply.1.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.ply.1.party}}-text'>{{toplegs.ply.1.party}}</span> {{toplegs.ply.1.district}}</td>
+					<td class='table-number'>{{toplegs.ply.1.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>2.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.ply.2.bioguide_id}}' target='_self'>{{toplegs.ply.2.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.ply.2.party}}-text'>{{toplegs.ply.2.party}}</span> {{toplegs.ply.2.district}}</td>
+					<td class='table-number'>{{toplegs.ply.2.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>3.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.ply.3.bioguide_id}}' target='_self'>{{toplegs.ply.3.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.ply.3.party}}-text'>{{toplegs.ply.3.party}}</span> {{toplegs.ply.3.district}}</td>
+					<td class='table-number'>{{toplegs.ply.3.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>4.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.ply.4.bioguide_id}}' target='_self'>{{toplegs.ply.4.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.ply.4.party}}-text'>{{toplegs.ply.4.party}}</span> {{toplegs.ply.4.district}}</td>
+					<td class='table-number'>{{toplegs.ply.4.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>5.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.ply.5.bioguide_id}}' target='_self'>{{toplegs.ply.5.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.ply.5.party}}-text'>{{toplegs.ply.5.party}}</span> {{toplegs.ply.5.district}}</td>
+					<td class='table-number'>{{toplegs.ply.5.stat}}%</td>
+				</tr>
+			</table>
+		</div>
+		<div class='stat-module'>
+			<h3>Attendance (ATD)</h3>
+			<table>
+				<tr>
+					<td class='table-position'>1.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.atd.1.bioguide_id}}' target='_self'>{{toplegs.atd.1.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.atd.1.party}}-text'>{{toplegs.atd.1.party}}</span> {{toplegs.atd.1.district}}</td>
+					<td class='table-number'>{{toplegs.atd.1.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>2.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.atd.2.bioguide_id}}' target='_self'>{{toplegs.atd.2.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.atd.2.party}}-text'>{{toplegs.atd.2.party}}</span> {{toplegs.atd.2.district}}</td>
+					<td class='table-number'>{{toplegs.atd.2.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>3.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.atd.3.bioguide_id}}' target='_self'>{{toplegs.atd.3.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.atd.3.party}}-text'>{{toplegs.atd.3.party}}</span> {{toplegs.atd.3.district}}</td>
+					<td class='table-number'>{{toplegs.atd.3.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>4.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.atd.4.bioguide_id}}' target='_self'>{{toplegs.atd.4.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.atd.4.party}}-text'>{{toplegs.atd.4.party}}</span> {{toplegs.atd.4.district}}</td>
+					<td class='table-number'>{{toplegs.atd.4.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>5.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.atd.5.bioguide_id}}' target='_self'>{{toplegs.atd.5.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.atd.5.party}}-text'>{{toplegs.atd.5.party}}</span> {{toplegs.atd.5.district}}</td>
+					<td class='table-number'>{{toplegs.atd.5.stat}}%</td>
+				</tr>
+			</table>
+		</div>
+		<div class='stat-module'>
+			<h3>Percent Bills Enacted (PBE)</h3>
+			<table>
+				<tr>
+					<td class='table-position'>1.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.pbe.1.bioguide_id}}' target='_self'>{{toplegs.pbe.1.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.pbe.1.party}}-text'>{{toplegs.pbe.1.party}}</span> {{toplegs.pbe.1.district}}</td>
+					<td class='table-number'>{{toplegs.pbe.1.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>2.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.pbe.2.bioguide_id}}' target='_self'>{{toplegs.pbe.2.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.pbe.2.party}}-text'>{{toplegs.pbe.2.party}}</span> {{toplegs.pbe.2.district}}</td>
+					<td class='table-number'>{{toplegs.pbe.2.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>3.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.pbe.3.bioguide_id}}' target='_self'>{{toplegs.pbe.3.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.pbe.3.party}}-text'>{{toplegs.pbe.3.party}}</span> {{toplegs.pbe.3.district}}</td>
+					<td class='table-number'>{{toplegs.pbe.3.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>4.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.pbe.4.bioguide_id}}' target='_self'>{{toplegs.pbe.4.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.pbe.4.party}}-text'>{{toplegs.pbe.4.party}}</span> {{toplegs.pbe.4.district}}</td>
+					<td class='table-number'>{{toplegs.pbe.4.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>5.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.pbe.5.bioguide_id}}' target='_self'>{{toplegs.pbe.5.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.pbe.5.party}}-text'>{{toplegs.pbe.5.party}}</span> {{toplegs.pbe.5.district}}</td>
+					<td class='table-number'>{{toplegs.pbe.5.stat}}%</td>
+				</tr>
+			</table>
+		</div>
+		<div class='stat-module'>
+			<h3>Num Sponsored Bills (NSB)</h3>
+			<table>
+				<tr>
+					<td class='table-position'>1.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.nsb.1.bioguide_id}}' target='_self'>{{toplegs.nsb.1.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.nsb.1.party}}-text'>{{toplegs.nsb.1.party}}</span> {{toplegs.nsb.1.district}}</td>
+					<td class='table-number'>{{toplegs.nsb.1.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>2.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.nsb.2.bioguide_id}}' target='_self'>{{toplegs.nsb.2.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.nsb.2.party}}-text'>{{toplegs.nsb.2.party}}</span> {{toplegs.nsb.2.district}}</td>
+					<td class='table-number'>{{toplegs.nsb.2.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>3.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.nsb.3.bioguide_id}}' target='_self'>{{toplegs.nsb.3.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.nsb.3.party}}-text'>{{toplegs.nsb.3.party}}</span> {{toplegs.nsb.3.district}}</td>
+					<td class='table-number'>{{toplegs.nsb.3.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>4.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.nsb.4.bioguide_id}}' target='_self'>{{toplegs.nsb.4.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.nsb.4.party}}-text'>{{toplegs.nsb.4.party}}</span> {{toplegs.nsb.4.district}}</td>
+					<td class='table-number'>{{toplegs.nsb.4.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>5.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.nsb.5.bioguide_id}}' target='_self'>{{toplegs.nsb.5.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.nsb.5.party}}-text'>{{toplegs.nsb.5.party}}</span> {{toplegs.nsb.5.district}}</td>
+					<td class='table-number'>{{toplegs.nsb.5.stat}}</td>
+				</tr>
+			</table>
+		</div>
+		<div class='stat-module'>
+			<h3>Num Cosponsored Bills (NCB)</h3>
+			<table>
+				<tr>
+					<td class='table-position'>1.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.ncb.1.bioguide_id}}' target='_self'>{{toplegs.ncb.1.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.ncb.1.party}}-text'>{{toplegs.ncb.1.party}}</span> {{toplegs.ncb.1.district}}</td>
+					<td class='table-number'>{{toplegs.ncb.1.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>2.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.ncb.2.bioguide_id}}' target='_self'>{{toplegs.ncb.2.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.ncb.2.party}}-text'>{{toplegs.ncb.2.party}}</span> {{toplegs.ncb.2.district}}</td>
+					<td class='table-number'>{{toplegs.ncb.2.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>3.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.ncb.3.bioguide_id}}' target='_self'>{{toplegs.ncb.3.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.ncb.3.party}}-text'>{{toplegs.ncb.3.party}}</span> {{toplegs.ncb.3.district}}</td>
+					<td class='table-number'>{{toplegs.ncb.3.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>4.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.ncb.4.bioguide_id}}' target='_self'>{{toplegs.ncb.4.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.ncb.4.party}}-text'>{{toplegs.ncb.4.party}}</span> {{toplegs.ncb.4.district}}</td>
+					<td class='table-number'>{{toplegs.ncb.4.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>5.</td>
+					<td class='table-name'><a href='/legislative/{{toplegs.ncb.5.bioguide_id}}' target='_self'>{{toplegs.ncb.5.name}}</a></td>
+					<td class='table-party'><span class='{{toplegs.ncb.5.party}}-text'>{{toplegs.ncb.5.party}}</span> {{toplegs.ncb.5.district}}</td>
+					<td class='table-number'>{{toplegs.ncb.5.stat}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<h2>Bottom Legislators</h2>
+	<div id='bottomstats-wrapper' class='stat-module-wrapper'>
+		<div class='stat-module'>
+			<h3>Party Loyalty (PLY)</h3>
+			<table>
+				<tr>
+					<td class='table-position'>1.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.ply.1.bioguide_id}}' target='_self'>{{bottomlegs.ply.1.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.ply.1.party}}-text'>{{bottomlegs.ply.1.party}}</span> {{bottomlegs.ply.1.district}}</td>
+					<td class='table-number'>{{bottomlegs.ply.1.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>2.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.ply.2.bioguide_id}}' target='_self'>{{bottomlegs.ply.2.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.ply.2.party}}-text'>{{bottomlegs.ply.2.party}}</span> {{bottomlegs.ply.2.district}}</td>
+					<td class='table-number'>{{bottomlegs.ply.2.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>3.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.ply.3.bioguide_id}}' target='_self'>{{bottomlegs.ply.3.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.ply.3.party}}-text'>{{bottomlegs.ply.3.party}}</span> {{bottomlegs.ply.3.district}}</td>
+					<td class='table-number'>{{bottomlegs.ply.3.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>4.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.ply.4.bioguide_id}}' target='_self'>{{bottomlegs.ply.4.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.ply.4.party}}-text'>{{bottomlegs.ply.4.party}}</span> {{bottomlegs.ply.4.district}}</td>
+					<td class='table-number'>{{bottomlegs.ply.4.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>5.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.ply.5.bioguide_id}}' target='_self'>{{bottomlegs.ply.5.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.ply.5.party}}-text'>{{bottomlegs.ply.5.party}}</span> {{bottomlegs.ply.5.district}}</td>
+					<td class='table-number'>{{bottomlegs.ply.5.stat}}%</td>
+				</tr>
+			</table>
+		</div>
+		<div class='stat-module'>
+			<h3>Attendance (ATD)</h3>
+			<table>
+				<tr>
+					<td class='table-position'>1.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.atd.1.bioguide_id}}' target='_self'>{{bottomlegs.atd.1.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.atd.1.party}}-text'>{{bottomlegs.atd.1.party}}</span> {{bottomlegs.atd.1.district}}</td>
+					<td class='table-number'>{{bottomlegs.atd.1.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>2.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.atd.2.bioguide_id}}' target='_self'>{{bottomlegs.atd.2.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.atd.2.party}}-text'>{{bottomlegs.atd.2.party}}</span> {{bottomlegs.atd.2.district}}</td>
+					<td class='table-number'>{{bottomlegs.atd.2.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>3.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.atd.3.bioguide_id}}' target='_self'>{{bottomlegs.atd.3.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.atd.3.party}}-text'>{{bottomlegs.atd.3.party}}</span> {{bottomlegs.atd.3.district}}</td>
+					<td class='table-number'>{{bottomlegs.atd.3.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>4.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.atd.4.bioguide_id}}' target='_self'>{{bottomlegs.atd.4.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.atd.4.party}}-text'>{{bottomlegs.atd.4.party}}</span> {{bottomlegs.atd.4.district}}</td>
+					<td class='table-number'>{{bottomlegs.atd.4.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>5.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.atd.5.bioguide_id}}' target='_self'>{{bottomlegs.atd.5.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.atd.5.party}}-text'>{{bottomlegs.atd.5.party}}</span> {{bottomlegs.atd.5.district}}</td>
+					<td class='table-number'>{{bottomlegs.atd.5.stat}}%</td>
+				</tr>
+			</table>
+		</div>
+		<div class='stat-module'>
+			<h3>Percent Bills Enacted (PBE)</h3>
+			<table>
+				<tr>
+					<td class='table-position'>1.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.pbe.1.bioguide_id}}' target='_self'>{{bottomlegs.pbe.1.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.pbe.1.party}}-text'>{{bottomlegs.pbe.1.party}}</span> {{bottomlegs.pbe.1.district}}</td>
+					<td class='table-number'>{{bottomlegs.pbe.1.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>2.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.pbe.2.bioguide_id}}' target='_self'>{{bottomlegs.pbe.2.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.pbe.2.party}}-text'>{{bottomlegs.pbe.2.party}}</span> {{bottomlegs.pbe.2.district}}</td>
+					<td class='table-number'>{{bottomlegs.pbe.2.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>3.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.pbe.3.bioguide_id}}' target='_self'>{{bottomlegs.pbe.3.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.pbe.3.party}}-text'>{{bottomlegs.pbe.3.party}}</span> {{bottomlegs.pbe.3.district}}</td>
+					<td class='table-number'>{{bottomlegs.pbe.3.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>4.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.pbe.4.bioguide_id}}' target='_self'>{{bottomlegs.pbe.4.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.pbe.4.party}}-text'>{{bottomlegs.pbe.4.party}}</span> {{bottomlegs.pbe.4.district}}</td>
+					<td class='table-number'>{{bottomlegs.pbe.4.stat}}%</td>
+				</tr>
+				<tr>
+					<td class='table-position'>5.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.pbe.5.bioguide_id}}' target='_self'>{{bottomlegs.pbe.5.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.pbe.5.party}}-text'>{{bottomlegs.pbe.5.party}}</span> {{bottomlegs.pbe.5.district}}</td>
+					<td class='table-number'>{{bottomlegs.pbe.5.stat}}%</td>
+				</tr>
+			</table>
+		</div>
+		<div class='stat-module'>
+			<h3>Num Sponsored Bills (NSB)</h3>
+			<table>
+				<tr>
+					<td class='table-position'>1.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.nsb.1.bioguide_id}}' target='_self'>{{bottomlegs.nsb.1.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.nsb.1.party}}-text'>{{bottomlegs.nsb.1.party}}</span> {{bottomlegs.nsb.1.district}}</td>
+					<td class='table-number'>{{bottomlegs.nsb.1.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>2.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.nsb.2.bioguide_id}}' target='_self'>{{bottomlegs.nsb.2.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.nsb.2.party}}-text'>{{bottomlegs.nsb.2.party}}</span> {{bottomlegs.nsb.2.district}}</td>
+					<td class='table-number'>{{bottomlegs.nsb.2.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>3.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.nsb.3.bioguide_id}}' target='_self'>{{bottomlegs.nsb.3.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.nsb.3.party}}-text'>{{bottomlegs.nsb.3.party}}</span> {{bottomlegs.nsb.3.district}}</td>
+					<td class='table-number'>{{bottomlegs.nsb.3.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>4.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.nsb.4.bioguide_id}}' target='_self'>{{bottomlegs.nsb.4.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.nsb.4.party}}-text'>{{bottomlegs.nsb.4.party}}</span> {{bottomlegs.nsb.4.district}}</td>
+					<td class='table-number'>{{bottomlegs.nsb.4.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>5.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.nsb.5.bioguide_id}}' target='_self'>{{bottomlegs.nsb.5.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.nsb.5.party}}-text'>{{bottomlegs.nsb.5.party}}</span> {{bottomlegs.nsb.5.district}}</td>
+					<td class='table-number'>{{bottomlegs.nsb.5.stat}}</td>
+				</tr>
+			</table>
+		</div>
+		<div class='stat-module'>
+			<h3>Num Cosponsored Bills (NCB)</h3>
+			<table>
+				<tr>
+					<td class='table-position'>1.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.ncb.1.bioguide_id}}' target='_self'>{{bottomlegs.ncb.1.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.ncb.1.party}}-text'>{{bottomlegs.ncb.1.party}}</span> {{bottomlegs.ncb.1.district}}</td>
+					<td class='table-number'>{{bottomlegs.ncb.1.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>2.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.ncb.2.bioguide_id}}' target='_self'>{{bottomlegs.ncb.2.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.ncb.2.party}}-text'>{{bottomlegs.ncb.2.party}}</span> {{bottomlegs.ncb.2.district}}</td>
+					<td class='table-number'>{{bottomlegs.ncb.2.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>3.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.ncb.3.bioguide_id}}' target='_self'>{{bottomlegs.ncb.3.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.ncb.3.party}}-text'>{{bottomlegs.ncb.3.party}}</span> {{bottomlegs.ncb.3.district}}</td>
+					<td class='table-number'>{{bottomlegs.ncb.3.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>4.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.ncb.4.bioguide_id}}' target='_self'>{{bottomlegs.ncb.4.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.ncb.4.party}}-text'>{{bottomlegs.ncb.4.party}}</span> {{bottomlegs.ncb.4.district}}</td>
+					<td class='table-number'>{{bottomlegs.ncb.4.stat}}</td>
+				</tr>
+				<tr>
+					<td class='table-position'>5.</td>
+					<td class='table-name'><a href='/legislative/{{bottomlegs.ncb.5.bioguide_id}}' target='_self'>{{bottomlegs.ncb.5.name}}</a></td>
+					<td class='table-party'><span class='{{bottomlegs.ncb.5.party}}-text'>{{bottomlegs.ncb.5.party}}</span> {{bottomlegs.ncb.5.district}}</td>
+					<td class='table-number'>{{bottomlegs.ncb.5.stat}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+<script>
+	$('#stats-link').css('color','red')
+	$('#stats-link').css('border-bottom','solid 2px red')
+</script>
+
+<style>
+	#chamber-selector{display:flex;}
+	#chamber-selector h1{color:#d9d9d9;margin-right:25px;cursor:pointer;}
+	#chamber-selector h1:hover{text-decoration:underline !important}
+	.active-chamber{color:#376cea !important;}
+	.stat-module-wrapper{display:flex;flex-wrap:wrap}
+	.stat-module{width:325px;margin:20px;}
+	.stat-module h3{text-align:left;border-bottom:solid 1px #0E1C32;}
+	.stat-module table{width:100%;color:#808080}
+	.stat-module table .table-number{font-weight:bold;font-size:150%;color:#0E1C32;}
+	.stat-module table a:hover{text-decoration:underline !important}
+	.stat-module table span{font-weight:bold;font-size:125%;}
+</style>
+
+
+{% endblock %}
