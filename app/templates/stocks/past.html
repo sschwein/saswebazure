@@ -1,0 +1,32 @@
+<h3>Fund Past Performance</h3>
+<div class="btn-float-top float-right">
+    Past Years: <select ng-model="past_perf_selection" ng-options="x for (x, y) in past_perf_select"></select>
+</div>
+
+<img class='loading-img' ng-show='show_loading' src='/images/Pacman.gif'>
+
+<div class='stock-summary-bar' ng-repeat='row in fundData track by $index'>
+    <h4>[[row.name]]</h4>
+    <div class='summary-row'>
+        <div class='summary-col-400 font-size-115 text-right'>
+            Projected [[past_perf_selection]] year YoY Past Performance
+        </div>
+        <div style='width:20px;'></div>
+        <div class='summary-col-400 font-size-115'>
+            [[row.proj_past_performance.yoy_percent_change.toFixed(2)]]%
+        </div>
+    </div>
+    <div class='summary-row'>
+        <div class='summary-col-400 font-size-115 text-right'>
+            Since Inception YoY Past Performance
+        </div>
+        <div style='width:20px;'></div>
+        <div class='summary-col-400 font-size-115'>
+            [[row.proj_past_performance.inception_yoy_percent_change.toFixed(2)]]%
+        </div>
+    </div>
+</div>
+
+<!--<div class='stock-past-detail-graphs'>
+    
+</div>-->

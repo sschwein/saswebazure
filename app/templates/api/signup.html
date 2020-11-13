@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript" src="/js/controllers/usersystem.js"></script>
+<link rel="stylesheet" href="/css/api.css">
+
+<div id='signup-wrapper' ng-controller='UserSystemController'>
+	<form id='signup-form'>
+	    <h3>Signup for an API Key</h3>
+	    <input class='api-input' type="text" ng-model="newuser.email" name="email" placeholder='Email' /><br>
+	    <input class='api-input' type="text" ng-model="newuser.username" name="username" placeholder='Username (optional)' /><br>
+	    <input type="password" class='ng-hide' ng-model="newuser.pw" name="pw" placeholder='Password' />
+	    <input class='api-input' type="password" ng-model="newuser.duppw" name="duppw" placeholder='Password' /><br>
+	    <input class='api-input' type="password" ng-model="newuser.pwconf" name="pwconf" placeholder='Confirm Password' /><br>
+        <div class='error-text' ng-cloak>[[error]]</div>
+	    <input class="btn btn-outline-success signup-btn api-input" type="submit" ng-click='submitSignup()' value='Submit'>
+	</form>
+</div>
+
+{% endblock %}

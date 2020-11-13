@@ -1,0 +1,26 @@
+<div id='mp'>
+	<h1>Welcome to the TGC Legislative tool!</h1>
+	<p class='headtext'>Our founding fathers intended the legislative branch to be our voice in the fedreral government. This is the branch where the collective will of the people is represented outside of elections. It is where bills are written, sponsored, and enacted law. We all have three legislators who are there to generate laws and policies that reflect our interests. TGC is here to help you connect to, and judge whether or not your representatives are doing a good job, and whether or not you support the bills before our congress.</p>
+
+	<div class='horizontal'>
+		<div class='bibox'>
+			<h2>Legislators</h2>
+			<p>We've compiled a series of objective metrics on every legislator in our congress. With this information we can all gain a clearer picture on how well our representatives are performing.</p>
+			<div ng-click='get_settings()' id='setdistrict'>Find My Legislators</div>
+		</div>
+		<div class='bibox'>
+			<h2>Bills</h2>
+			<p>This is where you can view a list of all bills before our congress so you can determine whether or not those policies take our country in the right direction and then pressure your representatives to vote with you</p>
+			<div class='btn' style='color:#376cea'>Check out the left panel to switch to the bills tab</div>
+		</div>		
+	</div>
+
+	
+</div>
+
+<style>
+	#mp h1{text-align:center;}
+	#mp #setdistrict{display:block;cursor:pointer;background:#376cea;color:white;font-size:18px;font-weight:bold;margin:0 auto;padding:20px;width:200px;text-align:center;cursor:pointer;}
+	.bibox{width:40%;margin:25px;}
+	.bibox h2{text-align:center;}
+</style>

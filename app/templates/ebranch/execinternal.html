@@ -1,0 +1,748 @@
+{% extends "newbase.html" %}
+
+{% block content %}
+<div id='executive' class='tab t1 tgcbluetextpage'>
+	<h1 style='text-align:center;margin-bottom:5px;'>The State of our Union: National Data</h1><br>
+	<div style='text-align:justify;width:80%;margin:0 auto;margin-bottom:25px;font-size:120%;'>{#A nation is the sum of its people, united under one governing body. Thus the success of a nation is directly reflected in the success of its people. Some major questions you may want to consider include: <br>1) Are the people safe from harm? <br>2) Are they provided a high level of health appropriate care in their environment? <br>3) Are they treated with equal fairness? <br>4) Do they have the freedoms and opportunities to do what they wish, with respect to others? <br>5) Can they seek education expand and improve their mind and skills? <br>6) Are they able to employ themselves in a fullfilling way?<br><br>#}A nation is the sum of its people, united under one governing body. Thus a nation's success is directly reflected in the success of its people. So to measure our nation, we must evaluate our people's access to these inalienable rights to:</div>
+	<div id='int-header'>
+		<div id='qualolife' class='rights-header z-index-3' onmouseout='javascript:unDisplayTip("qualolifesub");return false;' onmouseover='javascript:displayTip("qualolifesub");return false;' onclick='javascript:filterCat(0, false);return false;' style='background:#5A8F29;'>
+			<h3 style='margin-top:5px;margin-bottom:5px;'>Quality of</h3>
+			<h2 style='margin-top:0px;'>Life</h2>
+			<div id='qualolifesub' class='sub-filter' style='background:#83CE3B;'>
+				<div style='padding-left:5px;font-weight:normal;'>Specifically:</div>
+				<div id='security-filter' style='padding-left:5px;display:flex;'><div class='bulletpoint'></div>Security</div>
+				<div id='well-being-filter' style='padding-left:5px;display:flex;'><div class='bulletpoint'></div>Health/Well-being</div>
+			</div>
+		</div>
+		<div id='acctolib' class='rights-header z-index-3' onmouseout='javascript:unDisplayTip("acctolibsub");return false;' onmouseover='javascript:displayTip("acctolibsub");return false;' onclick='javascript:filterCat(1, false);return false;' style='background:#B64BB8;'>
+			<h3 style='margin-top:5px;margin-bottom:5px;'>Access to</h3>
+			<h2 style='margin-top:0px;'>Liberty</h2>
+			<div id='acctolibsub' class='sub-filter' style='background:#C661C9;'>
+				<div style='padding-left:5px;font-weight:normal;'>Specifically:</div>
+				<div id='equality-filter' style='padding-left:5px;display:flex;'><div class='bulletpoint'></div>Equality</div>
+				<div id='economic-filter' style='padding-left:5px;display:flex;'><div class='bulletpoint'></div>Econ. Opportunity</div>
+			</div>
+		</div>
+		<div id='perofhap' class='rights-header z-index-3' onmouseout='javascript:unDisplayTip("perofhapsub");return false;' onmouseover='javascript:displayTip("perofhapsub");return false;' onclick='javascript:filterCat(2, false);return false;' style='background:#FF8F00;'>
+			<h3 style='margin-top:5px;margin-bottom:5px;'>Pursuit of</h3>
+			<h2 style='margin-top:0px;'>Happiness</h2>
+			<div id='perofhapsub' class='sub-filter' style='background:#FD9D32;'>
+				<div style='padding-left:5px;font-weight:normal;'>Specifically:</div>
+				<div id='education-filter' style='padding-left:5px;display:flex;'><div class='bulletpoint'></div>Education</div>
+				<div id='employment-filter' style='padding-left:5px;display:flex;'><div class='bulletpoint'></div>Employment</div>
+			</div>
+		</div>
+	</div>
+	<div id='int-content'>
+		<div id='left-col'>
+			<div id='menu-wrapper'>
+				<div id='category-1' class='category z-index-3' onclick='javascript:expand("1",2,5);return false;'>
+					<span>Economic Policies</span>
+				</div>
+				<div id='category-1-1' class='sub-category' onclick='javascript:expand("1-1",2,0);return false;'>
+					<span>Monetary Policy</span>
+				</div>
+				<div id='category-1-1-1' class='sub-sub-category' onclick='javascript:graphSwitcher2("intfedfunds", "1-1-1");return false;'>
+					<div class='category-filters3'></div><span>Interest Rates</span>
+					<div id='interestratestip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("interestratestool");return false;' onmouseover='javascript:displayTip("interestratestool");return false;'>?</div>
+					<div id='interestratestool' class='tooltiptext z-index-1'>An annual depiction of the federal interest rate.</div>
+				</div>
+				<div id='category-1-1-2' class='sub-sub-category' onclick='javascript:graphSwitcher2("intmoneysupply", "1-1-2");return false;'>
+					<div class='category-filters3'></div><span>Money Supply</span>
+					<div id='moneysupplytip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("moneysupplytool");return false;' onmouseover='javascript:displayTip("moneysupplytool");return false;'>?</div>
+					<div id='moneysupplytool' class='tooltiptext z-index-1'>The amount of currency which exists in the economy.</div>
+				</div>
+				<div id='category-1-2' class='sub-category' onclick='javascript:expand("1-2",5,0);return false;'>
+					<span>Fiscal Policy</span>
+				</div>
+				<div id='category-1-2-1' class='sub-sub-category' onclick='javascript:graphSwitcher2("intrevspend", "1-2-1");return false;'>
+					<div class='category-filters3'></div><span>Revenue Vs Spending</span>
+					<div id='revspendtip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("revspendtool");return false;' onmouseover='javascript:displayTip("revspendtool");return false;'>?</div>
+					<div id='revspendtool' class='tooltiptext z-index-1'>A depiction of annual government revenue and spending.</div>
+				</div>
+				<div id='category-1-2-2' class='sub-sub-category' onclick='javascript:graphSwitcher2("intsurdef", "1-2-2");return false;'>
+					<div class='category-filters3'></div><span>Budget Deficit</span>
+					<div id='buddeficittip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("buddeficittool");return false;' onmouseover='javascript:displayTip("buddeficittool");return false;'>?</div>
+					<div id='buddeficittool' class='tooltiptext z-index-1'>The amount by which federal spending exceeds revenue.</div>
+				</div>
+				<div id='category-1-2-3' class='sub-sub-category' onclick='javascript:graphSwitcher2("intnatdebt", "1-2-3");return false;'>
+					<div class='category-filters3'></div><span>National Debt</span>
+					<div id='nationaldebttip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("nationaldebttool");return false;' onmouseover='javascript:displayTip("nationaldebttool");return false;'>?</div>
+					<div id='nationaldebttool' class='tooltiptext z-index-1'>The National debt, or amount owed by the federal government.</div>
+				</div>
+				<div id='category-1-2-4' class='sub-sub-category' onclick='javascript:graphSwitcher2("intspendcategory", "1-2-4");return false;'>
+					<div class='category-filters5'></div><span>Spending by Category</span>
+					<div id='spendbycatetip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("spendbycatetool");return false;' onmouseover='javascript:displayTip("spendbycatetool");return false;'>?</div>
+					<div id='spendbycatetool' class='tooltiptext z-index-1'>Government spending on various programs.</div>
+				</div>
+				<div id='category-1-2-5' class='sub-sub-category' onclick='javascript:graphSwitcher2("intrevcategory", "1-2-5");return false;'>
+					<div class='category-filters5'></div><span>Revenue by Category</span>
+					<div id='revbycatetip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("revbycatetool");return false;' onmouseover='javascript:displayTip("revbycatetool");return false;'>?</div>
+					<div id='revbycatetool' class='tooltiptext z-index-1'>The methods and institutions by which the government collects revenue.</div>
+				</div>
+				<div id='category-2' class='category' onclick='javascript:expand("2",5,5);return false;'>
+					<span>Economic Stats</span>
+				</div>
+				<div id='category-2-1' class='sub-category' onclick='javascript:expand("2-1",3,0);return false;'>
+					<span>Gross Domestic Product</span>
+				</div>
+				<div id='category-2-1-1' class='sub-sub-category' onclick='javascript:graphSwitcher2("intexecgdp", "2-1-1");return false;'>
+					<div class='category-filters3'></div><span>Real GDP</span>
+					<div id='realgdptip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("realgdptool");return false;' onmouseover='javascript:displayTip("realgdptool");return false;'>?</div>
+					<div id='realgdptool' class='tooltiptext z-index-1'>The value of all goods and services produced in the United States in 1 year.</div>
+				</div>
+				<div id='category-2-1-2' class='sub-sub-category' onclick='javascript:graphSwitcherAvg("intexecgdproc", "2-1-2", 4, 90);return false;'>
+					<div class='category-filters1'></div><span>GDP Rate of Change</span>
+					<div id='realgdproctip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("realgdproctool");return false;' onmouseover='javascript:displayTip("realgdproctool");return false;'>?</div>
+					<div id='realgdproctool' class='tooltiptext z-index-1'>The rate that GDP has changed over the past year.</div>
+				</div>
+				<div id='category-2-1-3' class='sub-sub-category' onclick='javascript:graphSwitcher2("intexecgdpcap", "2-1-3");return false;'>
+					<div class='category-filters3'></div><span>Real GDP Per Capita</span>
+					<div id='realgdppercaptip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("realgdppercaptool");return false;' onmouseover='javascript:displayTip("realgdppercaptool");return false;'>?</div>
+					<div id='realgdppercaptool' class='tooltiptext z-index-1'>The GDP divided by the number of people in the United States.</div>
+				</div>
+				<div id='category-2-2' class='sub-category' onclick='javascript:expand("2-2",1,0);return false;'>
+					<span>Job Creation</span>
+				</div>
+				<div id='category-2-2-1' class='sub-sub-category' onclick='javascript:graphSwitcherAvg("intjobs", "2-2-1", 3, 30);return false;'>
+					<div class='category-filters5'></div><span>Job Creation</span>
+					<div id='jobcreationtip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("jobcreationtool");return false;' onmouseover='javascript:displayTip("jobcreationtool");return false;'>?</div>
+					<div id='jobcreationtool' class='tooltiptext z-index-1'>The number of jobs created on a monthly basis.</div>
+				</div>
+				<div id='category-2-3' class='sub-category' onclick='javascript:expand("2-3",1,0);return false;'>
+					<span>Inflation</span>
+				</div>
+				<div id='category-2-3-1' class='sub-sub-category' onclick='javascript:graphSwitcherSum("intexeccpi", "2-3-1", 12, 30);return false;'>
+					<div class='category-filters3'></div><span>Inflation (CPI)</span>
+					<div id='inflationtip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("inflationtool");return false;' onmouseover='javascript:displayTip("inflationtool");return false;'>?</div>
+					<div id='inflationtool' class='tooltiptext z-index-1'>The approximate change in consumer prices over the past year.</div>
+				</div>
+				<div id='category-2-4' class='sub-category' onclick='javascript:expand("2-4",5,0);return false;'>
+					<span>Employment Data</span>
+				</div>
+				<div id='category-2-4-1' class='sub-sub-category' onclick='javascript:graphSwitcher2("intexecunemprate", "2-4-1");return false;'>
+					<div class='category-filters5'></div><span>Unemployment Rate</span>
+					<div id='unempratetip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("unempratetool");return false;' onmouseover='javascript:displayTip("unempratetool");return false;'>?</div>
+					<div id='unempratetool' class='tooltiptext z-index-1'>The number of people in the workforce who are not employed.</div>
+				</div>
+				<div id='category-2-4-2' class='sub-sub-category' onclick='javascript:graphSwitcher2("intexeclabpartrate", "2-4-2");return false;'>
+					<div class='category-filters5'></div><span>Labor Force Part Rate</span>
+					<div id='laborforceparttip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("laborforceparttool");return false;' onmouseover='javascript:displayTip("laborforceparttool");return false;'>?</div>
+					<div id='laborforceparttool' class='tooltiptext z-index-1'>The percentage of Americans participating in the workforce.</div>
+				</div>
+				<div id='category-2-4-3' class='sub-sub-category' onclick='javascript:graphSwitcher2("intexecavgweekunemp", "2-4-3");return false;'>
+					<div class='category-filters5'></div><span>Average Weeks Unemployed</span>
+					<div id='avweeksunemptip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("avweeksunemptool");return false;' onmouseover='javascript:displayTip("avweeksunemptool");return false;'>?</div>
+					<div id='avweeksunemptool' class='tooltiptext z-index-1'>The average number of weeks before an unemployed person starts a new job.</div>
+				</div>
+				<div id='category-2-4-4' class='sub-sub-category' onclick='javascript:graphSwitcher2("intexecnumunandemp", "2-4-4");return false;'>
+					<div class='category-filters5'></div><span>Number Un / Employed</span>
+					<div id='numunemptip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("numunemptool");return false;' onmouseover='javascript:displayTip("numunemptool");return false;'>?</div>
+					<div id='numunemptool' class='tooltiptext z-index-1'>The raw number of people employed and unemployed.</div>
+				</div>
+				<div id='category-2-4-5' class='sub-sub-category' onclick='javascript:graphSwitcher2("intexecunempbyeducation", "2-4-5");return false;'>
+					<div class='category-filters5'></div><span>Unemployment By Education</span>
+					<div id='unempbyedutip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("unempbyedutool");return false;' onmouseover='javascript:displayTip("unempbyedutool");return false;'>?</div>
+					<div id='unempbyedutool' class='tooltiptext z-index-1'>The unemployment rate broken down by education level.</div>
+				</div>
+				<div id='category-2-5' class='sub-category' onclick='javascript:expand("2-5",3,0);return false;'>
+					<span>International Trade</span>
+				</div>
+				<div id='category-2-5-1' class='sub-sub-category' onclick='javascript:graphSwitcher2("intexectrade", "2-5-1");return false;'>
+					<div class='category-filters3'></div><span>Imports and Exports</span>
+					<div id='impexptip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("impexptool");return false;' onmouseover='javascript:displayTip("impexptool");return false;'>?</div>
+					<div id='impexptool' class='tooltiptext z-index-1'>The amount of imports and exports, shown as a dollar value.</div>
+				</div>
+				<div id='category-2-5-2' class='sub-sub-category' onclick='javascript:graphSwitcher2("intexecbalance", "2-5-2");return false;'>
+					<div class='category-filters3'></div><span>Trade Balance</span>
+					<div id='tradebaltip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("tradebaltool");return false;' onmouseover='javascript:displayTip("tradebaltool");return false;'>?</div>
+					<div id='tradebaltool' class='tooltiptext z-index-1'>Exports minus inputs, shown as a dollar value</div>
+				</div>
+				<div id='category-2-5-3' class='sub-sub-category' onclick='javascript:graphSwitcher2("intexecbalpercent", "2-5-3");return false;'>
+					<div class='category-filters3'></div><span>Balance Percent</span>
+					<div id='tradebalpertip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("tradebalpertool");return false;' onmouseover='javascript:displayTip("tradebalpertool");return false;'>?</div>
+					<div id='tradebalpertool' class='tooltiptext z-index-1'>Exports divided by imports, shown as a percent.</div>
+				</div>
+				<div id='category-3' class='category' onclick='javascript:expand("3",2,3);return false;'>
+					<span>Social Stats</span>
+				</div>
+				<div id='category-3-1' class='sub-category' onclick='javascript:expand("3-1",3,0);return false;'>
+					<span>Wealth/Income</span>
+				</div>
+				<div id='category-3-1-1' class='sub-sub-category' onclick='javascript:graphSwitcher2("intaggincome", "3-1-1");return false;'>
+					<div class='category-filters3'></div><span>Aggregate Income</span>
+					<div id='aggincometip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("aggincometool");return false;' onmouseover='javascript:displayTip("aggincometool");return false;'>?</div>
+					<div id='aggincometool' class='tooltiptext z-index-1'>The total of all American incomes with inflation adjustments.</div>
+				</div>
+				<div id='category-3-1-2' class='sub-sub-category' onclick='javascript:graphSwitcher2("intcutincome", "3-1-2");return false;'>
+					<div class='category-filters3'></div><span>Income Level Cutoffs</span>
+					<div id='incomecutofftip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("incomecutofftool");return false;' onmouseover='javascript:displayTip("incomecutofftool");return false;'>?</div>
+					<div id='incomecutofftool' class='tooltiptext z-index-1'>A dollar representation of income levels.</div>
+				</div>
+				<div id='category-3-1-3' class='sub-sub-category' onclick='javascript:graphSwitcher2("intavgincome", "3-1-3");return false;'>
+					<div class='category-filters3'></div><span>Average Income Per Level</span>
+					<div id='avgincomepertip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("avgincomepertool");return false;' onmouseover='javascript:displayTip("avgincomepertool");return false;'>?</div>
+					<div id='avgincomepertool' class='tooltiptext z-index-1'>The average amount of money each fifth of the US population is making per person.</div>
+				</div>
+				<div id='category-3-2' class='sub-category' onclick='javascript:expand("3-2",2,0);return false;'>
+					<span>Cost of Education</span>
+				</div>
+				<div id='category-3-2-1' class='sub-sub-category' onclick='javascript:graphSwitcher2("inttuitpripub" ,"3-2-1");return false;'>
+					<div class='category-filters5'></div><span>Tuition Private and Public</span>
+					<div id='costofedutip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("costofedutool");return false;' onmouseover='javascript:displayTip("costofedutool");return false;'>?</div>
+					<div id='costofedutool' class='tooltiptext z-index-1'>The average annual college tuition for public and private institutions.</div>
+				</div>
+				<div id='category-3-2-2' class='sub-sub-category' onclick='javascript:graphSwitcher2("inttuitperchng", "3-2-2");return false;'>
+					<div class='category-filters5'></div><span>Percent Change in Tuition</span>
+					<div id='costofeduperchngtip' class='tooltipquestionmark' onmouseout='javascript:unDisplayTip("costofeduperchngtool");return false;' onmouseover='javascript:displayTip("costofeduperchngtool");return false;'>?</div>
+					<div id='costofeduperchngtool' class='tooltiptext z-index-1'>A representation of how college tuition changes over time.</div>
+				</div>
+			</div>
+		</div>
+		<div id='right-col-wrapper'>
+		<div id='right-col'>
+			<div id='module-wrapper'>
+				<div id='internal-graph-wrapper' class='cstanding-graph-wrapper3 z-index-2'></div>
+				<div id='hover-buttons'>
+					<div id='socialmedia' class='tooltipbutton z-index-1' onmouseout='javascript:unDisplayTip("socialmediahover");return false;' onmouseover='javascript:displayTip("socialmediahover");return false;' onclick='javascript:displayTip2("socialmediatip");return false;'>P<div id='socialmediahover' class='tooltiptext3'>Post to Social Media</div></div>
+					<div id='context' class='tooltipbutton z-index-1' onmouseout='javascript:unDisplayTip("contexthover");return false;' onmouseover='javascript:displayTip("contexthover");return false;' onclick='javascript:displayTip2("contexttip");return false;'>C<div id='contexthover' class='tooltiptext3'>Context</div></div>
+					<div id='sources' class='tooltipbutton z-index-1' onmouseout='javascript:unDisplayTip("sourceshover");return false;' onmouseover='javascript:displayTip("sourceshover");return false;' onclick='javascript:displayTip2("sourcestip");return false;'>S<div id='sourceshover' class='tooltiptext3'>Sources</div></div>
+					<div id='biascheck' class='tooltipbutton z-index-1' onmouseout='javascript:unDisplayTip("biascheckhover");return false;' onmouseover='javascript:displayTip("biascheckhover");return false;' onclick='javascript:displayTip2("biaschecktip");return false;'>B<div id='biascheckhover' class='tooltiptext3'>Bias Check</div></div>
+				</div>
+			</div>
+		</div>
+		<div id='tip-wrapper'>
+			<div id='tag-reps-tip'>
+				<input type='checkbox' name='include-reps'>Tag my representatives
+			</div>
+			<div id='socialmediatip' class='tooltiptext2' style='width:280px;background:none;border:none;position:relative;margin:0 auto;'>
+				<ul class="soc">
+					<li><a class="soc-facebook" href="#"></a></li>
+					<li><a class="soc-twitter" href="#"></a></li>
+					<li><a class="soc-google" href="#"></a></li>
+					<li><a class="soc-instagram" href="#"></a></li>
+					<li><a class="soc-reddit soc-icon-last" href="#"></a></li>
+				</ul>
+			</div>
+			<div id='contexttip' class='tooltiptext2'></div>
+			<div id='sourcestip' class='tooltiptext2'></div>
+			<div id='biaschecktip' class='tooltiptext2'></div>
+		</div>
+		<div class='pres-graph-header'><div style='position:relative;width:100%;display:flex;'>
+			<div id='graph-h1' class='graph-head-button' onclick='javascript:switchButton(1);return false;'>
+				John Kennedy
+			</div>
+			<div id='graph-h2' class='graph-head-button' onclick='javascript:switchButton(2);return false;'>
+				Lyndon Johnson
+			</div>
+			<div id='graph-h3' class='graph-head-button' onclick='javascript:switchButton(3);return false;'>
+				Richard Nixon
+			</div>
+			<div id='graph-h4' class='graph-head-button' onclick='javascript:switchButton(4);return false;'>
+				Gerald Ford
+			</div>
+			<div id='graph-h5' class='graph-head-button' onclick='javascript:switchButton(5);return false;'>
+				Jimmy Carter
+			</div>
+		</div></div>
+		<div class='pres-graph-header'><div style='position:relative;width:100%;display:flex;'>
+			<div id='graph-li1' class='lightwrap'>
+				<div style='width:60px;' class='horizline'></div><div class='light light1'><div class='timelineyear'>1961</div></div><div style='width:60px;' class='horizline'></div><div class='light light1'></div><div style='width:60px;' class='horizline'></div>
+			</div>
+			<div id='graph-li2' class='lightwrap'>
+				<div style='width:20px;' class='horizline'></div><div class='light light2'><div class='timelineyear'>1963</div></div><div style='width:20px;' class='horizline'></div><div class='light light2'></div><div style='width:20px;' class='horizline'></div><div class='light light2'></div><div style='width:20px;' class='horizline'></div><div class='light light2'></div><div style='width:20px;' class='horizline'></div><div class='light light2'></div><div style='width:20px;' class='horizline'></div><div class='light light2'></div><div style='width:20px;' class='horizline'></div>
+			</div>
+			<div id='graph-li3' class='lightwrap'>
+				<div style='width:25px;' class='horizline'></div><div class='light light3'><div class='timelineyear'>1969</div></div><div style='width:25px;' class='horizline'></div><div class='light light3'></div><div style='width:25px;' class='horizline'></div><div class='light light3'></div><div style='width:25px;' class='horizline'></div><div class='light light3'></div><div style='width:25px;' class='horizline'></div><div class='light light3'></div><div style='width:25px;' class='horizline'></div>
+			</div>
+			<div id='graph-li4' class='lightwrap'>
+				<div style='width:42px;' class='horizline'></div><div class='light light4'><div class='timelineyear'>1974</div></div><div style='width:42px;' class='horizline'></div><div class='light light4'></div><div style='width:42px;' class='horizline'></div><div class='light light4'></div><div style='width:42px;' class='horizline'></div>
+			</div>
+			<div id='graph-li5' class='lightwrap'>
+				<div style='width:32px;' class='horizline'></div><div class='light light5'><div class='timelineyear'>1977</div></div><div style='width:32px;' class='horizline'></div><div class='light light5'></div><div style='width:32px;' class='horizline'></div><div class='light light5'></div><div style='width:32px;' class='horizline'></div><div class='light light5'></div><div style='width:32px;' class='horizline'></div>
+			</div>
+		</div></div>
+		<div class='pres-graph-header'><div style='position:relative;width:100%;display:flex;'>
+			<div id='graph-h6' class='graph-head-button' onclick='javascript:switchButton(6);return false;'>
+				Ronald Reagan
+			</div>
+			<div id='graph-h7' class='graph-head-button' onclick='javascript:switchButton(7);return false;'>
+				George Bush
+			</div>
+			<div id='graph-h8' class='graph-head-button' onclick='javascript:switchButton(8);return false;'>
+				Bill Clinton
+			</div>
+			<div id='graph-h9' class='graph-head-button' onclick='javascript:switchButton(9);return false;'>
+				George W. Bush
+			</div>
+			<div id='graph-h10' class='graph-head-button' onclick='javascript:switchButton(10);return false;'>
+				Barack Obama
+			</div>
+		</div></div>
+		<div class='pres-graph-header'><div style='position:relative;width:100%;display:flex;'>
+			<div id='graph-li6' class='lightwrap'>
+				<div style='width:8px;' class='horizline'></div><div class='light light6'><div class='timelineyear'>1981</div></div><div class='horizline'></div><div class='light light6'></div><div class='horizline'></div><div class='light light6'></div><div class='horizline'></div><div class='light light6'></div><div class='horizline'></div><div class='light light6'></div><div class='horizline'></div><div class='light light6'></div><div class='horizline'></div><div class='light light6'></div><div class='horizline'></div><div class='light light6'></div><div style='width:8px;' class='horizline'></div>
+			</div>
+			<div id='graph-li7' class='lightwrap'>
+				<div style='width:32px;' class='horizline'></div><div class='light light7'><div class='timelineyear'>1989</div></div><div style='width:32px;' class='horizline'></div><div class='light light7'></div><div style='width:32px;' class='horizline'></div><div class='light light7'></div><div style='width:32px;' class='horizline'></div><div class='light light7'></div><div style='width:32px;' class='horizline'></div>
+			</div>
+			<div id='graph-li8' class='lightwrap'>
+				<div style='width:8px;' class='horizline'></div><div class='light light8'><div class='timelineyear'>1993</div></div><div class='horizline'></div><div class='light light8'></div><div class='horizline'></div><div class='light light8'></div><div class='horizline'></div><div class='light light8'></div><div class='horizline'></div><div class='light light8'></div><div class='horizline'></div><div class='light light8'></div><div class='horizline'></div><div class='light light8'></div><div class='horizline'></div><div class='light light8'></div><div style='width:8px;' class='horizline'></div>
+			</div>
+			<div id='graph-li9' class='lightwrap'>
+				<div style='width:8px;' class='horizline'></div><div class='light light9'><div class='timelineyear'>2001</div></div><div class='horizline'></div><div class='light light9'></div><div class='horizline'></div><div class='light light9'></div><div class='horizline'></div><div class='light light9'></div><div class='horizline'></div><div class='light light9'></div><div class='horizline'></div><div class='light light9'></div><div class='horizline'></div><div class='light light9'></div><div class='horizline'></div><div class='light light9'></div><div style='width:8px;' class='horizline'></div>
+			</div>
+			<div id='graph-li10' class='lightwrap'>
+				<div style='width:8px;' class='horizline'></div><div class='light light10'><div class='timelineyear'>2009</div></div><div class='horizline'></div><div class='light light10'></div><div class='horizline'></div><div class='light light10'></div><div class='horizline'></div><div class='light light10'></div><div class='horizline'></div><div class='light light10'></div><div class='horizline'></div><div class='light light10'></div><div class='horizline'></div><div class='light light10'></div><div class='horizline'></div><div class='light light10'></div><div style='width:8px;' class='horizline'></div>
+			</div>
+		</div></div>
+		</div>
+	</div>
+</div>
+<style>
+#int-header{width:100%;max-width:1280px;height:130px;margin: 0 auto;display:flex;}
+.rights-header{width:198px;height:54px;margin:0 auto;text-align:center;padding:10px;cursor:pointer;border-radius:50%;margin-bottom:20px;border:solid 1px #012;}
+.rights-header h2{margin:6px;font-size:160%;}
+.sub-filter{visibility:hidden;position:relative;right:-160px;bottom:20px;height:65px;width:145px;border-radius:5px;text-align:left;cursor:default;border:solid 1px #000;font-size:95%;font-weight:bold;}
+/*#security-filter:hover{background:#5A8F29;cursor:pointer;}#well-being-filter:hover{background:#5A8F29;cursor:pointer;}#equality-filter:hover{background:#B248B4;cursor:pointer;}#economic-filter:hover{background:#B248B4;cursor:pointer;}#education-filter:hover{background:#F78700;cursor:pointer;}#employment-filter:hover{background:#F78700;cursor:pointer;}*/
+
+#int-content{width:100%;max-width:1280px;margin:0 auto;display:flex;z-index:0;}
+#left-col{width:calc(20% - 8px);position:relative;z-index:0;padding-top:10px;}
+#right-col-wrapper{position:relative;width:calc(80% - 8px);left:16px;}
+#right-col{margin:0 auto;position:relative;z-index:0;}
+
+#module-wrapper{width:850px;height:600px;position:relative;margin:0 auto;padding:20px;z-index:0;}
+.category{margin:5px 0;border:solid 2px #014;background:#6bd;width:calc(100% - 20px);height:24px;padding: 5px 10px 3px;cursor:pointer;}
+.category span{font-size:17px;}
+.sub-category{margin:10px 0;display:none;width:calc(100% - 30px);position:relative;left:10px;height:22px;padding: 0 10px;cursor:pointer;border-bottom:solid 2px #014;}
+.sub-category span{font-size:15px;}
+.sub-sub-category{margin:5px 0;display:none;width:calc(100% - 40px);position:relative;left:20px;height:20px;padding: 5px 10px;cursor:pointer;border-radius:8px;}
+.sub-sub-category span{font-size:13px;}
+.category-filters1{width:10px;height:100%;background:#5A8F29;position:relative;margin-right:10px;}
+.category-filters2{width:10px;height:100%;background:#ccc;position:relative;margin-right:10px;}
+.category-filters3{width:10px;height:100%;background:#B64BB8;position:relative;margin-right:10px;}
+.category-filters4{width:10px;height:100%;background:#ccc;position:relative;margin-right:10px;}
+.category-filters5{width:10px;height:100%;background:#FF8F00;position:relative;margin-right:10px;}
+.category-filters6{width:10px;height:100%;background:#ccc;position:relative;margin-right:10px;}
+.tooltipquestionmark{position:absolute;right:0;bottom:0;padding-right:5px;font-size:90%;}
+.tooltiptext{visibility: hidden;position:absolute;text-align:justify;border:solid 2px #000;padding:5px;top:calc(100% + 5px);right:-50px;width:300px;background:#f8f8f8;z-index:20;}
+
+@keyframes change_animation1 {
+	from {height:0px;}
+	to {height:100px;}
+}
+@keyframes change_animation2 {
+	from {opacity:0.0;}
+	to {opacity:1.0;}
+}
+@keyframes change_animation3 {
+	from {height:100px;}
+	to {height:0px;}
+}
+@keyframes change_animation4 {
+	from {opacity:1.0;}
+	to {opacity:0.0;}
+}
+#module-wrapper{display:flex;}
+#hover-buttons{width:40px;position:absolute;bottom:20px;}
+.tooltipbutton{width:30px;height:25px;border-radius:50%;position:relative;bottom:0px;margin:15px 0px;border:1px solid #000;background:#fff;text-align:center;padding-top:5px;cursor:pointer;}
+.tooltiptext3{visibility: hidden;position:absolute;text-align:justify;border:solid 2px #000;padding:5px;bottom:calc(100% + 10px);right:0;width:100px;background:#ddd;z-index:20;}
+.tooltiptext2{animation-name:change_animation2;animation-duration:400ms;display:none;position:absolute;text-align:justify;border:solid 2px #014;padding:5px;background:#fff;z-index:20;}
+.cstanding-graph-wrapper3{position:relative;width:95%;height:100%;margin:0 auto;border:solid 1px #d9d9d9;z-index:0;}
+#tip-wrapper{animation-name:change_animation1;animation-duration:200ms;position:relative;margin:0 auto;z-index:0;top:0;height:100px;width:80%;display:none;}
+
+.pres-graph-header{display:flex;position:relative;margin:0 auto;width:100%;}
+.graph-head-button{position:relative;text-align:center;width:20%;margin-top:20px;height:27px;padding-top:6px;border-left:2px solid #666;border-right:2px solid #666;cursor:pointer;z-index:0;font-weight:bold;}
+.graph-head-button:hover{background:#ddd;}
+#graph-h1{border-left:none;}
+#graph-h6{border-left:none;}
+#graph-h5{border-right:none;}
+#graph-h10{border-right:none;}
+.lightwrap{position:relative;width:20%;height:20px;padding-top:5px;z-index:0;display:flex;}
+.horizline{position:relative;height:3px;margin-top:5px;background:#000;width:15px;}
+.light{position:relative;height:10px;width:10px;border:solid 1px #000;border-radius:50%;}
+.light1{background:#fff;}.light2{background:#fff;}.light3{background:#fff;}.light4{background:#fff;}.light5{background:#fff;}.light6{background:#fff;}.light7{background:#fc2;}.light8{background:#fc2;}.light9{background:#fc2;}.light10{background:#fc2;}
+.timelineyear{position:absolute;top:15px;left:-10px;}
+#tag-reps-tip{text-align:center;}
+</style>
+<script>
+
+function displayTip(id){
+	$('#'+id).css('visibility','visible');
+}
+
+function unDisplayTip(id){
+	$('#'+id).css('visibility','hidden');
+}
+
+var tiphide = false;
+var currenttip = '';
+var curtipid = '';
+function displayTip2(id){
+	if (tiphide) {
+		if (currenttip == id){
+			curtipid = id
+			$('#tip-wrapper').css('animation-name','change_animation3')
+			$('#'+id).css('animation-name','change_animation4')
+			$('#'+id).css('animation-duration','170ms')
+			window.setTimeout(cancelpartB,170);
+			tiphide = false;
+		} else {
+			$('#'+currenttip).css('display','none');
+			$('#'+id).css('display','block');
+			currenttip = id;
+		}
+	} else {
+		$('#'+id).css('display','block');
+		$('#tip-wrapper').css('display','block')
+		$('#tip-wrapper').css('animation-name','change_animation1')
+		$('#'+id).css('animation-name','change_animation2')
+		$('#'+id).css('animation-duration','400ms')
+		tiphide = true;
+		currenttip = id;
+	}
+}
+
+function cancelpartB(){
+	$('#'+curtipid).css('display','none');
+	window.setTimeout(cancelpartC,30);
+}
+
+function cancelpartC(){
+	$('#tip-wrapper').css('display','none');
+}
+
+var filterlist = [];
+filterlist[0] = ['2-1-2'];
+filterlist[1] = ['1-1-1', '1-1-2', '1-2-1', '1-2-2', '1-2-3', '2-1-1', '2-1-3', '2-3-1', '2-5-1', '2-5-2', '2-5-3', '3-1-1', '3-1-2', '3-1-3'];
+filterlist[2] = ['1-2-4', '1-2-5', '2-2-1', '2-4-1', '2-4-2', '2-4-3', '2-4-4', '2-4-5', '3-2-1', '3-2-2', ];
+filtersel = [false, false, false];
+filternames = ['#qualolife','#acctolib','#perofhap'];
+subfilternames = ['#qualolifesub','#acctolibsub','#perofhapsub'];
+
+var idlist = [];
+idlist['h1'] = false;
+idlist['h2'] = false;
+idlist['h3'] = false;
+idlist['h4'] = false;
+idlist['h5'] = false;
+idlist['h6'] = false;
+idlist['h7'] = false;
+idlist['h8'] = false;
+idlist['h9'] = false;
+idlist['h10'] = false;
+
+var datelist = [];
+datelist[0] = '1961';
+datelist[1] = '1963';
+datelist[2] = '1969';
+datelist[3] = '1974';
+datelist[4] = '1977';
+datelist[5] = '1981';
+datelist[6] = '1989';
+datelist[7] = '1993';
+datelist[8] = '2001';
+datelist[9] = '2009';
+datelist[10] = 'now';
+
+var start = 6
+var end = 10
+var currentid = '2-1-1'
+var vis = ''
+var type = 'normal'
+var smooth = 0
+var days = 0
+var currentFilter = -1
+var isStart = true;
+
+function filterCat(num, keepFiltering){
+	if (num == currentFilter && !keepFiltering) {
+		currentFilter = -1;
+		for (i = 0; i < 3; i++) {
+			for (j = 0; j < filterlist[i].length; j++){
+				$('#category-'+filterlist[i][j]).css('display','none');
+			}
+		}
+		$(filternames[0]).css('box-shadow','0px 0px 3px rgba(0,0,0,1)');
+		$(filternames[0]).css('border','solid 1px #012');
+		$(filternames[0]).css('height','54px');
+		$(subfilternames[0]).css('right','-160px');
+		$(filternames[0]).css('width','198px');
+		$(filternames[0]).css('padding-top','10px');
+		$(filternames[1]).css('box-shadow','0px 0px 3px rgba(0,0,0,1)');
+		$(filternames[1]).css('border','solid 1px #012');
+		$(filternames[1]).css('height','54px');
+		$(subfilternames[1]).css('right','-160px');
+		$(filternames[1]).css('width','198px');
+		$(filternames[1]).css('padding-top','10px');
+		$(filternames[2]).css('box-shadow','0px 0px 3px rgba(0,0,0,1)');
+		$(filternames[2]).css('border','solid 1px #012');
+		$(filternames[2]).css('height','54px');
+		$(subfilternames[2]).css('right','-160px');
+		$(filternames[2]).css('width','198px');
+		$(filternames[2]).css('padding-top','10px');
+	} else {
+		currentFilter = num;
+		$(filternames[currentFilter]).css('box-shadow','0px 0px 20px rgba(0,0,0,1)');
+		$(filternames[currentFilter]).css('border','solid 3px #012');
+		$(filternames[currentFilter]).css('height','52px');
+		$(filternames[currentFilter]).css('width','194px');
+		$(subfilternames[currentFilter]).css('right','-158px');
+		$(filternames[currentFilter]).css('padding-top','8px');
+		$(filternames[(currentFilter+1)%3]).css('box-shadow','0px 0px 3px rgba(0,0,0,1)');
+		$(filternames[(currentFilter+1)%3]).css('border','solid 1px #012');
+		$(filternames[(currentFilter+1)%3]).css('height','54px');
+		$(filternames[(currentFilter+1)%3]).css('width','198px');
+		$(subfilternames[(currentFilter+1)%3]).css('right','-160px');
+		$(filternames[(currentFilter+1)%3]).css('padding-top','10px');
+		$(filternames[(currentFilter+2)%3]).css('box-shadow','0px 0px 3px rgba(0,0,0,1)');
+		$(filternames[(currentFilter+2)%3]).css('border','solid 1px #012');
+		$(filternames[(currentFilter+2)%3]).css('height','54px');
+		$(filternames[(currentFilter+2)%3]).css('width','198px');
+		$(subfilternames[(currentFilter+2)%3]).css('right','-160px');
+		$(filternames[(currentFilter+2)%3]).css('padding-top','10px');
+	}
+	for (i = 0; i < 3; i++) {
+		for (j = 0; j < filterlist[i].length; j++){
+			if (i == currentFilter) {
+				$('#category-'+filterlist[i][j]).css('display','flex');
+			} else {
+				$('#category-'+filterlist[i][j]).css('display','none');
+			}
+		}
+	}
+}
+
+function switchButton(id){
+	if (isStart){
+		for (i = 1; i < id; i++){
+			idlist[i] = false;
+			$('.light'+String(i)).css('background','#fff');
+		}
+		start = id-1
+		end = id
+		for (i = id; i < 11; i++){
+			idlist[i] = false;
+			$('.light'+String(i)).css('background','#fff');
+		}
+		$('.light'+String(id)).css('background','#fc2');
+		isStart = false;
+	} else{
+		if (id > start) {
+			end = id
+			for (i = start+1; i < id+1; i++){
+				idlist[i] = true;
+				$('.light'+String(i)).css('background','#fc2');
+			}
+			isStart = true;
+		}
+		else {
+			for (i = 1; i < id; i++){
+				idlist[i] = false;
+				$('.light'+String(i)).css('background','#fff');
+			}
+			start = id-1
+			end = id
+			for (i = id; i < 11; i++){
+				idlist[i] = false;
+				$('.light'+String(i)).css('background','#fff');
+			}
+			$('.light'+String(id)).css('background','#fc2');
+			isStart = false;
+		}
+	}
+	if (type == 'avg'){
+		graphSwitcherAvg(vis, currentid, smooth, days);
+	} else if (type == 'sum'){
+		graphSwitcherSum(vis, currentid, smooth, days);
+	} else {
+		graphSwitcher2(vis, currentid);
+	}
+}
+
+function start_gdp(){
+	vis = 'intexecgdp'
+	$.post('/vishandle', {'visualization':vis, 'start':datelist[start], 'end':datelist[end]},function(data){
+		chart_data = $.parseJSON(data);
+		//console.log(chart_data)
+		drawLineChart2(chart_data);
+	});
+	expand("2",5,5);
+	expand("2-1",3,0);
+	$("#category-2-1-1").css('width','calc(100% - 50px)');
+	$("#category-2-1-1").css('left','30px');
+	$("#category-2-1-1").css('background','#ddd');
+	$("#contexttip").text(contexts["2-1-1"]);
+}
+
+function graphSwitcher2(vis2, id){
+	vis = vis2
+	type = 'normal'
+	$.post('/vishandle', {'visualization':vis, 'start':datelist[start], 'end':datelist[end]},function(data){
+		chart_data = $.parseJSON(data);
+		//console.log(chart_data)
+		drawLineChart2(chart_data);
+	});
+	$("#category-"+currentid).css('width','calc(100% - 40px)');
+	$("#category-"+currentid).css('left','20px');
+	$("#category-"+currentid).css('font-weight','normal');
+	$("#category-"+currentid).css('background','#fff');
+	currentid = id;
+	$("#category-"+currentid).css('width','calc(100% - 50px)');
+	$("#category-"+currentid).css('left','30px');
+	$("#category-"+currentid).css('font-weight','bold');
+	$("#category-"+currentid).css('background','#ddd');
+	$("#contexttip").text(contexts[id]);
+}
+
+function graphSwitcherSum(vis2, id, smooth2, days2){
+	vis = vis2
+	smooth = smooth2
+	days = days2
+	type = 'sum'
+	$.post('/vishandle', {'visualization':vis, 'start':datelist[start], 'end':datelist[end], 'smooth':smooth, 'days':days, 'type':'sum'},function(data){
+		chart_data = $.parseJSON(data);
+		//console.log(chart_data)
+		drawLineChart2(chart_data);
+	});
+	$("#category-"+currentid).css('width','calc(100% - 40px)');
+	$("#category-"+currentid).css('left','20px');
+	$("#category-"+currentid).css('font-weight','normal');
+	$("#category-"+currentid).css('background','#fff');
+	currentid = id;
+	$("#category-"+currentid).css('width','calc(100% - 50px)');
+	$("#category-"+currentid).css('left','30px');
+	$("#category-"+currentid).css('font-weight','bold');
+	$("#category-"+currentid).css('background','#ddd');
+	$("#contexttip").text(contexts[id]);
+}
+
+function graphSwitcherAvg(vis2, id, smooth2, days2){
+	vis = vis2
+	smooth = smooth2
+	days = days2
+	type = 'avg'
+	$.post('/vishandle', {'visualization':vis, 'start':datelist[start], 'end':datelist[end], 'smooth':smooth, 'days':days, 'type':'avg'},function(data){
+		chart_data = $.parseJSON(data);
+		//console.log(chart_data)
+		drawLineChart2(chart_data);
+	});
+	$("#category-"+currentid).css('width','calc(100% - 40px)');
+	$("#category-"+currentid).css('left','20px');
+	$("#category-"+currentid).css('font-weight','normal');
+	$("#category-"+currentid).css('background','#fff');
+	currentid = id;
+	$("#category-"+currentid).css('width','calc(100% - 50px)');
+	$("#category-"+currentid).css('left','30px');
+	$("#category-"+currentid).css('font-weight','bold');
+	$("#category-"+currentid).css('background','#ddd');
+	$("#contexttip").text(contexts[id]);
+}
+
+function expand(id,num,num2){
+	for (i = 0; i <= num; i++){
+		for (j = 1; j <= num2; j++){
+			if ($('#category-'+id+'-'+i.toString()+'-'+j.toString()).css('display') == 'block' || $('#category-'+id+'-'+i.toString()+'-'+j.toString()).css('display') == 'flex'){
+				$('#category-'+id+'-'+i.toString()+'-'+j.toString()).css('display','none');
+			}
+		}
+		if ($('#category-'+id+'-'+i.toString()).css('display') == 'none'){
+			if (id.length == 3){
+				$('#category-'+id+'-'+i.toString()).css('display','flex');
+			} else {
+				$('#category-'+id+'-'+i.toString()).css('display','block');
+			}
+		} else {
+			$('#category-'+id+'-'+i.toString()).css('display','none');
+		}
+	}
+	if (currentFilter != -1) {
+		filterCat(currentFilter, true);
+	}
+}
+
+$( document ).ready(function() {
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(start_gdp);
+});
+
+var contexts = [];
+contexts['1-1-1'] = 'The Fed Funds interest rate is the base level interest rate in the U.S. economy. All other interest rates in banking is based off of this rate. It is set and controlled by the Federal Reserve, and is one method they use to influence the economy. A lower rate encourages banks to loan more money, stimulating the economy. A higher rate discourages loaning, and can be used to combat inflation.'
+contexts['1-1-2'] = 'The money supply is the amount of US Dollars that exist in the economy. Control of this supply is used in conjunction with interest rates to help stimulate the economy and fight inflation. A greater money supply stimulates the economy by encouraging lending, while a smaller money supply can be used to fight inflation. Money is considered in the M1 supply if it is in the form of cash, coins, checking accounts, and demand deposits. This is the most liquid form of asset, and can be moved around the economy quickly. The M2 money supply contains everything in the M1 money supply, plus less liquid assets like savings accounts and money market accounts. Any asset that can’t be traded as currency however can be quickly converted into tradeable currency is considered a part of the M2 supply'
+contexts['1-2-1'] = 'Government revenue is received from sources such as taxes levied upon individuals, private and government owned corporations, goods and services produced, exports and imports, central bank revenue and capital receipts.Government spending includes all government consumption, (the acquisition of goods and services for current use),  investment (the acquisition of goods and services for future use) and transfer payments. According to Keynesian economics, increased government spending leads to raises in aggregate demand, increased production and faster recession recovery. Classical economists believe that increased government spending worsens the economy by shifting resources to the less productive public sector. '
+contexts['1-2-2'] = 'The Annual Budget Deficit is the amount by which government spending exceeds government revenue in a given year. This deficit is a major contributor to the National Debt. The United State’s recent policies focused on increased federal spending have lead to increased budget deficits. '
+contexts['1-2-3'] = 'The United States national debt is the amount of money owed by the federal government. The measure of the public national debt is the amount outstanding Treasury securities at a given time. These securities are held by private investors, corporations, the Federal Reserve System, foreign, state and local governments. The national debt is increased by budget deficits, meaning that government expenditures exceed government revenue. Some effects of an increased national debt are reduced national income and living standards, reductions in spending on important government programs and higher inflation rates.  '
+contexts['1-2-4'] = 'This represents the amount of money that the federal government spends on various government programs. This information can be used to help evaluate how effectively the United States Government is spending their revenue. '
+contexts['1-2-5'] = 'This represents the avenues of government receipts. This graph may be used to give you a better understanding of how the government generates revenue and how that has changed over time.'
+contexts['2-1-1'] = 'The GDP (Gross Domestic Product) represents the total dollar value of all goods and services produced with a period of time. GDP is used an indication of a nation’s economic health. A significant change in the GDP, up or down tends to correlate with a significant change in the stock market as well.Negative GDP growth is one of the factors considered in determining whether an economy is in recession or not. '
+contexts['2-1-2'] = 'The GDP per Capita is the calculated GDP divided by the population of the country. This is done in an attempt to normalize the data to make for easier comparisons with other countries. '
+contexts['2-1-3'] = 'The GDP rate of change displays the increase or decrease of the GDP per year as a percentage. This is useful for determining the general direction and magnitude of growth for an economy.  '
+contexts['2-2-1'] = 'Inflation is the increase in the level of prices for various goods and services. Here it measured using the Consumer Price Index (CPI). The Bureau of Labor Statistics gathers the average prices for goods and services then compares them to the average prices from an arbitrary date. The CPI is then calculated as the difference between the two points. '
+contexts['2-3-1'] = 'This is a measure of net hiring of full and part time adult workers. The index score is calculated by subtracting the percent of americans who indicate their job is  firing and those who say their employers are hiring. Job Creation can be an indication of economic health, in that a healthy economy will be likely to have a high number of jobs created. '
+contexts['2-4-1'] = 'The Unemployment Rate is the percentage of people in the labor force that are not currently employed. To be counted as unemployed you need to be without a job, available to work, and actively looking for work. This rate is one way to measure the health of the economy, however it might not provide a full picture.'
+contexts['2-4-2'] = 'This rate measures what percentage of the population is currently in the workforce. To be considered a part of the workforce, you either have to be employed or unemployed (looking for work). Everyone else who is not looking for work or not able to work are not considered part of the labor force. This rate is an indirect method of calculating unemployment, where people who are no longer looking for work, discouraged workers, are counted.'
+contexts['2-4-3'] = 'This number measures how many weeks those unemployed stay looking for work. A higher number of weeks unemployed means that it’s harder for people who are unemployed to find work. A high number is also an indicator for a weaker economy.'
+contexts['2-4-4'] = 'The number employed and unemployed are the raw numbers used to calculate the unemployment rate and related statistics. These numbers can be used to track the size of the labor force overtime.'
+contexts['2-4-5'] = 'These 4 numbers show the different unemployment rates for those with different education statuses.People with different educational levels experience economic changes differently, and this chart is one way to measure it.'
+contexts['2-5-1'] = 'This graph displays the United States imports and exports. An import is the purchase of foreign manufactured goods. An export is the sale of goods to foreign countries. Overseas products offer more choices to consumers and can help to manage strained budgets. However too many imports in relation to exports distorts the balance of trade and devalues the currency.'
+contexts['2-5-2'] = 'Trade Balance is the difference between a country’s imports and exports. A trade deficit (imports > exports) isn’t necessarily an indication of poor economic health. In a recession countries try to export more but during an expansion countries tend to import more goods providing price competition which limits inflation and provides goods beyond the economy’s ability.'
+contexts['2-5-3'] = 'The Trade Balance Percent is the percentage representation of imports over exports.If the percentage is >100% then that means the United States had more imports than exports that year.'
+contexts['3-1-1'] = 'Aggregate income is the total of all incomes without adjustment for inflation and taxes. This graph depicts the aggregate income broken down for each fifth of the of United States as a percentage of the total. Wealth distribution is a major political issue, particularly as it relates to income taxes.'
+contexts['3-1-2'] = 'This is a percentile representation of income levels in the United States. For example if your annual income is ~41,000 then you are making more money than 40% of Americans.'
+contexts['3-1-3'] = 'Average Income per Level indicates how much money each fifth of the United States is making on average. This information can be useful in determining where in the American economy you fit it, which may influence your voting behaviors. '
+contexts['3-2-1'] = 'This graph depicts the annual tuition for public and private universities. The cost of a college education is an important social issue because of the importance placed upon a degree and the debt that can be incurred.'
+contexts['3-2-2'] = 'Percent Change in Tuition is simply a depiction of how the tuition is changing over a period of time. Whereas the College Tuition graph is showing the monetary representation of it.'
+
+var sources = [];
+sources['1-1-1'] = ''
+sources['1-1-2'] = ''
+sources['1-2-1'] = ''
+sources['1-2-2'] = ''
+sources['1-2-3'] = ''
+sources['1-2-4'] = ''
+sources['1-2-5'] = ''
+sources['2-1-1'] = ''
+sources['2-1-2'] = ''
+sources['2-1-3'] = ''
+sources['2-2-1'] = ''
+sources['2-3-1'] = ''
+sources['2-4-1'] = ''
+sources['2-4-2'] = ''
+sources['2-4-3'] = ''
+sources['2-4-5'] = ''
+sources['2-5-1'] = ''
+sources['2-5-2'] = ''
+sources['2-5-3'] = ''
+sources['3-1-1'] = ''
+sources['3-1-2'] = ''
+sources['3-1-3'] = ''
+sources['3-2-1'] = ''
+sources['3-2-2'] = ''
+
+var biases = [];
+biases['1-1-1'] = ''
+biases['1-1-2'] = ''
+biases['1-2-1'] = ''
+biases['1-2-2'] = ''
+biases['1-2-3'] = ''
+biases['1-2-4'] = ''
+biases['1-2-5'] = ''
+biases['2-1-1'] = ''
+biases['2-1-2'] = ''
+biases['2-1-3'] = ''
+biases['2-2-1'] = ''
+biases['2-3-1'] = ''
+biases['2-4-1'] = ''
+biases['2-4-2'] = ''
+biases['2-4-3'] = ''
+biases['2-4-5'] = ''
+biases['2-5-1'] = ''
+biases['2-5-2'] = ''
+biases['2-5-3'] = ''
+biases['3-1-1'] = ''
+biases['3-1-2'] = ''
+biases['3-1-3'] = ''
+biases['3-2-1'] = ''
+biases['3-2-2'] = ''
+</script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript" src="/js/controllers/stocks.js"></script>
+<link rel="stylesheet" href="/css/stocks.css">
+
+<div id='profile-wrapper' class='w-1280-container' ng-controller='StocksController' ng-init='init()'>
+    <div id='tracker-header'>
+        <h1>Stock Tracker</h1>
+    </div>
+    <div id='profile-body-wrap'>
+        <div class='w-250-left'>
+            <h4>Quick Links</h4>
+            <ul class='quick-link-ul'>
+                <li ng-click='loadTrackerPage(0)'>Current Holdings</li>
+                <li ng-click='loadTrackerPage(1)'>Funds</li>
+                <li ng-click='loadTrackerPage(2)'>Past Value</li>
+                <li ng-click='loadTrackerPage(3)'>Projections</li>
+                <li ng-click='loadTrackerPage(4)'>Taxes 'n' shit</li>
+            </ul>
+        </div>
+        <div class='w-1000-center' bind-unsafe-html="bodyHTML"></div>
+    </div>
+</div>
+
+{% endblock %}

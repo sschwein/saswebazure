@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id='angular-wrapper' ng-controller='LegislativeController'>
+    <div id='csrf-token' style='display:none;'>{{token}}</div>
+    <script type="text/javascript" src="/js/controllers/legislative.js"></script>
+    <link rel="stylesheet" href="/css/legislative.css">
+
+    <div class='w-700-header'>
+        <h1 style='margin-bottom:40px;'>Congressional Bill Search</h1>
+        <input class='search-bar-input' name='query' type='text' ng-model='filter.query'>
+    </div>
+    <div id='bill-search-wrapper' class='w-1280-container' ng-init='init_bill_search()'>
+        <div class='w-250-left'>
+            <h3>Filters</h3>
+            <h6 class='header-left'>Sort By</h6>
+            <div class='ml-3'>
+                <input type='radio' name='sort_order' value='last_action_asc' ng-model='filter.sort'>&nbspLast Action - Oldest First<br>
+                <input type='radio' name='sort_order' value='last_action_desc' ng-model='filter.sort'>&nbspLast Action - Newest First<br>
+                <input type='radio' name='sort_order' value='introduced_asc' ng-model='filter.sort'>&nbspIntroduced - Oldest First<br>
+                <input type='radio' name='sort_order' value='introduced_desc' ng-model='filter.sort'>&nbspIntroducted - Newest First<br>
+            </div><br>
+            <h6 class='header-left'>Chamber of Origin</h6>
+            <div class='ml-3'>
+                <input type='checkbox' name='chamber_house' ng-model='filter.chamber.house'>&nbspHouse of Representatives<br>
+                <input type='checkbox' name='chamber_senate' ng-model='filter.chamber.senate'>&nbspSenate<br>
+            </div><br>
+            <h6 class='header-left'>Status of Legislation</h6>
+            <div class='ml-3'>
+                <input type='checkbox' name='status_inactive' ng-model='filter.status.inactive'>&nbspInactive<br>
+                <input type='checkbox' name='status_active' ng-model='filter.status.active'>&nbspActive<br>
+                <input type='checkbox' name='status_enacted' ng-model='filter.status.enacted'>&nbspEnacted<br>
+                <input type='checkbox' name='status_vetoed' ng-model='filter.status.vetoed'>&nbspVetoed<br>
+            </div><br>
+        </div>
+        <div class='w-1000-center'>
+            <div class='result-wrapper'>
+                <img class='loading-img' ng-show='show_loading' src='/images/Pacman.gif'>
+                <div class='error-text' ng-show='search_error' ng-cloak>Bill Search Error</div>
+                <div class='single-result-wrapper' ng-repeat='row in bill_results track by $index' ng-cloak>
+                    <a style='font-weight:bold;color:#d85c38;cursor:pointer;' ng-click='search_load_full_bill($index)'>[[row.bill_id]]</a> - [[row.congress_term]]
+                    <br>
+                    <span style='font-size:85%;font-weight:bold;'>[[row.title]]</span>
+                    <br>
+                    <div class='ml-4' style='font-size:85%;'>
+                        <div>Sponsor: [[row.sponsor_name]]</div>
+                        <div class='d-flex'>
+                            <div>Introduced:  [[row.introduced_date.split('-')[1] ]]-[[row.introduced_date.split('-')[2] ]]-[[row.introduced_date.split('-')[0] ]]</div>
+                            <div class='ml-3'>Last Action: [[row.last_action_date.split('-')[1] ]]-[[row.last_action_date.split('-')[2] ]]-[[row.last_action_date.split('-')[0] ]]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id='bill-detail-bg' ng-if='is_bill_detail_active' ng-click='close_full_bill()' ng-cloak></div>
+    <div id='bill-detail-display' ng-if='is_bill_detail_active' ng-cloak>
+        <div id='bill-detail-close' ng-click='close_full_bill()'>X</div>
+        <div id='bill-detail-panel-1' class='bill-detail-panel' ng-show='is_bill_detail_panel == 1'>
+            <div class='bill-detail-header'>
+                <div ng-click='change_bill_detail_panel(1)' class='bill-detail-header-cell bill-detail-selected'>Information</div>
+                <div ng-click='change_bill_detail_panel(2)' class='bill-detail-header-cell'>Sponsorship</div>
+                <div ng-click='change_bill_detail_panel(3)' class='bill-detail-header-cell'>Details</div>
+                <div ng-click='change_bill_detail_panel(4)' class='bill-detail-header-cell'>Learn More</div>
+            </div>
+            <h3>[[active_bill_detail.bill.bill_cong_id]]<span ng-show='active_bill_detail.bill.title != active_bill_detail.bill.official_title'> - [[active_bill_detail.bill.title]]</span></h3>
+            <div id='bill-detail-status-bar' class='text-center'>
+                <div class='bill-detail-status-cell [[active_bill_detail.bill.status_bar[0] ]]'>Introduced</div>
+                <div class='bill-detail-status-cell [[active_bill_detail.bill.status_bar[1] ]]'>Passed 1 Chamber</div>
+                <div class='bill-detail-status-cell [[active_bill_detail.bill.status_bar[2] ]]'>Passed 2 Chambers</div>
+                <div class='bill-detail-status-cell [[active_bill_detail.bill.status_bar[3] ]]'>To President</div>
+                <div class='bill-detail-status-cell [[active_bill_detail.bill.status_bar[4] ]]'>Enacted Law</div>
+            </div>
+            <div class='bill-detail-body'>
+                <table>
+                    <col style="width:15%">
+                    <col style="width:25%">
+                    <tr>
+                        <td class='text-right align-top bill-detail-body-info-cell'>Sponsor:</td>
+                        <td>[[active_bill_detail.bill.sponsor_name]]</td>
+                    </tr>
+                    <tr>
+                        <td class='text-right align-top bill-detail-body-info-cell'>Last Action On:</td>
+                        <td>[[active_bill_detail.bill.last_action_date.split('T')[0] ]]</td>
+                    </tr>
+                    <tr>
+                        <td class='text-right align-top bill-detail-body-info-cell'>Introduced On:</td>
+                        <td>[[active_bill_detail.bill.introduced_date.split('T')[0] ]]</td>
+                    </tr>
+                    <tr>
+                        <td class='text-right align-top bill-detail-body-info-cell'>Core Policy Area:</td>
+                        <td>[[active_bill_detail.bill.core_policy]]</td>
+                    </tr>
+                    <tr>
+                        <td class='text-right align-top bill-detail-body-info-cell'>Status:</td>
+                        <td>[[active_bill_detail.bill.status]]</td>
+                    </tr>
+                    <tr>
+                        <td class='text-right align-top bill-detail-body-info-cell'>Full Title:</td>
+                        <td>[[active_bill_detail.bill.official_title]]</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id='bill-detail-panel-2' class='bill-detail-panel' ng-show='is_bill_detail_panel == 2'>
+            <div class='bill-detail-header'>
+                <div ng-click='change_bill_detail_panel(1)' class='bill-detail-header-cell'>Information</div>
+                <div ng-click='change_bill_detail_panel(2)' class='bill-detail-header-cell bill-detail-selected'>Sponsorship</div>
+                <div ng-click='change_bill_detail_panel(3)' class='bill-detail-header-cell'>Details</div>
+                <div ng-click='change_bill_detail_panel(4)' class='bill-detail-header-cell'>Learn More</div>
+            </div>
+            <h3>[[active_bill_detail.bill.bill_cong_id]]<span ng-show='active_bill_detail.bill.title != active_bill_detail.bill.official_title'> - [[active_bill_detail.bill.title]]</span></h3>
+            <div id='bill-detail-sponsor-wrap'>
+                <img src='[[active_bill_detail.bill.sponsor.image_url]]' ng-cloak>
+                <div id='bill-detail-sponsor-text'>
+                    <span style='font-size:125%;font-weight:bold;'>Sponsor: </span>
+                    <span>[[active_bill_detail.bill.sponsor.name]]</span>
+                    <span ng-show='active_bill_detail.bill.sponsor.party == "Democratic"'>(D)</span>
+                    <span ng-show='active_bill_detail.bill.sponsor.party == "Republican"'>(R)</span>
+                    <span ng-show='active_bill_detail.bill.sponsor.party == "Independent"'>(I)</span>
+                </div>
+            </div>
+            <div id='bill-detail-cosponsor-wrap'>
+                <div class='text-center'>
+                    <span style='font-size:125%;font-weight:bold;'>Cosponsors</span>
+                </div>
+                <div id='bill-detail-cosponsor-tiles'>
+                    <div class='bill-detail-cosponsor-tile' ng-repeat='cosponsor in active_bill_detail.cosponsors'>
+                        <div class='bill-detail-cosponsor-tile-img'>
+                            <img ng-if='cosponsor.image_url != "N/A"' src='[[cosponsor.image_url]]' ng-cloak>
+                            <img style='margin-top:8px;' ng-if='cosponsor.image_url == "N/A"' src='/images/avatar.png' width="48" height="48" ng-cloak>
+                        </div>
+                        <span style='font-size:85%;'>[[cosponsor.name]]</span>
+                        <span style='font-size:85%;' ng-show='cosponsor.party == "Democratic"'>(D)</span>
+                        <span style='font-size:85%;' ng-show='cosponsor.party == "Republican"'>(R)</span>
+                        <span style='font-size:85%;' ng-show='cosponsor.party == "Independent"'>(I)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='bill-detail-panel-3' class='bill-detail-panel' ng-show='is_bill_detail_panel == 3'>
+            <div class='bill-detail-header'>
+                <div ng-click='change_bill_detail_panel(1)' class='bill-detail-header-cell'>Information</div>
+                <div ng-click='change_bill_detail_panel(2)' class='bill-detail-header-cell'>Sponsorship</div>
+                <div ng-click='change_bill_detail_panel(3)' class='bill-detail-header-cell bill-detail-selected'>Details</div>
+                <div ng-click='change_bill_detail_panel(4)' class='bill-detail-header-cell'>Learn More</div>
+            </div>
+            <h3>[[active_bill_detail.bill.bill_cong_id]]<span ng-show='active_bill_detail.bill.title != active_bill_detail.bill.official_title'> - [[active_bill_detail.bill.title]]</span></h3>
+            <table>
+                <col style="width:10%">
+                <col style="width:25%">
+                <tr>
+                    <td class='text-right align-top bill-detail-body-detail-cell'>Summary:</td>
+                    <td>
+                        <span>[[active_bill_detail.bill.latest_summary.substring(0,300)]]</span>
+                        <span ng-show='active_bill_detail.bill.latest_summary.length > 300'>...</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class='text-right align-top bill-detail-body-detail-cell'>Actions:</td>
+                    <td>
+                        <button class='btn btn-outline-success btn-table-cell [[bill_detail_action_selector[0]["class"] ]]' ng-click='switch_full_bill_action(false)'>Important Actions</button>
+                        <button class='btn btn-outline-success btn-table-cell [[bill_detail_action_selector[1]["class"] ]]' ng-click='switch_full_bill_action(true)'>All Actions</button>
+                    </td>
+                </tr>
+                <tr class='' ng-show='bill_detail_action_selector[0]["val"]' ng-repeat='act in active_bill_detail.important_actions track by $index'>
+                    <td class='text-right align-top bill-detail-body-detail-cell'></td>
+                    <td><small>([[act.date.split('T')[0] ]]) [[act.text]]</small></td>
+                </tr>
+                <tr class='' ng-show='bill_detail_action_selector[1]["val"]' ng-repeat='act in active_bill_detail.actions track by $index'>
+                    <td class='text-right align-top bill-detail-body-detail-cell'></td>
+                    <td><small>([[act.date.split('T')[0] ]]) [[act.text]]</small></td>
+                </tr>
+                <tr>
+                    <td class='text-right align-top bill-detail-body-detail-cell'>Status:</td>
+                    <td>[[active_bill_detail.bill.status]]</td>
+                </tr>
+                <tr>
+                    <td class='text-right align-top bill-detail-body-detail-cell'>Full Title:</td>
+                    <td>[[active_bill_detail.bill.official_title]]</td>
+                </tr>
+            </table>
+        </div>
+        <div id='bill-detail-panel-4' class='bill-detail-panel' ng-show='is_bill_detail_panel == 4'>
+            <div class='bill-detail-header'>
+                <div ng-click='change_bill_detail_panel(1)' class='bill-detail-header-cell'>Information</div>
+                <div ng-click='change_bill_detail_panel(2)' class='bill-detail-header-cell'>Sponsorship</div>
+                <div ng-click='change_bill_detail_panel(3)' class='bill-detail-header-cell'>Details</div>
+                <div ng-click='change_bill_detail_panel(4)' class='bill-detail-header-cell bill-detail-selected'>Learn More</div>
+            </div>
+            <h3>[[active_bill_detail.bill.bill_cong_id]]<span ng-show='active_bill_detail.bill.title != active_bill_detail.bill.official_title'> - [[active_bill_detail.bill.title]]</span></h3>
+            <table>
+                <col style="width:10%">
+                <col style="width:25%">
+                <tr>
+                    <td class='text-right align-top bill-detail-body-detail-cell'>Source:</td>
+                    <td>
+                        <a href='[[active_bill_detail.congress_gov_url]]' target='_blank'>[[ active_bill_detail.congress_gov_url ]]</a>
+                    </td>
+                </tr>
+                <tr ng-if='active_bill_detail.related_bills.length > 9'>
+                    <td class='text-right align-top bill-detail-body-detail-cell'></td>
+                    <td>
+                        <button class='btn btn-outline-success btn-table-cell [[bill_detail_related_selector[0]["class"] ]]' ng-click='switch_full_bill_related(false)'>Fewer Related Bills</button>
+                        <button class='btn btn-outline-success btn-table-cell [[bill_detail_related_selector[1]["class"] ]]' ng-click='switch_full_bill_related(true)'>All Related Bills</button>
+                    </td>
+                </tr>
+                <tr ng-show='bill_detail_related_selector[0]["val"]'>
+                    <td class='text-right align-top bill-detail-body-detail-cell'>Related Bills:</td>
+                    <td>
+                        <div ng-if='active_bill_detail.related_bills.length == 0'>
+                            No Related Bills
+                        </div> 
+                        <div class='text-link font-orange' ng-if='active_bill_detail.related_bills.length > 0' ng-click='load_full_bill(related.related_bill_cong_id)' ng-repeat='related in active_bill_detail.related_bills.splice(0,9)'>
+                            - <span class='font-weight-bold'>[[related.related_bill_id]]</span> [[related.name]]
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-show='bill_detail_related_selector[1]["val"]'>
+                    <td class='text-right align-top bill-detail-body-detail-cell'>Related Bills:</td>
+                    <td>
+                        <div class='text-link font-orange' ng-if='active_bill_detail.related_bills.length > 0' ng-click='load_full_bill(related.related_bill_cong_id)' ng-repeat='related in active_bill_detail.related_bills'>
+                            - <span class='font-weight-bold'>[[related.related_bill_id]]</span> [[related.name]]
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-if='active_bill_detail.bill.subjects.length > 9'>
+                    <td class='text-right align-top bill-detail-body-detail-cell'></td>
+                    <td>
+                        <button class='btn btn-outline-success btn-table-cell [[bill_detail_subject_selector[0]["class"] ]]' ng-click='switch_full_bill_subjects(false)'>Fewer Subjects</button>
+                        <button class='btn btn-outline-success btn-table-cell [[bill_detail_subject_selector[1]["class"] ]]' ng-click='switch_full_bill_subjects(true)'>All Subjects</button>
+                    </td>
+                </tr>
+                <tr ng-show='bill_detail_subject_selector[0]["val"]'>
+                    <td class='text-right align-top bill-detail-body-detail-cell'>Subjects:</td>
+                    <td>
+                        <div ng-if='active_bill_detail.bill.subjects.length == 0'>
+                            No Bill Subjects
+                        </div>
+                        <div class='text-link font-orange' ng-click='set_subject_search_term(subject)' ng-repeat='subject in active_bill_detail.bill.subjects.slice(0,9)'>
+                            [[subject]]
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-show='bill_detail_subject_selector[1]["val"]'>
+                    <td class='text-right align-top bill-detail-body-detail-cell'>Subjects:</td>
+                    <td>
+                        <div class='text-link font-orange' ng-click='set_subject_search_term(subject)' ng-repeat='subject in active_bill_detail.bill.subjects'>
+                            [[subject]]
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

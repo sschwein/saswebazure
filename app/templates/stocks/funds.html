@@ -1,0 +1,80 @@
+<input class="sm-btn btn-black btn-float-top float-right" type="submit" ng-click='loadFunds()' value='Refresh'>
+
+<img class='loading-img' ng-show='show_loading' src='/images/Pacman.gif'>
+
+<table class="table" ng-repeat='row in fundData track by $index'>
+    <thead>
+        <tr>
+            <td colspan=4><h3>[[row.name]]</h3></td>
+        </tr>
+        <tr>
+            <th></th>
+            <th>Current Value</th>
+            <th>Yearly Gain</th>
+            <th>Est. Yearly Income</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th style='color:#d85c38;width:100px;' ng-click='expandFund($index)' ng-show='!is_expanded_fund[$index]'>Expand</th>
+            <th style='color:#d85c38;width:100px;' ng-click='expandFund($index)' ng-show='is_expanded_fund[$index]'>Close</th>
+            <td>$[[row.total_value]]</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr ng-if='is_expanded_fund[$index]'>
+            <td colspan=4 style='padding:0;'>
+            <table class='sub-table'>
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Last Day's Price</th>
+                        <th>Shares</th>
+                        <th>Equity</th>
+                        <th>Target Exposure</th>
+                        <th>Current Exposure</th>
+                        <th>Yield</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat='subrow in fundData[$index].holdings track by subrow.id'>
+                        <td>[[subrow.symbol]]</td>
+                        <td>$[[subrow.close]]</td>
+                        <td>[[subrow.shares]]</td>
+                        <td>$[[(subrow.close * subrow.shares).toFixed(2)]]</td>
+                        <td>0%</td>
+                        <td>[[(100 * subrow.close * subrow.shares / row.total_value).toFixed(2)]]%</td>
+                        <td>[[(subrow.dividend_yield * 100).toFixed(2)]]%</td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <td></td>
+                        <td></td>
+                        <td>$[[row.total_value.toFixed(2)]]</td>
+                        <td>100%</td>
+                        <td>100%</td>
+                        <td>[[(row.total_dividend * 100 / row.total_value).toFixed(2) ]]%</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div id='add-fund-wrap'>
+    <h3>Add New Fund</h3>
+    <div style='display:flex;margin-top:16px;'>
+        <input class='textinput centered-150 text-center' type='text' placeholder='Fund Name' ng-model='newFund.name'>
+        <input class='textinput centered-150 text-center' type='text' placeholder='List of Holdings' ng-model='newFund.holdings'>
+        <input class="btn btn-outline-success btn-submit" type="submit" ng-click='addNewFund()' value='Sumbit'>
+    </div>
+    <h5 style='margin-top:24px;'>Click to Add New Holdings to Fund</h5>
+    <div id='new-holding-list'>
+        <div class='new-holding' ng-repeat='holding in freeHoldings track by $index' ng-click='addHoldingToFund($index)'>
+            [[holding]]
+        </div>
+    </div>
+</div>

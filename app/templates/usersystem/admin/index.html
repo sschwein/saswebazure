@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type="text/javascript" src="/js/admin.js"></script>
+<link rel='stylesheet' href='/css/usersystem.css'/>
+<script type="text/javascript" src="/js/controllers/AdminController.js"></script>
+
+<div class='row' style='min-height:1000px;' ng-app='TGC-app' ng-controller="adminController" ng-init='admin_init()'>
+	<div id='user-info-wrapper'>
+		<h2>Initiative Approval</h2>
+		<ul>
+			<li><a class='redlink' href='/admin/org/invite' target='_self'>Org Invite</a></li>
+			<li><a class='redlink' href='/admin/tdb' target='_self'>ThingDB Viewer</a></li>
+			<li><a class='redlink' href='/admin/tdb/convert' target='_self'>Datastore to ThingDB Converter</a></li>
+		</ul>
+	</div>
+	<div id='post-area'>
+		<div id='init-approval-wrap'>
+			<div class='init-approval-row'>
+				<div class='init-approval-head'>Organization</div>
+				<div class='init-approval-head'>Initiative Title</div>
+				<div class='init-approval-head'>Link</div>
+			</div>
+			<div class='init-approval-row' ng-repeat='init in approvallist track by $index'>
+				<div class='init-approval-cell'>[[init.org]]</div>
+				<div class='init-approval-cell'>[[init.title]]</div>
+				<a class='init-approval-cell' target='_self' ng-href='/admin/initiative/[[init.id]]'>View/Approve</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+.row{padding-top:100px;}
+.radio-quest-row{display:flex;width:100%;padding:5px;}
+#switcher ul{margin:0;padding:0;}
+#switcher ul li{display:inline;padding:0 10px;font-size:16px;}
+#feedback-wrapper{display:none;}
+.row{max-width:1280px;position:relative;margin:25px auto;width:90vw;display:flex;flex-direction:row;justify-content:space-between;flex-wrap:wrap;}
+#user-info-wrapper{position:fixed;left:0px;background:white;border:solid 1px #d9d9d9;width:350px;padding:25px;}
+#post-area{position:absolute;right:0px;width:calc(100% - 400px);}
+.post-wrapper{background:white;border:solid 1px #d9d9d9;padding:15px;margin-bottom:50px;}
+.post-wrapper h2{text-align:center;}
+#footer{display:none !important;}
+#footfoot{position:relative;background:white;border-top:solid 1px #d9d9d9;}
+.beta-question-wrap{margin-top:15px;}
+.beta-question{padding:5px;background:white;}
+.betafeed-submit{width:100px;margin:5px auto;}
+.beta-question-close{width:100px;height:25px;padding-top:5px;margin:0 auto;color:blue;cursor:pointer;}
+#beta-feedback-top-bar{width:100%;height:40px;background:#c00;display:flex;}
+.beta-feedback-top-button{width:50%;text-align:center;padding-top:8px;cursor:pointer;font-weight:bold;color:white;}
+.adm-assigned-feed-responses{display:none;}
+.newquestionq{border-top:solid 2px black;margin-top:15px;}
+@-webkit-keyframes questionanimation2 {from {height:150px;} to {height:0px;}}
+@keyframes questionanimation2 {from {height:150px;} to {height:0px;}}
+#init-approval-wrap{background:white;border:solid 1px #d9d9d9;margin-bottom:50px;}
+.init-approval-row{padding:5px;display:flex;}
+.init-approval-row:hover{background:#e9e9e9;}
+.init-approval-row a{color:#c00;}
+.init-approval-cell{margin:0px auto;width:25%;text-align:center;}
+.init-approval-head{margin:5px auto;width:25%;text-align:center;font-weight:bold;}
+h2 {text-align:center;}
+</style>
+{% endblock %}

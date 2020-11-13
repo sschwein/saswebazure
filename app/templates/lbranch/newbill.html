@@ -1,0 +1,240 @@
+<div id='bill-row-ARRAYLOC' class='bill-main-row'>
+	<div class='bill-row-col-info' ng-click='changeBillDetail(1, ARRAYLOC)'>
+		<div class='bill-info-id'>
+			<h3>[[billmaster[ARRAYLOC].bill.bill_id.toUpperCase()]]</h3>
+		</div>
+		<div class='bill-info-committee'>
+			[[ monthCode[billmaster[ARRAYLOC].bill.last_action.split('T')[0].split('-')[1] ] ]]-[[ billmaster[ARRAYLOC].bill.last_action.split('T')[0].split('-')[2] ]]-[[ billmaster[ARRAYLOC].bill.last_action.split('T')[0].split('-')[0] ]]
+		</div>
+		<div class='bill-info-sponsor'>
+			<div class='bill-info-sponsor-name'>[[billmaster[ARRAYLOC].sponsorname.trim()]]</div>
+			<div class='bill-info-sponsor-pic-wrapper [[billmaster[ARRAYLOC].sponparty]]-border' style='background:url(\"/images/headshots/[[billmaster[ARRAYLOC].sponimg]].png\");'></div>
+		</div>
+		<div class='bill-info-amendments' ng-show='billmaster[ARRAYLOC].amendments.length != 0 && billmaster[ARRAYLOC].showamendments == 0' ng-click='showBillAmendments(ARRAYLOC, 1); $event.stopPropagation();'>
+			Show All [[ billmaster[ARRAYLOC].amendments.length ]] Amendments
+		</div>
+		<div class='bill-info-amendments' ng-show='billmaster[ARRAYLOC].amendments.length != 0 && billmaster[ARRAYLOC].showamendments == 1' ng-click='showBillAmendments(ARRAYLOC, 0); $event.stopPropagation();'>
+			Hide Amendments
+		</div>
+		<!--<div class='bill-info-amendments2' ng-show='billmaster[ARRAYLOC].amendments.length == 0'>
+			No Amendments
+		</div>-->
+	</div>
+	<div class='bill-row-col-time'>
+		<!--<div class='bill-row-col-time-square'></div>
+		<div>[[ monthCode[billmaster[ARRAYLOC].bill.last_action.split('T')[0].split('-')[1] ] ]]<br>[[ billmaster[ARRAYLOC].bill.last_action.split('T')[0].split('-')[2] ]]<br>[[ billmaster[ARRAYLOC].bill.last_action.split('T')[0].split('-')[0] ]]</div>-->
+	</div>
+	<div class='bill-row-col-status' ng-click='changeBillDetail(2, ARRAYLOC)'>
+		<div ng-if='billmaster[ARRAYLOC].bill.enacted == \"True\"' class='bill-status-top-row' style='border:solid 2px #66cc00;'>
+			<div class='bill-status-top-row-left' style='background:#66cc00;'>
+				Enacted
+			</div>
+			<div class='bill-status-top-row-left-arrow-right' style='border-left:15px solid #66cc00;'></div>
+			<div class='bill-status-top-row-right'>
+				<div ng-if='billmaster[ARRAYLOC].billactions.length == 0'>
+					None
+				</div>
+				<div ng-if='billmaster[ARRAYLOC].billactions.length != 0'>
+					[[ billmaster[ARRAYLOC].billactions[0].text.substring(0, 30) ]]
+				</div>
+			</div>
+			<div ng-if='billmaster[ARRAYLOC].tracked == 0' ng-click='trackBill(1, billmaster[ARRAYLOC].bill.bill_id, ARRAYLOC); $event.stopPropagation();' class='bill-status-top-track-green'>
+				+
+			</div>
+			<div ng-if='billmaster[ARRAYLOC].tracked == 1' ng-click='trackBill(0, billmaster[ARRAYLOC].bill.bill_id, ARRAYLOC); $event.stopPropagation();' class='bill-status-top-track-red'>
+				-
+			</div>
+			<div ng-show='trackedloginbox == ARRAYLOC' class='bill-status-tracked-box z-index-3' ng-click='closeTrackedLoginBox(); $event.stopPropagation();'>
+				<div class='bill-vote-login-login' ng-click='showPopup(\"#login-flow-popup\", ARRAYLOC, 1)'>Login</div>
+				&nbspOr&nbsp
+				<div class='bill-vote-login-login' ng-click='showPopup(\"#login-flow-popup\", ARRAYLOC, 0)'>Signup</div>
+				&nbspto track this bill
+			</div>
+		</div>
+		<div ng-if='billmaster[ARRAYLOC].bill.active == \"True\" && billmaster[ARRAYLOC].bill.enacted == \"False\"' class='bill-status-top-row' style='border:solid 2px #66cc00;'>
+			<div class='bill-status-top-row-left' style='background:#66cc00;'>
+				Active
+			</div>
+			<div class='bill-status-top-row-left-arrow-right' style='border-left:15px solid #66cc00;'></div>
+			<div class='bill-status-top-row-right'>
+				<div ng-if='billmaster[ARRAYLOC].billactions.length == 0'>
+					None
+				</div>
+				<div ng-if='billmaster[ARRAYLOC].billactions.length != 0'>
+					[[ billmaster[ARRAYLOC].billactions[0].text.substring(0, 30) ]]
+				</div>
+			</div>
+			<div ng-if='billmaster[ARRAYLOC].tracked == 0' ng-click='trackBill(1, billmaster[ARRAYLOC].bill.bill_id, ARRAYLOC); $event.stopPropagation();' class='bill-status-top-track-green'>
+				+
+			</div>
+			<div ng-if='billmaster[ARRAYLOC].tracked == 1' ng-click='trackBill(0, billmaster[ARRAYLOC].bill.bill_id, ARRAYLOC); $event.stopPropagation();' class='bill-status-top-track-red'>
+				-
+			</div>
+			<div ng-show='trackedloginbox == ARRAYLOC' class='bill-status-tracked-box z-index-3' ng-click='closeTrackedLoginBox(); $event.stopPropagation();'>
+				<div class='bill-vote-login-login' ng-click='showPopup(\"#login-flow-popup\", ARRAYLOC, 1)'>Login</div>
+				&nbspOr&nbsp
+				<div class='bill-vote-login-login' ng-click='showPopup(\"#login-flow-popup\", ARRAYLOC, 0)'>Signup</div>
+				&nbspto track this bill
+			</div>
+		</div>
+		<div ng-if='billmaster[ARRAYLOC].bill.active == \"False\"' class='bill-status-top-row' style='border:solid 2px #ccc;'>
+			<div class='bill-status-top-row-left' style='background:#ccc;'>
+				Inactive
+			</div>
+			<div class='bill-status-top-row-left-arrow-right' style='border-left:15px solid #ccc;'></div>
+			<div class='bill-status-top-row-right'>
+				<div ng-if='billmaster[ARRAYLOC].billactions.length == 0'>
+					None
+				</div>
+				<div ng-if='billmaster[ARRAYLOC].billactions.length != 0'>
+					[[ billmaster[ARRAYLOC].billactions[0].text.substring(0, 30) ]]
+				</div>
+			</div>
+			<div ng-if='billmaster[ARRAYLOC].tracked == 0' ng-click='trackBill(1, billmaster[ARRAYLOC].bill.bill_id, ARRAYLOC); $event.stopPropagation();' class='bill-status-top-track-green'>
+				+
+			</div>
+			<div ng-if='billmaster[ARRAYLOC].tracked == 1' ng-click='trackBill(0, billmaster[ARRAYLOC].bill.bill_id, ARRAYLOC); $event.stopPropagation();' class='bill-status-top-track-red'>
+				-
+			</div>
+			<div ng-show='trackedloginbox == ARRAYLOC' class='bill-status-tracked-box z-index-3' ng-click='closeTrackedLoginBox(); $event.stopPropagation();'>
+				<div class='bill-vote-login-login' ng-click='showPopup(\"#login-flow-popup\", ARRAYLOC, 1)'>Login</div>
+				&nbspOr&nbsp
+				<div class='bill-vote-login-login' ng-click='showPopup(\"#login-flow-popup\", ARRAYLOC, 0)'>Signup</div>
+				&nbspto track this bill
+			</div>
+		</div>
+		<div style='padding:5px;'>
+			<div class='bill-status-title' ng-show='billmaster[ARRAYLOC].billtitle2 == \"\"'>
+				<span style='font-weight:bold;font-size:125%;'>[[ billmaster[ARRAYLOC].billtitle ]]</span>
+			</div>
+			<div class='bill-status-title' ng-show='billmaster[ARRAYLOC].billtitle2 != \"\"'>
+				<span style='font-weight:bold;font-size:125%;'>[[ billmaster[ARRAYLOC].billtitle ]]...</span>
+			</div>
+			<div class='bill-status-summary'>
+				[[ billmaster[ARRAYLOC].billsummary ]]&nbsp<span style='font-weight:bold;color:blue;'>more...</span>
+			</div>
+			<!--<div class='bill-status-tag-wrap'>
+				<div class='bill-status-tag z-index-3'>
+					Immigration
+				</div>
+				<div class='bill-status-tag z-index-3'>
+					Budget
+				</div>
+				<div class='bill-status-tag z-index-3'>
+					Racial Justice
+				</div>
+			</div>-->
+		</div>
+		<div class='bill-status-button-wrap'>
+			<div ng-show='billmaster[ARRAYLOC].bill.active == \"True\" && billmaster[ARRAYLOC].bill.enacted == \"False\"'>
+				<div class='bill-status-button' ng-click='showPopup(\"#bill-phonebook-popup\", ARRAYLOC); $event.stopPropagation();'><img src='/images/buttons/phone64x64.png'></div>
+			</div>
+			<div ng-show='billmaster[ARRAYLOC].bill.active != \"True\" || billmaster[ARRAYLOC].bill.enacted != \"False\"'>
+				<div class='bill-status-button2' ng-click='$event.stopPropagation();'><img src='/images/buttons/phone64x64.png'></div>
+			</div>
+			<div class='bill-status-button' ng-click='showPopup(\"#bill-scrnsht-popup\", ARRAYLOC); $event.stopPropagation();'><img src='/images/buttons/share_megaphone_black.png'></div>
+		</div>
+	</div>
+	<div class='bill-row-col-vote' ng-click='changeBillDetail(3, ARRAYLOC)'>
+		<div ng-if='billmaster[ARRAYLOC].votelist.housevote != \"No House Vote\" && billmaster[ARRAYLOC].votelist.HVoteAction == \"vote\"' class='bill-vote-half'>
+			<div class='bill-vote-top-row' style='border:solid 2px #66cc00;' ng-show='billmaster[ARRAYLOC].votelist.housevote.result == \"Passed\"'>
+				<span style='font-weight:bold;'>House:</span>&nbspPassed
+			</div>
+			<div class='bill-vote-top-row' style='border:solid 2px #CC0000;' ng-show='billmaster[ARRAYLOC].votelist.housevote.result != \"Passed\"'>
+				<span style='font-weight:bold;'>House:</span>&nbspFailed
+			</div>
+			<div class='bill-vote-main'>
+				<div style='margin:0 auto;'>Aye:&nbsp[[ billmaster[ARRAYLOC].votelist.housevote.breakdown.split(\"_\")[0] ]]</div>
+				<div style='margin:0 auto;'>Nay:&nbsp[[ billmaster[ARRAYLOC].votelist.housevote.breakdown.split(\"_\")[1] ]]</div><br>
+				<div style='margin:0 auto;font-size:14.5px;'>On:&nbsp[[ billmaster[ARRAYLOC].votelist.housevote.voted_at.split(\"T\")[0] ]]</div>
+			</div>
+			<div class='bill-vote-ayenay' ng-style='billmaster[ARRAYLOC].ayebackground' ng-click='billVote(1, billmaster[ARRAYLOC].bill.bill_id, ARRAYLOC); $event.stopPropagation();'>
+				<img class='bill-vote-ayenay-img'>
+				<div class='bill-vote-ayenay-text'>Aye</div>
+			</div>
+		</div>
+		<div ng-if='billmaster[ARRAYLOC].votelist.housevote != \"No House Vote\" && billmaster[ARRAYLOC].votelist.HVoteAction == \"act\"' class='bill-vote-half'>
+			<div class='bill-vote-top-row' style='border:solid 2px #66cc00;' ng-show='billmaster[ARRAYLOC].votelist.housevote.result == \"pass\"'>
+				<span style='font-weight:bold;'>House:</span>&nbspPassed
+			</div>
+			<div class='bill-vote-top-row' style='border:solid 2px #CC0000;' ng-show='billmaster[ARRAYLOC].votelist.housevote.result != \"pass\"'>
+				<span style='font-weight:bold;'>House:</span>&nbspFailed
+			</div>
+			<div class='bill-vote-main'>
+				<div style='margin:0 auto;'>[[ billmaster[ARRAYLOC].votelist.housevote.text ]]</div><br>
+				<div style='margin:0 auto;font-size:14.5px;'>On:&nbsp[[ billmaster[ARRAYLOC].votelist.housevote.acted_at.split(\"T\")[0] ]]</div>
+			</div>
+			<div class='bill-vote-ayenay' ng-style='billmaster[ARRAYLOC].ayebackground' ng-click='billVote(1, billmaster[ARRAYLOC].bill.bill_id, ARRAYLOC); $event.stopPropagation();'>
+				<img class='bill-vote-ayenay-img'>
+				<div class='bill-vote-ayenay-text'>Aye</div>
+			</div>
+		</div>
+		<div ng-if='billmaster[ARRAYLOC].votelist.housevote == \"No House Vote\"' class='bill-vote-half'>
+			<div class='bill-vote-top-row' style='border:solid 2px #ccc;'>
+				<span style='font-weight:bold;'>House:</span>&nbspN/A
+			</div>
+			<div class='bill-vote-main'>
+				<div style='margin:0 auto;text-align:center;'>[[billmaster[ARRAYLOC].votelist.housevote]]</div>
+			</div>
+			<div class='bill-vote-ayenay' ng-style='billmaster[ARRAYLOC].ayebackground' ng-click='billVote(1, billmaster[ARRAYLOC].bill.bill_id, ARRAYLOC); $event.stopPropagation();'>
+				<img class='bill-vote-ayenay-img'>
+				<div class='bill-vote-ayenay-text'>Aye</div>
+			</div>
+		</div>
+		<div ng-if='billmaster[ARRAYLOC].votelist.senatevote != \"No Senate Vote\" && billmaster[ARRAYLOC].votelist.SVoteAction == \"vote\"' class='bill-vote-half'>
+			<div class='bill-vote-top-row' style='border:solid 2px #66cc00;' ng-show='billmaster[ARRAYLOC].votelist.senatevote.result == \"Bill Passed\"'>
+				<span style='font-weight:bold;'>Senate:</span>&nbspPassed
+			</div>
+			<div class='bill-vote-top-row' style='border:solid 2px #CC0000;' ng-show='billmaster[ARRAYLOC].votelist.senatevote.result != \"Bill Passed\"'>
+				<span style='font-weight:bold;'>Senate:</span>&nbspFailed
+			</div>
+			<div class='bill-vote-main'>
+				<div style='margin:0 auto;'>Aye:&nbsp[[ billmaster[ARRAYLOC].votelist.senatevote.breakdown.split(\"_\")[0] ]]</div>
+				<div style='margin:0 auto;'>Nay:&nbsp[[ billmaster[ARRAYLOC].votelist.senatevote.breakdown.split(\"_\")[1] ]]</div><br>
+				<div style='margin:0 auto;font-size:14.5px;'>On:&nbsp[[ billmaster[ARRAYLOC].votelist.senatevote.voted_at.split(\"T\")[0] ]]</div>
+			</div>
+			<div class='bill-vote-ayenay' ng-style='billmaster[ARRAYLOC].naybackground' ng-click='billVote(-1, billmaster[ARRAYLOC].bill.bill_id, ARRAYLOC); $event.stopPropagation();'>
+				<img class='bill-vote-ayenay-img2'>
+				<div class='bill-vote-ayenay-text'>Nay</div>
+			</div>
+		</div>
+		<div ng-if='billmaster[ARRAYLOC].votelist.senatevote != \"No Senate Vote\" && billmaster[ARRAYLOC].votelist.SVoteAction == \"act\"' class='bill-vote-half'>
+			<div class='bill-vote-top-row' style='border:solid 2px #66cc00;' ng-show='billmaster[ARRAYLOC].votelist.senatevote.result == \"pass\"'>
+				<span style='font-weight:bold;'>Senate:</span>&nbspPassed
+			</div>
+			<div class='bill-vote-top-row' style='border:solid 2px #CC0000;' ng-show='billmaster[ARRAYLOC].votelist.senatevote.result != \"pass\"'>
+				<span style='font-weight:bold;'>Senate:</span>&nbspFailed
+			</div>
+			<div class='bill-vote-main'>
+				<div style='margin:0 auto;'>[[ billmaster[ARRAYLOC].votelist.senatevote.text ]]</div><br>
+				<div style='margin:0 auto;font-size:14.5px;'>On:&nbsp[[ billmaster[ARRAYLOC].votelist.senatevote.acted_at.split(\"T\")[0] ]]</div>
+			</div>
+			<div class='bill-vote-ayenay' ng-style='billmaster[ARRAYLOC].naybackground' ng-click='billVote(-1, billmaster[ARRAYLOC].bill.bill_id, ARRAYLOC); $event.stopPropagation();'>
+				<img class='bill-vote-ayenay-img2'>
+				<div class='bill-vote-ayenay-text'>Nay</div>
+			</div>
+		</div>
+		<div ng-if='billmaster[ARRAYLOC].votelist.senatevote == \"No Senate Vote\"' class='bill-vote-half'>
+			<div class='bill-vote-top-row' style='border:solid 2px #ccc;'>
+				<span style='font-weight:bold;'>Senate:</span>&nbspN/A
+			</div>
+			<div class='bill-vote-main'>
+				<div style='margin:0 auto;text-align:center;'>[[billmaster[ARRAYLOC].votelist.senatevote]]</div>
+			</div>
+			<div class='bill-vote-ayenay' ng-style='billmaster[ARRAYLOC].naybackground' ng-click='billVote(-1, billmaster[ARRAYLOC].bill.bill_id, ARRAYLOC); $event.stopPropagation();'>
+				<img class='bill-vote-ayenay-img2'>
+				<div class='bill-vote-ayenay-text'>Nay</div>
+			</div>
+		</div>
+		<div ng-show='voteloginbox == ARRAYLOC' class='bill-vote-login-box z-index-3' ng-click='closeVoteLoginBox(); $event.stopPropagation();'>
+			<div class='bill-vote-login-login' ng-click='showPopup(\"#login-flow-popup\", ARRAYLOC, 1)'>Login</div>
+			&nbspOr&nbsp
+			<div class='bill-vote-login-login' ng-click='showPopup(\"#login-flow-popup\", ARRAYLOC, 0)'>Signup</div>
+			&nbspto save your vote
+		</div>
+	</div>
+	<div class='bill-row-col-updown' ng-click='changeBillDetail()'>
+		test4
+	</div>
+</div>
+<!---ARRAYLOC---B---><!---->

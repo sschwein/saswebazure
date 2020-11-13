@@ -1,0 +1,106 @@
+{% extends "newbase.html" %}
+
+{% block content %}
+{#<script>
+    var w = window.innerWidth;
+    if (w < 1024){
+        window.location = "/nomobile";
+    }
+</script>#}
+<link rel='stylesheet' href='/css/usersystem.css'/>
+<link rel='stylesheet' href='/css/natdata.css'/>
+<script type="text/javascript" src="/js/controllers/NatDataController.js"></script>
+<div id='content-body' ng-controller="natdataController" ng-init='nat_data_init()'>
+	<div id='panel-wrapper'>
+		<div id='mob-left-panel-search-wrap'>
+			<h3 style='text-align:center;margin:15px auto 5px'>Data Search</h3>
+			<input type="text" class='text-search' ng-model='queryTerm' ng-model-options="{debounce: 500}" ng-change="runNatDataQuery(queryTerm)" placeholder='Data Set Search'>
+			<div class='z-index-3 search-panel' ng-show='queryTerm.length > 0'>
+				<div ng-repeat="results in searchResults track by $index">
+					<div class='search-result-head' ng-click='graphSwitcher(results.graphtype, results.docid, results.docnum, results.docsmooth, results.docdays)'>[[results.name]]</div>
+				</div>
+			</div>
+			<div id='mob-menu-close' ng-click='mob_menu_close(); $event.stopPropagation();' ng-show='mob_closer == 1'>X</div>
+		</div>
+		<div id='left-panel-wrapper' class='panel sidepanel'>
+			<div id='left-panel-switcher' ng-show='current_leftpanel != 3' style='width:100%;display:flex;'>
+				<div id='tab1-select' class='leftpanel-tab leftpanel-tab-selected' ng-click='select_left_panel_nat(1)'>Data Sets</div>
+				<div id='tab2-select' class='leftpanel-tab' ng-click='select_left_panel_nat(2)'>Time Period</div>
+			</div>
+			<div id='left-panel-search-wrap' ng-click='mob_menu_raise()'>
+				{#h3 style='text-align:center;margin:5px 0px'>Data Search</h3>#}
+				<img src='/images/search_mag_glass.png' class='text-search-img'>
+				<input type="text" class='text-search' ng-model='queryTerm' ng-model-options="{debounce: 500}" ng-change="runNatDataQuery(queryTerm)" placeholder='Data Set Search'>
+				<div class='z-index-3 search-panel' ng-show='queryTerm.length > 0'>
+					<div ng-repeat="results in searchResults track by $index">
+						<div class='search-result-head' ng-click='graphSwitcher(results.graphtype, results.docid, results.docnum, results.docsmooth, results.docdays)'>[[results.name]]</div>
+					</div>
+				</div>
+			</div>
+			<div id='left-panel' ng-show='current_leftpanel == 1' bind-unsafe-html="leftpanel"></div>
+			<div id='right-panel' ng-show='current_leftpanel == 2' bind-unsafe-html="rightpanel"></div>
+		</div>
+
+		<div id='center-panel' class='panel' bind-unsafe-html="centerpanel">
+		</div>
+	</div>
+	<div id='beta-feedback-wrap' ng-init='beta_feedback_init()'>
+		{#<div id='beta-feedback-button-wrap'>
+			<div id='beta-feedback-exclaimation' class='z-index-1' onclick='javascript:betaFeedbackSlider();return false;'>
+				!
+			</div>
+			<div id='beta-feedback-button' onclick='javascript:betaFeedbackSlider();return false;'>
+				<span>
+					<br>B<br>e<br>t<br>a<br><br><br>F<br>e<br>e<br>d<br>b<br>a<br>c<br>k
+				</span>
+			</div>
+		</div>#}
+		<div id='beta-feedback-intro'><h2 id='beta-feedback-intro-head'>Beta Feedback - We want your help improving this page. Start talking with the TGC team!</div>
+		<div id='beta-feedback-top-wrap'>
+			<div id='beta-feedback-questions' bind-unsafe-html="feedbackqs">
+			</div>
+			<div id='beta-feedback-responses' style='display:none;' bind-unsafe-html="feedbackrs">
+			</div>
+		</div>
+	</div>
+	<div id='beta-feedback-top-bar'>
+		<div id='bfeedqs' class='beta-feedback-top-button' style='background:#ec4670;z-index:2;' onclick='javascript:loadQuestions();return false;'>
+			Questions
+		</div>
+		<div id='bfeedrs' class='beta-feedback-top-button' style='background:#BB133E;z-index:1;' onclick='javascript:loadResponses();return false;'>
+			Responses
+		</div>
+	</div>
+
+
+<script type="text/javascript" src="/js/feedback.js"></script>
+</div>
+
+<script>
+	function useLocation() {
+	    navigator.geolocation.getCurrentPosition(gotGPS);
+	}
+	function gotGPS(position) {
+		lat = position.coords.latitude;
+		lng = position.coords.longitude;
+		$.post("/api/leftpanellegislators", {lat:lat, lng:lng}, function(data){
+		});
+	}
+
+	//helper functions
+	function center_panel_scroll(step){
+		console.log('center panel scroll')
+		$('.center-panel-section').each(function(index){
+			$('#center-panel-section-'+index).css('display', 'none')
+		});
+		console.log('#center-panel-section-'+step)
+		$('#center-panel-section-'+step).css('display', 'block')
+	}
+	var slider = '{{slideoutbetafeed}}';
+	if (slider == 'True') {
+		window.setTimeout(betaFeedbackSlider,500);
+		window.setTimeout(loadResponses, 500);
+	}
+</script>
+
+{% endblock %}

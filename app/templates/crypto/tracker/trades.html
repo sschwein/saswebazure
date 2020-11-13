@@ -1,0 +1,59 @@
+<div style='margin-bottom:20px;'>
+    <h3>Submit Trades</h3>
+    {#<div class="btn btn-outline-success top-right-btn" ng-click='refreshTradeList()'>Refresh Trades</div>#}
+</div>
+
+<form style='display:flex;margin:16px auto;width:700px;' enctype='multipart/form-data'>
+    <input class='api-input' type='file' placeholder='Submit Transaction History' fileread='file', name='file'>
+    <input class="btn btn-outline-success signup-btn api-input" type="submit" ng-click='submitTransHist()' value='Upload New Trades'>
+</form>
+<div class='error-text' ng-cloak>[[error]]</div>
+
+<div style='display:flex;'>
+    <table class="table sm-font">
+        <thead>
+            <tr>
+                <th colspan=5 class='text-center font-size-125'>BUYS</th>
+            </tr>
+            <tr>
+                <th>Coin Pair</th>
+                <th>Buying Price</th>
+                <th>Base Coin Amount</th>
+                <th>Trade Coin Amount</th>
+                <th>Transaction Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat='row in buysPanelData track by $index' style='background-color:[[row.background]];' ng-click='buyUnMatchedClick($index)'>
+                <th>[[row.coin_pair]]</th>
+                <td>[[row.price]]</td>
+                <td>[[row.source_coin_amount]]</td>
+                <td>[[row.destination_coin_amount]]</td>
+                <td>[[row.transaction_date.replace('T', ' ')]]</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table sm-font">
+        <thead>
+            <tr>
+                <th colspan=5 class='text-center font-size-125'>SELLS</th>
+            </tr>
+            <tr>
+                <th>Coin Pair</th>
+                <th>Selling Price</th>
+                <th>Base Coin Amount</th>
+                <th>Trade Coin Amount</th>
+                <th>Transaction Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat='row in sellsPanelData track by $index' style='background-color:[[row.background]];' ng-click='sellUnMatchedClick($index)'>
+                <th>[[row.coin_pair]]</th>
+                <td>[[row.price]]</td>
+                <td>[[row.destination_coin_amount]]</td>
+                <td>[[row.source_coin_amount]]</td>
+                <td>[[row.transaction_date.replace('T', ' ')]]</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

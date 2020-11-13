@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript" src="/js/controllers/admin.js"></script>
+
+<h1 class='page-title top-margin'>The Almighty Thing DB</h1>
+
+<div ng-controller='TDBTableController' ng-init='tdbTableInit()' ng-cloak>
+    <div class='thing-header-row'>
+        <span style='font-size:20px;line-height:20px;padding:5px;'>Table Name:</span>
+        <div id='tablelist'>
+            <div class='selection' ng-click='selTableList()' ng-clock>[[tablesel]]</div>
+            <div ng-show='showTableSel' style='border:1px solid black;margin-top:-1px;background:#fff;'>
+                <div class='selector-row' ng-repeat='name in tdbtablelist' value='[[name]]' ng-click='loadTable(name)'>[[name]]</div>
+            </div>
+        </div>
+        <div id='deleterows' class='btn btn-outline-success api-input ng-scope' ng-click='deleteRows()'>Delete</div>
+        <div id='refreshtable' class='btn btn-outline-success api-input ng-scope' ng-click='loadTable(tablesel)'>Refresh Table</div>
+        <div id='tabulatetablelist' class='btn btn-outline-success api-input ng-scope' ng-click='tdbTableUpdate()'>Tabulate Table List</div>
+    </div>
+    <div class='thing-table-wrap'>
+        <div class='thing-table'>
+            <div class='thing-row thing-row-head'>
+                <div class='thing-cell' style='width:25px;'>
+                    <input type='checkbox' ng-model='allchecked' ng-true-value='1' ng-false-value='0' ng-click='checkAll()'>
+                </div>
+                <div class='thing-cell thing-cell-head'>
+                    App Engine ID
+                </div>
+                <div class='thing-cell thing-cell-head'>
+                    Name
+                </div>
+                <div class='thing-cell thing-cell-head'>
+                    Created
+                </div>
+                <div class='thing-cell thing-cell-head'>
+                    Modified
+                </div>
+                <div class='thing-cell thing-cell-head2' ng-repeat='cell in table["h"]' ng-cloak>
+                    [[cell]]
+                </div>
+            </div><br>
+            <div class='thing-row thing-row-[[$index]]' ng-repeat='row in table["d"]' ng-cloak>
+                <div class='thing-cell' style='width:25px;' ng-click='selRow($index)'>
+                    <input type='checkbox' ng-model='checkboxModel[$index]' ng-true-value='1' ng-false-value='0'>
+                </div>
+                <div class='thing-cell2' ng-click='selRow($index)'>
+                    [[row["id"] ]]
+                </div>
+                <div class='thing-cell2' ng-click='selRow($index)'>
+                    [[row["name"] ]]
+                </div>
+                <div class='thing-cell2' ng-click='selRow($index)'>
+                    [[row["created"] ]]
+                </div>
+                <div class='thing-cell2' ng-click='selRow($index)'>
+                    [[row["modified"] ]]
+                </div>
+                <div class='thing-cell' ng-repeat='cell in table["h"]' ng-click='loadCellDetail($parent.$index, $index)'>
+                    [[row["cols"][cell] ]]
+                </div>
+            </div>
+            <div id='thing-cell-detail' ng-show='cellDetail != " "' ng-cloak>
+                <div id='popup-background2' ng-click='closeCellDetail()'></div>
+                <div class='popup-content2'>
+                    <div class='thing-cell-detail-header'>[[cellHead]]</div>
+                    <div ng-if='!cellDetailArray'>
+                        <div class='thing-cell-detail-text' ng-show='!editcell'>[[cellDetail]]</div>
+                        <textarea class='thing-cell-detail-text-edit' ng-show='editcell' ng-model='cellDetail'></textarea>
+                        <div class='thing-cell-detail-btn-wrap'>
+                            <div class='redbutton thing-cell-detail-btn' ng-show='!editcell' ng-click='editCellDetail()'>Edit</div>
+                            <div class='redbutton thing-cell-detail-btn' ng-show='editcell' ng-click='saveCellDetail(cellDetail)'>Save</div>
+                            <div class='thing-cell-detail-error' ng-show='editcell && editerror'>Failed</div>
+                            <div class='thing-cell-detail-error' ng-show='!editcell && editsuccess'>Success</div>
+                            <div class='redbutton thing-cell-detail-btn' ng-click='closeCellDetail()'>Close</div>
+                        </div>
+                    </div>
+                    <div ng-if='cellDetailArray'>
+                        <div ng-repeat='arr in cellDetailArr track by $index'>
+                            <div class='thing-cell-detail-text' ng-show='!editcell'>[[cellDetailArr[$index] ]]</div>
+                            <textarea class='thing-cell-detail-text-edit' ng-show='editcell' ng-model='cellDetailArr[$index]'></textarea>
+                        </div>
+                        <div class='thing-cell-detail-btn-wrap'>
+                            <div class='redbutton thing-cell-detail-btn' ng-show='!editcell' ng-click='editCellDetail()'>Edit</div>
+                            <div class='redbutton thing-cell-detail-btn' ng-show='editcell' ng-click='saveCellDetail(cellDetailArr)'>Save</div>
+                            <div class='thing-cell-detail-error' ng-show='editcell && editerror'>Failed</div>
+                            <div class='thing-cell-detail-error' ng-show='!editcell && editsuccess'>Success</div>
+                            <div class='redbutton thing-cell-detail-btn' ng-click='closeCellDetail()'>Close</div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.thing-header-row{display:flex;width:95%;height:30px;margin:20px 2.5%;position:relative;}
+#tabulatetablelist{padding:5px;height:32px;right:0px;position:absolute;width:150px;}
+#deleterows{padding:5px;height:32px;right:310px;position:absolute;width:80px;}
+#refreshtable{padding:5px;height:32px;right:170px;position:absolute;width:120px;}
+#tablelist{width:200px;margin-left:30px;}
+.selection{font-size:16px;text-align:center;line-height:16px;cursor:pointer;border:solid 1px black;padding:6px;}
+.selector-row{font-size:16px;text-align:center;line-height:24px;cursor:pointer;margin:8px 0;}
+.selector-row:hover{background:#e9e9e9;}
+.thing-table-wrap{border:1px solid #e9e9e9;width:calc(100% - 40px);margin-left:20px;background:#fff;overflow-x:auto;}
+.thing-table{width:100%;display:table;}
+.thing-row{height:28px;width:100%;display:inline-flex;margin:2px 0px;}
+.thing-row-head{background:#ddd;padding-bottom:3px;margin-top:2px;}
+.thing-cell2{margin-left:5px;width:150px;overflow:hidden;white-space:nowrap;}
+.thing-cell{margin-left:5px;width:150px;overflow:hidden;white-space:nowrap;cursor:pointer;}
+.thing-cell-head{font-weight:bold;cursor:auto;}
+.thing-cell-head2{font-weight:bold;color:#15c;}
+.thing-cell:hover{background:#ccf;}
+.thing-cell-head:hover{background:none;}
+.thing-cell-head2:hover{background:none;}
+.thing-cell-detail-text{width:100%;background:#e8e8e8;}
+.thing-cell-detail-text-edit{width:100%;background:white;border:solid 1px black;padding:0;}
+.popup-content2{left:50%;top:50%;transform:translate(-50%,-50%);position:fixed;min-height:250px;width:500px;padding:20px 20px 52px;background:white;border:1px solid #ccc;}
+#popup-background2{opacity:.7;background-repeat:repeat;height:100%;width:100%;}
+#thing-cell-detail{opacity:1;height:100vh;width:100%;position:fixed;left:0;top:0;z-index:850;}
+.thing-cell-detail-btn{width:100px;position:relative;padding:5px;margin:0 auto;}
+.thing-cell-detail-error{font-weight:bold;color:red;position:relative;padding:5px;margin-left:10px;}
+.thing-cell-detail-btn-wrap{width:calc(100% - 40px);position:absolute;bottom:10px;height:32px;display:flex;}
+.thing-cell-detail-header{width:100%;text-align:center;font-size:125%;font-weight:bold;margin-bottom:10px;}
+</style>
+
+{% endblock %}

@@ -1,0 +1,214 @@
+{% extends "api/api_template.html" %}
+
+{% block api_title %}
+    Congress API
+{% endblock %}
+
+{% block overview %}
+    The Congress API is a collection of bills and related data about the United States Congress. You can retrieve information about bills, members, votes, amendments, and other congressional activity.<br><br>
+    The following data is available through the Congress API:<br><br>
+    <ul>
+        <li>
+            Bill data: This includes standard bill infomration, titles, subjects, amendments, related bills, actions, and votes. Bills can be retrieved by sponsor and/or cosponsor. Data spans from 1993 through the present.
+        </li>
+    </ul>
+    Data in the Congress API is updated hourly
+{% endblock %}
+{% block api_key %}
+    <a class='btn btn-outline-success api-doc-btn' href='/api/signup' target='_self'>Get an API Key</a>
+{% endblock %}
+{% block terms %}
+    <div>
+        This API is provided under a <a href='https://creativecommons.org/licenses/by-sa/4.0/legalcode' target='_new'>Creative Commons Attribution-ShareAlike 4.0 International Public License</a>
+    </div>
+    <br>
+    <div>
+        All users are required to abide by the following terms of use for data provided by the API:
+    </div>
+    <br>
+    <ul>
+        <li>If you use the data for publication, you must cite Steven Schweinhart.</li>
+        <li>If you reuse, adapt, distribute, etc... any data, you must also use a compatible CC license.</li>
+        <li>I do not guarantee the accuracy or completeness of the data. You acknowledge that the data may contain errors and omissions.</li>
+        <li>I are not obligated to update the data, but in the event I do, you are solely responsible for checking this site for any updates.</li>
+        <li>You will indemnify, hold harmless, and defend Steven Schweinhart from and against any claims arising out of your use of the data.</li>
+    </ul>
+{% endblock %}
+{% block auth %}
+    <div>
+        To use the Congress API, you must sign up for an API key. Usage is limited to 1 request every 10 seconds (rate limits are subject to change). The API key must be included in all API requests to the server, as a header:
+    </div>
+    <br>
+    <div>
+        <code class='hljs'>
+            <span class='hljs-attribute'>X-API-Key</span>: <span class="hljs-string">MY_API_KEY</span>
+        </code>
+    </div>
+    <br>
+    <div>
+        Sample code snippets:
+    </div>
+    <br>
+    <div class='ml-4'>
+        <h6 style='text-align:left;'>curl:</h6>
+        <code class='hljs'>
+            curl <span class="hljs-string">"api_endpoint_here"</span> -H <span class="hljs-string">"X-API-Key: MY_API_KEY"</span>
+        </code>
+        <br>
+        <h6 style='text-align:left;'>python:</h6>
+        <code class='hljs'>
+            import requests<br>
+            url = <span class="hljs-string">'https://sschwein.com/api/congress/v1/status'</span><br>
+            headers = {<span class="hljs-attribute">'X-API-Key'</span>: <span class="hljs-string">MY_API_KEY</span>}<br>
+            r = requests.get(url, <span class="hljs-attribute">headers</span> = headers)
+        </code>
+    </div>
+    <br>
+    <div>
+        Make sure to replace <code><span class="hljs-string">MY_API_KEY</span></code> with your API key.
+    </div>
+{% endblock %}
+{% block requests %}
+    The Congress API follows a RESTful style. GET requests are the only requests that are supported. the URI for all requests follow this format:<br><br>
+    <code>https://sschwein.com/api/congress/{version}/{endpoint}?{parameters}</code><br><br>
+    The current version is <code>v1</code>. A list of endpoints are listed below.
+{% endblock %}
+{% block endpoints %}
+    * denotes a required parameter<br>
+    ** denotes the default value<br><br>
+    <table class='error-table ml-4'>
+        <tr>
+            <th style='width:200px;'>Endpoint</th>
+            <th>Information</th>
+        </tr>
+        <tr>
+            <th>/{congress}/{id}</th>
+            <td>
+                Gets any item (bill, amendment, resolution, etc) by the ID listed on congress.gov. This endpoint will only return 1 item at a time. Note that if <code style='color:#333;'><span class='hljs-attribute'>content</span>: <span class="hljs-string">all</span></code> is passed in, all related information about a bill will be returned.
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                Parameters:
+                <ul>
+                    <li>
+                        <code class='hljs'>
+                            <span class='hljs-attribute'>content</span>: <span class="hljs-string">basic**</span> / <span class="hljs-string">standard</span> / <span class="hljs-string">all</span>
+                        </code>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>/bill/search</th>
+            <td>
+                Search for bills by some query. Response will contain up to the 20 most relevant results.
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                Parameters:
+                <ul>
+                    <li>
+                        <code class='hljs'>
+                            <span class='hljs-attribute'>content</span>: <span class="hljs-string">basic</span>
+                        </code>
+                    </li>
+                    <li>
+                        <code class='hljs'>
+                            <span class='hljs-attribute'>query*</span>: <span class="hljs-string">query_text</span>
+                        </code>
+                    </li>
+                    <li>
+                        <code class='hljs'>
+                            <span class='hljs-attribute'>limit</span>: <span class="hljs-string">1</span>-<span class="hljs-string">20**</span>
+                        </code>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>/{congress}/bill</th>
+            <td>
+                This is the endpoint to retrieve a list of bills by a date range. Response will contain up to 20 results.
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                Parameters:
+                <ul>
+                    <li>
+                        <code class='hljs'>
+                            <span class='hljs-attribute'>content</span>: <span class="hljs-string">basic</span>
+                        </code>
+                    </li>
+                    <li>
+                        <code class='hljs'>
+                            <span class='hljs-attribute'>start_date*</span>: <span class="hljs-string">MM-DD-YYYY</span>
+                        </code>
+                    </li>
+                    <li>
+                        <code class='hljs'>
+                                <span class='hljs-attribute'>end_date*</span>: <span class="hljs-string">MM-DD-YYYY</span>
+                        </code>
+                    </li>
+                    <li>
+                        <code class='hljs'>
+                            <span class='hljs-attribute'>sort</span>: <span class="hljs-string">last_action_asc</span> / <span class="hljs-string">last_action_desc**</span> / <span class="hljs-string">introduced_asc</span> / <span class="hljs-string">introduced_desc</span>
+                        </code>
+                    </li>
+                    <li>
+                        <code class='hljs'>
+                            <span class='hljs-attribute'>limit</span>: <span class="hljs-string">1</span>-<span class="hljs-string">20**</span>
+                        </code>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+{% block responses %}
+    The API provides JSON responses for all requests. Responses are typically limited to 20 results. Pagination is not currently supported. 
+{% endblock %}
+{% block errors %}
+    The Congress API uses the following error codes:<br><br>
+    <table class='error-table ml-4'>
+        <tr>
+            <th style='width:100px;'>Code</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>400</td>
+            <td>Bad Request - Your request is lacking the X-API-Key header, or the url is incorrect.</td>
+        </tr>
+        <tr>
+            <td>403</td>
+            <td>Forbidden - Your API key is invalid</td>
+        </tr>
+        <tr>
+            <td>404</td>
+            <td>Not Found - We could not find the data requested</td>
+        </tr>
+        <tr>
+            <td>422</td>
+            <td>Unprocessable Entity - Parameters that were passed in were incorrent.</td>
+        </tr>
+        <tr>
+            <td>429</td>
+            <td>Too Many Requests - Rate Limit Exceeded, wait 10 seconds and try again</td>
+        </tr>
+        <tr>
+            <td>500</td>
+            <td>Internal Server Error - Something went wrong on our end, please try again later</td>
+        </tr>
+    </table>
+{% endblock %}
+{% block data_sources %}
+    All data is scraped from the Library of Congress via <a href='https://congress.gov/' target='_new'>congress.gov.</a>
+{% endblock %}
+{% block update_schedule %}
+    There is no set schedule for updates, the API checks congress.gov for new data once an hour. This means there will be at most an hour's lag between data being posted on congress.gov and it appearing here.
+{% endblock %}

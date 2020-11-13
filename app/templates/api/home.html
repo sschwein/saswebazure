@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript" src="/js/controllers/api.js"></script>
+<link rel="stylesheet" href="/css/api.css">
+
+<div id='api-wrapper' class='w-1440-container' ng-controller='APIController'>
+    <h1 style='margin-top:50px;'>API's Home Page</h1>
+    <div style='text-align:center;font-size:125%;'>Here you can find all of the api's that are currently available, or under development.</div>
+    <div class='api-single-wrap'>
+        <h2>Congress API (v1 beta)</h2>
+        <h4>Overview</h4>
+        <div>This API is currently a collection of bill data from <a href='https://www.congress.gov/' target='_new'>congress.gov</a>. The date range spans from the 103rd congress (1993) to the present, and includes both legislation from the House of Representatives and the Senate.</div>
+        <h4>Endpoint</h4>
+        <div>This API follows a RESTful format. You can access this api through this endpoint: <span class='api-doc-background'>https://sschwein.com/api/congress/v1/</span></div>
+        <div style='display:flex;margin:30px 0;'>
+            <a class='btn btn-outline-success api-doc-btn' href='/api/signup' target='_self'>Get an API Key</a>
+            <a class='btn btn-outline-success api-doc-btn' href='/api/congress' target='_self'>Documentation</a>
+        </div>
+    </div>
+    <div class='api-single-wrap'>
+        <h2>Cryptocurrency API (under development)</h2>
+        <h4>Overview</h4>
+        <div>Get latest information about crytpo currency markets and trading information here. Will be expanded to include prediction algorithms later.</div>
+        <h4>Endpoint</h4>
+        <div>This API follows a RESTful format. You can access this api through this endpoint: <span class='api-doc-background'>https://sschwein.com/api/crypto/v1/candle</span></div>
+        <div style='display:flex;margin:30px 0;'>
+            <a class='btn btn-outline-success api-doc-btn' href='/api/signup' target='_self'>Get an API Key</a>
+            <a class='btn btn-outline-success api-doc-btn' href='/api/crypto' target='_self'>Documentation</a>
+        </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

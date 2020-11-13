@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id='ushead'>
+	<div id='profile'>
+		<div class='profileplaceholder'></div>
+		{{betausername}}
+	</div>
+</div>
+<h1 style='text-align:center;margin-top:30px;'>Welcome to TGC's Beta!</h1>
+<div class='row' style='min-height:600px'>
+	<div id='user-info-wrapper'>
+		<h3>Pages in Development</h3>
+		<ul>
+			<li type='circle'><a href='/reps'>Legislative Branch - My Reps Interactive</a></li>
+			<li type='circle'><a href='/executive/internal'>Executive Branch - Domestic Affairs Tab</a></li>
+			<li type='circle'><a href='/executive/status'>Executive Branch - Presidential Status Tab</a></li>
+		</ul>
+		<h3>Future Pages</h3>
+		<ul>
+			<li type='circle'>Legislative Branch - 4 additional tabs</li>
+			<li type='circle'>Executive Branch - 2 additional tabs</li>
+			<li type='circle'>Judicial Branch - ~3 tabs</li>
+			<li type='circle'>Election Tracking - ~3 tabs</li>
+			<li type='circle'>Topic Pages/Quizzes</li>
+			<li type='circle'>Political Ideology Quiz</li>
+		</ul>
+	</div>
+	<div id='post-area'>
+		<div class='post-wrapper'>
+			<h2>Feedback!</h2>
+			<p>Coming soon we will implement a feedback system to let you, the beta user, interact with us! We will let you know more here, and probably in a couple other places (social media) when we do.</p>
+		</div>
+		<div class='post-wrapper'>
+			<h2>Posts from the TGC team</h2>
+			<h3>June 11th, 2016</h3>
+			<p>Changes to the site this week have been minimal, as we're mainly getting new designs laid out. One thing I have done is add beta level access to the site. If you are a beta user and logged in, pages accessible to the beta users but not the public show up as blue links in the nav bar. This will allow beta users to see pages that are being built. --Steven</p><br>
+			<h3>June 3rd, 2016</h3>
+			<p>So second post here, a little further information. We will continue to develop pages here at a consistent pace. You can probably expect to see blog posts like this one 1-2 times a week letting everyone know what the status on our development is. As far as site updates go, minor changes will occur on an almost daily basis. Most of these will be things like bug fixes. New pages/interactives will appear every 1-2 weeks. --Steven</p><br>
+			<h3>June 2nd, 2016</h3>
+			<p>Hey everyone, This is the first post I'm doing for the beta users. As you can see, on the left column there is a list of pages available to access. The first set of pages are ones that are available to beta users to interact with and suggest feedback for. The second set of pages are what is next in line to be developed, and are not linked because they either don't exist, or are just being started and are largely incomplete. The right column will contain information about the beta. This can be posts from the team (like this one), plans for our next steps, or other things the team would like to share with everyone. I hope you all enjoy! --Steven</p>
+		</div>
+		{#<div class='post-wrapper'>
+			<h1>What is TGC and what can we accomplish with it?</h1>
+			<h2>overview of the question</h2>
+			<p>Link to the forum discussion</p>
+		</div>
+		<div class='post-wrapper'>
+			<h1>Try out our political ideology quiz</h1>
+			<h2>See where you stand relative to current political movements</h2>
+			<h2>See which candidates align with your values</h2>
+		</div>#}
+	</div>
+</div>
+
+<style>
+	#ushead{position:relative;background:white;border-bottom:solid 1px #d9d9d9;display:flex;justify-content:space-between;padding:80px 50px 3px;}
+	#switcher ul{margin:0;padding:0;}
+	#switcher ul li{display:inline;padding:0 10px;font-size:16px;}
+	#feedback-wrapper{display:none;}
+	#head{display:none;}
+	.row{max-width:1280px;position:relative;margin:25px auto;width:90vw;display:flex;flex-direction:row;justify-content:space-between;flex-wrap:wrap;}
+	#user-info-wrapper{position:relative;background:white;border:solid 1px #d9d9d9;width:25%;padding:25px;height:100%;}
+	#post-area{position:relative;width:calc(75% - 100px);}
+	.post-wrapper{background:white;border:solid 1px #d9d9d9;padding:25px;margin-bottom:50px;}
+	.post-wrapper h3{padding-left:8px;}
+	.post-wrapper p{padding-left:8px;}
+	#footer{display:none !important;}
+	#footfoot{position:relative;background:white;border-top:solid 1px #d9d9d9;}
+</style>
+{% endblock %}

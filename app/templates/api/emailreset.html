@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript" src="/js/controllers/usersystem.js"></script>
+<link rel="stylesheet" href="/css/api.css">
+
+<div id='signup-wrapper' ng-controller='UserSystemController' ng-init='resetInit("{{username}}")'>
+    <form id='signup-form'>
+        <h3>Password Reset - {{username}}</h3>
+        <input type="password" class='ng-hide' ng-model="newuser.pw" name="pw" placeholder='Password' />
+        <input class='api-input' type="password" ng-model="newuser.duppw" name="duppw" placeholder='Password' /><br>
+        <input class='api-input' type="password" ng-model="newuser.pwconf" name="pwconf" placeholder='Confirm Password' /><br>
+        <div class='error-text' ng-cloak>[[error]]</div>
+        <input class="btn btn-outline-success signup-btn api-input" type="submit" ng-click='submitReset()' value='Submit'>
+    </form>
+</div>
+
+{% endblock %}

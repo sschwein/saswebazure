@@ -1,0 +1,417 @@
+<h2 ng-if='big2hide != 1' class='home-head-text' style='text-align:left;margin-bottom:10px;max-width:620px;margin:10px auto;'>{{ title }}</h2>
+
+{#<div ng-if='big2hide != 1' class='headtext home-head-text'>
+{{ typedescription }}
+</div>#}
+
+<div class='data-persistence' id='legislatorshareinfo{{bioguideid}}'>{{ sharejson }}</div>
+
+<div class='legislator-panel center-panel-module z-index-3'>
+	<div class='legislator-panel-head'>
+		<div class='legislator-basic-info {{politicianparty1}}-background'>
+			<div class='lbi-socialmedia'>
+				<a href='https://www.facebook.com/{{politicianfacebook_id}}' target='blank'><img src='/images/rep-card-facebook.png' class='lbi-sm-img'></a>
+				<a href='https://www.twitter.com/{{politiciantwitter_id}}' target='blank'><img src='/images/rep-card-twitter.png' class='lbi-sm-img'></a>
+				<a href='{{politicianwebsite}}' target='blank'><img src='/images/rep-card-web.png' class='lbi-sm-img'></a>
+			</div>
+			<div class='lbi-profile-pic' ng-if="'{{rep_type}}' == 'hr'" style='background:url(/images/headshots/{{rep_pic}}.png);background-size:100%'></div>
+			<div class='lbi-profile-pic' ng-if="'{{rep_type}}' == 'ss'" style='background:url(/images/headshots/{{rep_pic}}.png);background-size:100%'></div>
+			<div class='lbi-profile-pic' ng-if="'{{rep_type}}' == 'js'" style='background:url(/images/headshots/{{rep_pic}}.png);background-size:100%'></div>
+			<div class='lbi-text'><h3 class='pol-name-wrap'>{{politicianname}}</h3>District: {{politiciandistrict}}<br>Party: {{politicianparty}}<br>Years In Office: {{ 2016 - politicianfyio }}<br><h3 style='font-size:95%' class='pol-name-wrap'>Phone:&nbsp{{politicianphone}}</h3></div>
+		</div>
+		<div class='legislator-panel-key'>
+			<h3 class='keytitle'>Key</h3>
+			<div class='statgradientbackground'></div>
+			<table id='statdata'>
+				<tr class='dtrow'>
+					<td class='drepstat3'>
+						<div class='statkeytext'>Best</div>
+					</td> 
+				</tr>
+				<tr class='dtrow'>
+					<td class='drepstat3'>
+						<div class='statkeytext'>Average</div>
+					</td> 
+				</tr>
+				<tr class='dtrow'>
+					<td class='drepstat3'>
+						<div class='statkeytext'>Worst</div>
+					</td> 
+				</tr>
+			</table>
+			<table id='statdata2' style='display:none;width:calc(100% - 150px)'>
+				<tr class='dtrow' style='width:100%;'>
+					<td class='drepstat3' >
+						<div class='statkeytext'>Best</div>
+					</td> 
+					<td class='drepstat3'>
+						<div class='statkeytext'>Average</div>
+					</td> 
+					<td class='drepstat3'>
+						<div class='statkeytext'>Worst</div>
+					</td> 
+				</tr>
+			</table>
+			<div id='greykey-wrap' style='display:flex;margin-left:20px;'>
+				<div id='greykey'></div>
+				Not Ranked
+			</div>
+		</div>
+	</div>
+
+	<div id='legstatlist' class='legislator-stat-wrapper-pie'>
+		<div id='scrpartyloyaltychart{{bioguideid}}'>
+			<div class='scrnsht-tgc-logo-wrap'>
+				<div class='scrnsht-hide scrnsht-tgc-logo'><img src='/images/gclogo_newflame.png' width=30 height=40 style='margin-left:5px;'></div>
+				<div class='lbi-profile-pic2 scrnsht-hide {{politicianparty1}}-border' style='background:url(/images/headshots/{{rep_pic}}.png);background-size:100%'></div>
+				<div class='temp-scrnsht-wrap'>
+					<h2 id='namescrpartyloyaltychart{{bioguideid}}' class='scrnsht-mob-title'>Party Loyalty<span class='scrnsht-hide3'>&nbsp-&nbsp{{ partyloyalty_value }}%</span></h2>
+				<div class='scrnsht-hide2 temp-scrnsht-wrap2'>
+					<h2 style='margin:20px 0px;' class='{{politicianparty1}}-color'>{{politicianname}}:</h2>
+					<h1 style='text-align:center;margin:20px 20px;'>{{ partyloyalty_value }}%</h1>
+				</div></div>
+			</div>
+			<div id='partyloyaltychart{{bioguideid}}' class='legislator-stat-pie-wrapper'></div>
+		</div>
+		<div id='scrattendancechart{{bioguideid}}'>
+			<div class='scrnsht-tgc-logo-wrap'>
+				<div class='scrnsht-hide scrnsht-tgc-logo'><img src='/images/gclogo_newflame.png' width=30 height=40 style='margin-left:5px;'></div>
+				<div class='lbi-profile-pic2 scrnsht-hide {{politicianparty1}}-border' style='background:url(/images/headshots/{{rep_pic}}.png);background-size:100%'></div>
+				<div class='temp-scrnsht-wrap'>
+					<h2 id='namescrattendancechart{{bioguideid}}' class='scrnsht-mob-title'>Attendance Record<span class='scrnsht-hide3'>&nbsp-&nbsp{{ attendance_value }}%</span></h2>
+				<div class='scrnsht-hide2 temp-scrnsht-wrap2'>
+					<h2 style='margin:20px 0px;' class='{{politicianparty1}}-color'>{{politicianname}}:</h2>
+					<h1 style='text-align:center;margin:20px 20px;'>{{ attendance_value }}%</h1>
+				</div></div>
+			</div>
+			<div id='attendancechart{{bioguideid}}' class='legislator-stat-pie-wrapper'></div>
+		</div>
+		<div id='screffectivenesschart{{bioguideid}}'>
+			<div class='scrnsht-tgc-logo-wrap'>
+				<div class='scrnsht-hide scrnsht-tgc-logo'><img src='/images/gclogo_newflame.png' width=30 height=40 style='margin-left:5px;'></div>
+				<div class='lbi-profile-pic2 scrnsht-hide {{politicianparty1}}-border' style='background:url(/images/headshots/{{rep_pic}}.png);background-size:100%'></div>
+				<div class='temp-scrnsht-wrap'>
+					<h2 id='namescreffectivenesschart{{bioguideid}}' class='scrnsht-mob-title'>Percent of Sponsored and Cosponsored Bills Enacted<span class='scrnsht-hide3'>&nbsp-&nbsp{{ performance_value }}%</span></h2>
+				<div class='scrnsht-hide2 temp-scrnsht-wrap2'>
+					<h2 style='margin:20px 0px;' class='{{politicianparty1}}-color'>{{politicianname}}:</h2>
+					<h1 style='text-align:center;margin:20px 20px;'>{{ performance_value }}%</h1>
+				</div></div>
+			</div>
+			<div id='effectivenesschart{{bioguideid}}' class='legislator-stat-pie-wrapper'></div>
+		</div>
+		<div id='scrsponsoredchart{{bioguideid}}'>
+			<div class='scrnsht-tgc-logo-wrap'>
+				<div class='scrnsht-hide scrnsht-tgc-logo'><img src='/images/gclogo_newflame.png' width=30 height=40 style='margin-left:5px;'></div>
+				<div class='lbi-profile-pic2 scrnsht-hide {{politicianparty1}}-border' style='background:url(/images/headshots/{{rep_pic}}.png);background-size:100%'></div>
+				<div class='temp-scrnsht-wrap'>
+					<h2 id='namescrsponsoredchart{{bioguideid}}' class='scrnsht-mob-title'>Number of Sponsored Bills<span class='scrnsht-hide3'>&nbsp-&nbsp{{ sponsored_value }}</span></h2>
+				<div class='scrnsht-hide2 temp-scrnsht-wrap2'>
+					<h2 style='margin:20px 0px;' class='{{politicianparty1}}-color'>{{politicianname}}:</h2>
+					<h1 style='text-align:center;margin:20px 20px;'>{{ sponsored_value }}</h1>
+				</div></div>
+			</div>
+			<div id='sponsoredchart{{bioguideid}}' class='legislator-stat-pie-wrapper'></div>
+		</div>
+		<div id='scrcosponsoredchart{{bioguideid}}'>
+			<div class='scrnsht-tgc-logo-wrap'>
+				<div class='scrnsht-hide scrnsht-tgc-logo'><img src='/images/gclogo_newflame.png' width=30 height=40 style='margin-left:5px;'></div>
+				<div class='lbi-profile-pic2 scrnsht-hide {{politicianparty1}}-border' style='background:url(/images/headshots/{{rep_pic}}.png);background-size:100%'></div>
+				<div class='temp-scrnsht-wrap'>
+					<h2 id='namescrcosponsoredchart{{bioguideid}}' class='scrnsht-mob-title'>Number of Cosponsored Bills<span class='scrnsht-hide3'>&nbsp-&nbsp{{ cosponsored_value }}</span></h2>
+				<div class='scrnsht-hide2 temp-scrnsht-wrap2'>
+					<h2 style='margin:20px 0px;' class='{{politicianparty1}}-color'>{{politicianname}}:</h2>
+					<h1 style='text-align:center;margin:20px 20px;'>{{ cosponsored_value }}</h1>
+				</div></div>
+			</div>
+			<div id='cosponsoredchart{{bioguideid}}' class='legislator-stat-pie-wrapper'></div>
+		</div>
+		<div id='screnactedchart{{bioguideid}}'>
+			<div class='scrnsht-tgc-logo-wrap'>
+				<div class='scrnsht-hide scrnsht-tgc-logo'><img src='/images/gclogo_newflame.png' width=30 height=40 style='margin-left:5px;'></div>
+				<div class='lbi-profile-pic2 scrnsht-hide {{politicianparty1}}-border' style='background:url(/images/headshots/{{rep_pic}}.png);background-size:100%'></div>
+				<div class='temp-scrnsht-wrap'>
+					<h2 id='namescrenactedchart{{bioguideid}}' class='scrnsht-mob-title'>Number of Sponsored and Cosponsored Bills Enacted<span class='scrnsht-hide3'>&nbsp-&nbsp{{ enacted_value }}</span></h2>
+				<div class='scrnsht-hide2 temp-scrnsht-wrap2'>
+					<h2 style='margin:20px 0px;' class='{{politicianparty1}}-color'>{{politicianname}}:</h2>
+					<h1 style='text-align:center;margin:20px 20px;'>{{ enacted_value }}</h1>
+				</div></div>
+			</div>
+			<div id='enactedchart{{bioguideid}}' class='legislator-stat-pie-wrapper'></div>
+		</div>
+		<div style='height:50px;' class='legislator-ranking-master-wrap'>
+			{#<div ng-show='showMyRating{{bioguideid}}' class='legislator-title-text2'>Personal Rating</div>
+			<div id='scrmyuserrating{{bioguideid}}'>
+				<div class='scrnsht-tgc-logo-wrap'>
+					<div class='scrnsht-hide scrnsht-tgc-logo'><img src='/images/gclogo_newflame.png' width=30 height=40 style='margin-left:5px;'></div>
+					<div class='lbi-profile-pic2 scrnsht-hide {{politicianparty1}}-border' style='background:url(/images/headshots/{{rep_pic}}.png);background-size:100%'></div>
+					<div class='temp-scrnsht-wrap'>
+						<h2 id='namescrmyuserrating{{bioguideid}}' class='scrnsht-mob-title'>My Performance Rating</h2>
+					<div ng-controller='ShareController' class='scrnsht-hide2 temp-scrnsht-wrap2'>
+						<h2 style='margin:20px 0px;' class='{{politicianparty1}}-color'>{{politicianname}}:</h2>
+						<h1 id='myratingscrntext{{bioguideid}}' style='text-align:center;margin:20px 20px;'></h1>
+					</div></div>
+				</div>
+				<!--<div id='myuserrating2{{bioguideid}}' ng-show='showMyRating{{bioguideid}}' class='legislator-stat-pie-wrapper'></div>-->
+				<ul id='myuserrating{{bioguideid}}' class='rep-rating'>
+					<li id='lijob1' ng-style='listitem{{bioguideid}}[0][0]'>
+						<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("0", "1", "{{bioguideid}}")'>
+					</li><li id='lijob2' ng-style='listitem{{bioguideid}}[0][1]'>
+						<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("0", "2", "{{bioguideid}}")'>
+					</li><li id='lijob3' ng-style='listitem{{bioguideid}}[0][2]'>
+						<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("0", "3", "{{bioguideid}}")'>
+					</li><li id='lijob4' ng-style='listitem{{bioguideid}}[0][3]'>
+						<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("0", "4", "{{bioguideid}}")'>
+					</li><li id='lijob5' ng-style='listitem{{bioguideid}}[0][4]'>
+						<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("0", "5", "{{bioguideid}}")'>
+					</li>
+				</ul>
+				<input id='myuserrating{{bioguideid}}temp' value='0' type='hidden'>
+			</div>
+			{#<div class='legislator-ranking-row-wrap'>
+				<div class='legislator-ranking-ind-wrap'>
+					<div class='legislator-ranking-text'>Is your representative meeting basic job requirements?<br></div>
+					<ul id='myuserrating{{bioguideid}}' class='rep-rating'>
+						<li id='lijob1' ng-style='listitem{{bioguideid}}[0][0]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("0", "1", "{{bioguideid}}")'>
+						</li><li id='lijob2' ng-style='listitem{{bioguideid}}[0][1]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("0", "2", "{{bioguideid}}")'>
+						</li><li id='lijob3' ng-style='listitem{{bioguideid}}[0][2]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("0", "3", "{{bioguideid}}")'>
+						</li><li id='lijob4' ng-style='listitem{{bioguideid}}[0][3]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("0", "4", "{{bioguideid}}")'>
+						</li><li id='lijob5' ng-style='listitem{{bioguideid}}[0][4]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("0", "5", "{{bioguideid}}")'>
+						</li>
+					</ul>
+				</div>
+				<div class='legislator-ranking-ind-wrap home-mobile-hide'>
+					<div class='legislator-ranking-text'>How appropriately do you feel your representative handles themselves in public settings?<br></div>
+					<ul class='rep-rating'>
+						<li id='lipub1' ng-style='listitem{{bioguideid}}[1][0]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("1", "1", "{{bioguideid}}")'>
+						</li><li id='lipub2' ng-style='listitem{{bioguideid}}[1][1]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("1", "2", "{{bioguideid}}")'>
+						</li><li id='lipub3' ng-style='listitem{{bioguideid}}[1][2]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("1", "3", "{{bioguideid}}")'>
+						</li><li id='lipub4' ng-style='listitem{{bioguideid}}[1][3]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("1", "4", "{{bioguideid}}")'>
+						</li><li id='lipub5' ng-style='listitem{{bioguideid}}[1][4]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("1", "5", "{{bioguideid}}")'>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class='legislator-ranking-row-wrap'>
+				<div class='legislator-ranking-ind-wrap home-mobile-hide'>
+					<div class='legislator-ranking-text'>How well does your representative listen to the concerns and values of all of their constituents?<br></div>
+					<ul class='rep-rating'>
+						<li id='lilis1' ng-style='listitem{{bioguideid}}[2][0]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("2", "1", "{{bioguideid}}")'>
+						</li><li id='lilis1' ng-style='listitem{{bioguideid}}[2][1]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("2", "2", "{{bioguideid}}")'>
+						</li><li id='lilis1' ng-style='listitem{{bioguideid}}[2][2]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("2", "3", "{{bioguideid}}")'>
+						</li><li id='lilis1' ng-style='listitem{{bioguideid}}[2][3]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("2", "4", "{{bioguideid}}")'>
+						</li><li id='lilis1' ng-style='listitem{{bioguideid}}[2][4]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("2", "5", "{{bioguideid}}")'>
+						</li>
+					</ul>
+				</div>
+				<div class='legislator-ranking-ind-wrap home-mobile-hide'>
+					<div class='legislator-ranking-text'>How well does your representative represent you?<br></div>
+					<ul class='rep-rating'>
+						<li id='lime1' ng-style='listitem{{bioguideid}}[3][0]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("3", "1", "{{bioguideid}}")'>
+						</li><li id='lime2' ng-style='listitem{{bioguideid}}[3][1]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("3", "2", "{{bioguideid}}")'>
+						</li><li id='lime3' ng-style='listitem{{bioguideid}}[3][2]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("3", "3", "{{bioguideid}}")'>
+						</li><li id='lime4' ng-style='listitem{{bioguideid}}[3][3]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("3", "4", "{{bioguideid}}")'>
+						</li><li id='lime5' ng-style='listitem{{bioguideid}}[3][4]'>
+							<img src='/images/buttons/star64x64.png' height=50 width=50 ng-click='highlightstats("3", "5", "{{bioguideid}}")'>
+						</li>
+					</ul>
+				</div>
+			</div>#}
+			<div ng-controller='ShareController' ng-click='showLegScrnsht("{{bioguideid}}", "{{politicianname}}")' class='share-leg-button z-index-1'>
+				<img class='share-megaphone-circle' src='/images/buttons/share_megaphone.png'>
+			</div>
+			{#<div ng-show='isloggedin' ng-click='saveRepRating("{{bioguideid}}")' class='redbutton submit-button'>Save</div>
+			<div ng-show='!isloggedin' ng-click='saveRepRating("{{bioguideid}}")' class='redbutton submit-button'>Rate</div>
+			<div ng-click='expandHomeMobileHide()' class='redbutton submit-button2'>[[homeMobileShownText]]</div>
+			<div ng-show='notloggedinsubmit' id='notloggedinsubmit' >Login or Signup to be able to save your ratings</div>#}
+		</div>
+	</div>
+	<div style='height:20px;text-align:center;color:#CCCCCC'>**Rep data covers 1/1/2011 - 11/21/2016**</div>
+</div>
+
+<script>
+	google.charts.load('current', {'packages':['corechart']});
+	// Draw the pie chart and bar chart when Charts is loaded.
+	google.charts.setOnLoadCallback(loadData);
+	function loadData(){
+		//party loyalty
+		var graphHeight = 0
+		var graphWidth = 0
+		if ($(window).width() >= 1024){
+			graphHeight = 40
+			graphWidth = parseInt($('#legstatlist').css('width').substring(-2))
+		} else if ($(window).width() >= 760){
+			graphHeight = 40
+			graphWidth = parseInt($('#legstatlist').css('width').substring(-2))
+		} else {
+			graphHeight = 30
+			graphWidth = window.location.width - 15;
+		}
+		var data = google.visualization.arrayToDataTable([
+			['Key', 'Percent of Votes Wtih Party', 'Percent of Votes Against Party'],
+			[{#'{{partyloyalty_value}}%'#}'', parseFloat({{ partyloyalty_value }}), 100.0 - parseFloat({{ partyloyalty_value }})]
+		]);
+		if ('{{politicianparty}}' == 'R'){
+			var piechart_options = {width:graphWidth,
+				height:graphHeight,
+				dataOpacity: 0.8,
+				isStacked: true,
+				colors: ['#cbb3ff', '#fff'],
+				legend: 'none',
+				vAxis: {textStyle: {fontSize: 14, bold: true}}}
+		} else {
+			var piechart_options = {width:graphWidth,
+				height:graphHeight,
+				dataOpacity: 0.8,
+				isStacked: true,
+				colors: ['#cbb3ff', '#fff'],
+				legend: 'none',
+				vAxis: {textStyle: {fontSize: 14, bold: true}}}
+		}
+		var piechart = new google.visualization.BarChart(document.getElementById('partyloyaltychart{{bioguideid}}'));
+		piechart.draw(data, piechart_options);
+		//attendance
+		if ({{attendance_value}} == 100) {
+			var data = google.visualization.arrayToDataTable([
+				['Key', 'Percent of Votes Made', 'Percent of Votes Missed'],
+				[{#parseInt({{attendance_value}}).toString().concat('%')#}'', parseInt({{ attendance_value }}), 100 - parseInt({{ attendance_value }})]
+			]);
+		} else {
+			var data = google.visualization.arrayToDataTable([
+				['Key', 'Percent of Votes Made', 'Percent of Votes Missed'],
+				[{#'{{attendance_value}}%'#}'', parseFloat({{ attendance_value }}), 100.0 - parseFloat({{ attendance_value }})]
+			]);
+		}
+		var piechart_options = {width:graphWidth,
+			height:graphHeight,
+			dataOpacity: 0.6,
+			isStacked: true,
+			colors: ['{{ attendance_back }}', '#fff'],
+			legend: 'none',
+			vAxis: {textStyle: {fontSize: 14, bold: true}}}
+		var piechart = new google.visualization.BarChart(document.getElementById('attendancechart{{bioguideid}}'));
+		piechart.draw(data, piechart_options);
+		//effectiveness
+		var data = google.visualization.arrayToDataTable([
+			['Key', 'Effectiveness Compared to Other Politicians', 'N/A'],
+			[{#'{{performance_value}}%'#}'', parseFloat({{ performance_sub }}), 100.0 - parseFloat({{ performance_sub }})]
+		]);
+		var piechart_options = {width:graphWidth,
+			height:graphHeight,
+			dataOpacity: 0.6,
+			isStacked: true,
+			colors: ['{{performance_back}}', '#fff'],
+			legend: 'none',
+			vAxis: {textStyle: {fontSize: 14, bold: true}}}
+		var piechart = new google.visualization.BarChart(document.getElementById('effectivenesschart{{bioguideid}}'));
+		piechart.draw(data, piechart_options);
+		//sponsored
+		var data = google.visualization.arrayToDataTable([
+			['Key', 'Sponsored Bills Compared to Other Politicians', 'N/A'],
+			[{#'{{sponsored_value}}'#}'', parseFloat({{ sponsored_sub }}), 100.0 - parseFloat({{ sponsored_sub }})]
+		]);
+		var piechart_options = {width:graphWidth,
+			height:graphHeight,
+			dataOpacity: 0.6,
+			isStacked: true,
+			colors: ['{{ sponsored_back }}', '#fff'],
+			legend: 'none',
+			vAxis: {textStyle: {fontSize: 14, bold: true}}}
+		var piechart = new google.visualization.BarChart(document.getElementById('sponsoredchart{{bioguideid}}'));
+		piechart.draw(data, piechart_options);
+		//cosponsored
+		var data = google.visualization.arrayToDataTable([
+			['Key', 'Cosponsored Bills Compared to Other Politicians', 'N/A'],
+			[{#'{{cosponsored_value}}'#}'', parseFloat({{ cosponsored_sub }}), 100.0 - parseFloat({{ cosponsored_sub }})]
+		]);
+		var piechart_options = {width:graphWidth,
+			height:graphHeight,
+			dataOpacity: 0.6,
+			isStacked: true,
+			colors: ['{{cosponsored_back}}', '#fff'],
+			legend: 'none',
+			vAxis: {textStyle: {fontSize: 14, bold: true}}}
+		var piechart = new google.visualization.BarChart(document.getElementById('cosponsoredchart{{bioguideid}}'));
+		piechart.draw(data, piechart_options);
+		//enacted
+		var data = google.visualization.arrayToDataTable([
+			['Key', 'Enacted Bills Compared to Other Politicians', 'N/A'],
+			[{#'{{ enacted_value }}'#}'', parseFloat({{ enacted_sub }}), 100.0 - parseFloat({{ enacted_sub }})]
+		]);
+		var piechart_options = {width:graphWidth,
+			height:graphHeight,
+			dataOpacity: 0.6,
+			isStacked: true,
+			colors: ['{{ enacted_back }}', '#fff'],
+			legend: 'none',
+			vAxis: {textStyle: {fontSize: 14, bold: true}}}
+		var piechart = new google.visualization.BarChart(document.getElementById('enactedchart{{bioguideid}}'));
+		piechart.draw(data, piechart_options);
+	}
+
+	var avgrating = 0.0
+
+	function myRating(input, bioid){
+		avgrating = 0.0
+		var count = 0
+		for (i = 0; i < 4; i++){
+			if (input[i] != 0){
+				avgrating += input[i]
+				count += 1
+			}
+		}
+		/*avgrating = 10.0 * (parseFloat(parseFloat(avgrating) / parseFloat(count)) - 1.0) / 4.0
+		var outputcolor = ''
+		if (avgrating >= 5.0) {
+			var tempdec = avgrating - 5.0
+			tempdec = 255 - parseInt((tempdec*(255.0/5.0)))
+			var temphex = tempdec.toString(16)
+			if (temphex.length == 1) {
+				temphex = '0'.concat(temphex)
+			}
+			outputcolor = '#'.concat(temphex,'ff00')
+		}
+		else {
+			var tempdec = avgrating
+			tempdec = parseInt((tempdec*(255.0/10.0)))
+			var temphex = tempdec.toString(16)
+			if (temphex.length == 1){
+				temphex = '0'.concat(temphex)
+			}
+			outputcolor = '#ff'.concat(temphex, '00')
+		}
+		var data = google.visualization.arrayToDataTable([
+			['Key', 'My Personal Rating', 'N/A'],
+			[avgrating.toString(), avgrating, 10.0 - avgrating]
+		]);
+		var piechart_options = {width:parseInt($('#legstatlist').css('width').substring(-2))-20,
+			height:50,
+			dataOpacity: 0.6,
+			isStacked: true,
+			colors: [outputcolor, '#fff'],
+			legend: 'none',
+			vAxis: {textStyle: {fontSize: 14, bold: true}}}
+		var piechart = new google.visualization.BarChart(document.getElementById('myuserrating'.concat(bioid)));
+		piechart.draw(data, piechart_options);
+		$('#myratingscrntext'.concat(bioid)).html(avgrating.toString().concat('/10'))
+		console.log(avgrating)*/
+	}
+</script>
