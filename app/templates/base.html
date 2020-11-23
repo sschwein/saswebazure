@@ -4,37 +4,21 @@
         <title>Steven Schweinhart - Web Developer/Data Engineer</title>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
 
+        <!--JS-->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+        <!-- Load React. -->
+        <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
         <!--CSS-->
         <link rel="stylesheet" href="/static/css/basic/bootstrap.css" {#integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"#}>
         <link rel="stylesheet" href="/static/css/basic/base.css">
-
-        <!--JS-->
-        <script type="text/javascript" src="/static/js/basic/master.js"></script>
-        <!--<script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
-        <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src='/js/html2canvas.js'></script>
-        <script type="text/javascript" src='/js/googlecharts.js'></script>
-        {#<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">#}
-        <script type="text/javascript" src='/js/angular-1.6.4.min.js'></script>
-        <script type="text/javascript" src='/js/angular-1.6.4-cookies.js'></script>
-        <script type="text/javascript" src='/js/angular-1.6.4-animate.min.js'></script>
-        <script type="text/javascript" src='/js/angular-1.6.4-aria.min.js'></script>
-        <script type="text/javascript" src='/js/angular-1.6.4-messages.min.js'></script>
-        <script type="text/javascript" src='/js/angular-material.js'></script>-->
-        <script>
-            var app = angular.module('app', ['ngMaterial', 'ngMessages', 'ngCookies'], function($interpolateProvider, $locationProvider) {
-                $interpolateProvider.startSymbol('[[');
-                $interpolateProvider.endSymbol(']]');
-                $locationProvider.html5Mode({
-                    enabled: true,
-                    requireBase: false
-                });
-            });
-        </script>
-        <script type="text/javascript" src="/static/js/basic/newbase.js"></script>
-        <script type="text/javascript" src="/static/js/controllers/app.js"></script>
     </head>
-    <body ng-app='app' ng-controller='BaseController'>
+    <body>
         <nav id='header' class="navbar navbar-toggleable-md navbar-light bg-med-grey">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -45,15 +29,15 @@
                     <li class="nav-item">
                         <a class="nav-link disabled" {#href="/api"#} href="#" target='_self'>API</a>
                     </li>
-                    <li class="nav-item" ng-show='{{is_logged_in}} == 0' ng-cloak>
+                    <!-- <li class="nav-item" ng-show='{{is_logged_in}} == 0' ng-cloak>
                         <a class="nav-link disabled" {#href="/login"#} href="#" target='_self'>Login</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link disabled" {#href="/congress/bill/search"#} href="#" target='_self'>Bill Search</a>
                     </li>
-                    <li class="nav-item" ng-show='{{is_logged_in}} == 1' ng-cloak>
+                    <!-- <li class="nav-item" ng-show='{{is_logged_in}} == 1' ng-cloak>
                         <a class="nav-link disabled" {#href="/api/profile"#} href="#" target='_self'>Profile</a>
-                    </li>
+                    </li> -->
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search">
@@ -71,9 +55,5 @@
         <div id='footer'>
             © 2020 Steven Schweinhart, All Rights Reserved. Icons from: <a href="http://www.onlinewebfonts.com">Online Web Fonts</a>
         </div>
-
-        <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script> -->
     </body>
 </html>
