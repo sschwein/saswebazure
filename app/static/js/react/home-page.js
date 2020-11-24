@@ -6,6 +6,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var homeSliderElements = {
     0: React.createElement(
         'div',
@@ -64,7 +66,7 @@ var homeSliderElements = {
         ),
         React.createElement(
             'div',
-            { className: 'd-flex', style: { width: "700px", margin: "0 auto" } },
+            _defineProperty({ className: 'd-flex' }, 'className', 'interests-panel-list-wrapper'),
             React.createElement(
                 'div',
                 { className: 'interests-panel-section' },
@@ -84,22 +86,37 @@ var homeSliderElements = {
                     React.createElement(
                         'li',
                         null,
+                        'Natural Language Processing'
+                    ),
+                    React.createElement(
+                        'li',
+                        null,
+                        'Serverless Computing'
+                    ),
+                    React.createElement(
+                        'li',
+                        null,
+                        'NoSQL Databases'
+                    ),
+                    React.createElement(
+                        'li',
+                        null,
                         'Python'
                     ),
                     React.createElement(
                         'li',
                         null,
-                        'Hadoop'
+                        'Microsoft Azure'
+                    ),
+                    React.createElement(
+                        'li',
+                        null,
+                        'Databricks'
                     ),
                     React.createElement(
                         'li',
                         null,
                         'Pyspark'
-                    ),
-                    React.createElement(
-                        'li',
-                        null,
-                        'Google Cloud Platform'
                     ),
                     React.createElement(
                         'li',
@@ -110,11 +127,6 @@ var homeSliderElements = {
                         'li',
                         null,
                         'Javascript/AJAX'
-                    ),
-                    React.createElement(
-                        'li',
-                        null,
-                        'AngularJs'
                     ),
                     React.createElement(
                         'li',
@@ -157,7 +169,17 @@ var homeSliderElements = {
                     React.createElement(
                         'li',
                         null,
+                        'Google Cloud Platform'
+                    ),
+                    React.createElement(
+                        'li',
+                        null,
                         'Machine Learning'
+                    ),
+                    React.createElement(
+                        'li',
+                        null,
+                        'AngularJs'
                     ),
                     React.createElement(
                         'li',
@@ -167,22 +189,12 @@ var homeSliderElements = {
                     React.createElement(
                         'li',
                         null,
-                        'C'
-                    ),
-                    React.createElement(
-                        'li',
-                        null,
-                        'C++'
+                        'C/C++'
                     ),
                     React.createElement(
                         'li',
                         null,
                         'C#'
-                    ),
-                    React.createElement(
-                        'li',
-                        null,
-                        'Blockchain'
                     ),
                     React.createElement(
                         'li',
@@ -460,112 +472,108 @@ var homeSliderElements = {
         'div',
         { className: 'slider-panel' },
         React.createElement(
-            'table',
+            'div',
             { id: 'vol-table' },
             React.createElement(
-                'tbody',
-                null,
+                'div',
+                { className: 'vol-row' },
                 React.createElement(
-                    'tr',
-                    null,
+                    'div',
+                    { className: 'vol-cell' },
                     React.createElement(
-                        'td',
-                        null,
-                        React.createElement(
-                            'h5',
-                            { className: 'home-section-subhead3 font-orange' },
-                            'Kentuckians for the Commonwealth'
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'home-section-subhead1 font-green' },
-                            'Member and Work Team Coordinator'
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'home-section-subhead2 font-grey' },
-                            'Since 2017; Louisville, KY'
-                        )
+                        'h5',
+                        { className: 'home-section-subhead3 font-orange' },
+                        'Kentuckians for the Commonwealth'
                     ),
                     React.createElement(
-                        'td',
-                        null,
-                        React.createElement(
-                            'h5',
-                            { className: 'home-section-subhead3 font-orange' },
-                            'Code Louisville'
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'home-section-subhead1 font-green' },
-                            'Python Cohort Mentor'
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'home-section-subhead2 font-grey' },
-                            '2017-2018; Louisville, KY'
-                        )
+                        'div',
+                        { className: 'home-section-subhead1 font-green' },
+                        'Member and Work Team Coordinator'
                     ),
                     React.createElement(
-                        'td',
-                        null,
-                        React.createElement(
-                            'h5',
-                            { className: 'home-section-subhead3 font-orange' },
-                            'Josie Raymond for KY State House'
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'home-section-subhead1 font-green' },
-                            'Campaign Volunteer'
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'home-section-subhead2 font-grey' },
-                            '2018; Jeffersontown, KY'
-                        )
+                        'div',
+                        { className: 'home-section-subhead2 font-grey' },
+                        'Since 2017; Louisville, KY'
                     )
                 ),
                 React.createElement(
-                    'tr',
-                    null,
+                    'div',
+                    { className: 'vol-cell' },
                     React.createElement(
-                        'td',
-                        null,
-                        React.createElement(
-                            'h5',
-                            { className: 'home-section-subhead3 font-orange' },
-                            'Ryan Fenwick for Mayor'
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'home-section-subhead1 font-green' },
-                            'Campaign Volunteer'
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'home-section-subhead2 font-grey' },
-                            '2018; Louisville, KY'
-                        )
+                        'h5',
+                        { className: 'home-section-subhead3 font-orange' },
+                        'Code Louisville'
                     ),
                     React.createElement(
-                        'td',
-                        null,
-                        React.createElement(
-                            'h5',
-                            { className: 'home-section-subhead3 font-orange' },
-                            'Boy Scouts of America'
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'home-section-subhead1 font-green' },
-                            'Eagle Scout Project'
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'home-section-subhead2 font-grey' },
-                            '2010; Louisville, KY'
-                        )
+                        'div',
+                        { className: 'home-section-subhead1 font-green' },
+                        'Python Cohort Mentor'
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'home-section-subhead2 font-grey' },
+                        '2017-2018; Louisville, KY'
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'vol-cell' },
+                    React.createElement(
+                        'h5',
+                        { className: 'home-section-subhead3 font-orange' },
+                        'Josie Raymond for KY State House'
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'home-section-subhead1 font-green' },
+                        'Campaign Volunteer'
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'home-section-subhead2 font-grey' },
+                        '2018; Jeffersontown, KY'
+                    )
+                )
+            ),
+            React.createElement(
+                'div',
+                { className: 'vol-row' },
+                React.createElement(
+                    'div',
+                    { className: 'vol-cell' },
+                    React.createElement(
+                        'h5',
+                        { className: 'home-section-subhead3 font-orange' },
+                        'Ryan Fenwick for Mayor'
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'home-section-subhead1 font-green' },
+                        'Campaign Volunteer'
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'home-section-subhead2 font-grey' },
+                        '2018; Louisville, KY'
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'vol-cell' },
+                    React.createElement(
+                        'h5',
+                        { className: 'home-section-subhead3 font-orange' },
+                        'Boy Scouts of America'
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'home-section-subhead1 font-green' },
+                        'Eagle Scout Project'
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'home-section-subhead2 font-grey' },
+                        '2010; Louisville, KY'
                     )
                 )
             )
@@ -592,6 +600,11 @@ var MenuContainer = function (_React$Component) {
         }, _this.homeSliderSelect = function (index) {
             _this.setState({ activeIndex: index });
             ReactDOM.render(homeSliderElements[index], document.getElementById('home-slider-panel-wrap'));
+            document.getElementById("home-slider-panel").scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth"
+            });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -600,10 +613,10 @@ var MenuContainer = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 'div',
-                { style: { display: "flex" } },
+                { className: 'd-flex' },
                 React.createElement(MenuClickable, { index: 0, name: 'Skills', isActive: this.state.activeIndex === 0, onClick: this.homeSliderSelect }),
                 React.createElement(MenuClickable, { index: 1, name: 'Experience', isActive: this.state.activeIndex === 1, onClick: this.homeSliderSelect }),
-                React.createElement(MenuClickable, { index: 2, name: 'Volunteer Work', isActive: this.state.activeIndex === 2, onClick: this.homeSliderSelect })
+                React.createElement(MenuClickable, { index: 2, name: 'Volunteerism', isActive: this.state.activeIndex === 2, onClick: this.homeSliderSelect })
             );
         }
     }]);
