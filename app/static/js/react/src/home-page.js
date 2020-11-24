@@ -17,18 +17,20 @@ var homeSliderElements = {
                     <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/spark_tint.png' /></div>
                 </div>
             </div>
-            <div className='d-flex' style={{width: "700px",margin: "0 auto"}}>
+            <div className='d-flex' className="interests-panel-list-wrapper">
                 <div className='interests-panel-section'>
                     <h4>Day to Day Experience</h4>
                     <ul>
                         <li>Data Engineering</li>
+                        <li>Natural Language Processing</li>
+                        <li>Serverless Computing</li>
+                        <li>NoSQL Databases</li>
                         <li>Python</li>
-                        <li>Hadoop</li>
+                        <li>Microsoft Azure</li>
+                        <li>Databricks</li>
                         <li>Pyspark</li>
-                        <li>Google Cloud Platform</li>
                         <li>HTML5/CSS3</li>
                         <li>Javascript/AJAX</li>
-                        <li>AngularJs</li>
                         <li>Git</li>
                         <li>REST APIs</li>
                         <li>Full Stack Web Development</li>
@@ -39,12 +41,12 @@ var homeSliderElements = {
                 <div className='interests-panel-section'>
                     <h4>Other Experience</h4>
                     <ul>
+                        <li>Google Cloud Platform</li>
                         <li>Machine Learning</li>
+                        <li>AngularJs</li>
                         <li>Java</li>
-                        <li>C</li>
-                        <li>C++</li>
+                        <li>C/C++</li>
                         <li>C#</li>
-                        <li>Blockchain</li>
                         <li>Cyber Security</li>
                     </ul>
                 </div>
@@ -134,39 +136,37 @@ var homeSliderElements = {
     ),
     2: (
         <div className='slider-panel'>
-            <table id='vol-table'>
-                <tbody>
-                    <tr>
-                        <td>
-                            <h5 className='home-section-subhead3 font-orange'>Kentuckians for the Commonwealth</h5>
-                            <div className='home-section-subhead1 font-green'>Member and Work Team Coordinator</div>
-                            <div className='home-section-subhead2 font-grey'>Since 2017; Louisville, KY</div>
-                        </td>
-                        <td>
-                            <h5 className='home-section-subhead3 font-orange'>Code Louisville</h5>
-                            <div className='home-section-subhead1 font-green'>Python Cohort Mentor</div>
-                            <div className='home-section-subhead2 font-grey'>2017-2018; Louisville, KY</div>
-                        </td>
-                        <td>
-                            <h5 className='home-section-subhead3 font-orange'>Josie Raymond for KY State House</h5>
-                            <div className='home-section-subhead1 font-green'>Campaign Volunteer</div>
-                            <div className='home-section-subhead2 font-grey'>2018; Jeffersontown, KY</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h5 className='home-section-subhead3 font-orange'>Ryan Fenwick for Mayor</h5>
-                            <div className='home-section-subhead1 font-green'>Campaign Volunteer</div>
-                            <div className='home-section-subhead2 font-grey'>2018; Louisville, KY</div>
-                        </td>
-                        <td>
-                            <h5 className='home-section-subhead3 font-orange'>Boy Scouts of America</h5>
-                            <div className='home-section-subhead1 font-green'>Eagle Scout Project</div>
-                            <div className='home-section-subhead2 font-grey'>2010; Louisville, KY</div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id='vol-table'>
+                <div className="vol-row">
+                    <div className="vol-cell">
+                        <h5 className='home-section-subhead3 font-orange'>Kentuckians for the Commonwealth</h5>
+                        <div className='home-section-subhead1 font-green'>Member and Work Team Coordinator</div>
+                        <div className='home-section-subhead2 font-grey'>Since 2017; Louisville, KY</div>
+                    </div>
+                    <div className="vol-cell">
+                        <h5 className='home-section-subhead3 font-orange'>Code Louisville</h5>
+                        <div className='home-section-subhead1 font-green'>Python Cohort Mentor</div>
+                        <div className='home-section-subhead2 font-grey'>2017-2018; Louisville, KY</div>
+                    </div>
+                    <div className="vol-cell">
+                        <h5 className='home-section-subhead3 font-orange'>Josie Raymond for KY State House</h5>
+                        <div className='home-section-subhead1 font-green'>Campaign Volunteer</div>
+                        <div className='home-section-subhead2 font-grey'>2018; Jeffersontown, KY</div>
+                    </div>
+                </div>
+                <div className="vol-row">
+                    <div className="vol-cell">
+                        <h5 className='home-section-subhead3 font-orange'>Ryan Fenwick for Mayor</h5>
+                        <div className='home-section-subhead1 font-green'>Campaign Volunteer</div>
+                        <div className='home-section-subhead2 font-grey'>2018; Louisville, KY</div>
+                    </div>
+                    <div className="vol-cell">
+                        <h5 className='home-section-subhead3 font-orange'>Boy Scouts of America</h5>
+                        <div className='home-section-subhead1 font-green'>Eagle Scout Project</div>
+                        <div className='home-section-subhead2 font-grey'>2010; Louisville, KY</div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 };
@@ -182,13 +182,18 @@ class MenuContainer extends React.Component {
             homeSliderElements[index],
             document.getElementById('home-slider-panel-wrap')
         );
+        document.getElementById("home-slider-panel").scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+        });
     };
   
     render() {
-        return <div style={{display: "flex"}}>
+        return <div className='d-flex'>
             <MenuClickable index={0} name="Skills" isActive={ this.state.activeIndex===0 } onClick={ this.homeSliderSelect } />
             <MenuClickable index={1} name="Experience" isActive={ this.state.activeIndex===1 } onClick={ this.homeSliderSelect }/>
-            <MenuClickable index={2} name="Volunteer Work" isActive={ this.state.activeIndex===2 } onClick={ this.homeSliderSelect }/>
+            <MenuClickable index={2} name="Volunteerism" isActive={ this.state.activeIndex===2 } onClick={ this.homeSliderSelect }/>
         </div>
     }
 }
