@@ -1,55 +1,37 @@
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
 
-
-var homeSliderElements = {
-    0: (
+homeSliderElements = {
+    0:(
         <div className='slider-panel'>
-            <div className='interests-panel-section-whole'>
-                <div className='interests-panel-image-row'>
-                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/angularjs_tint.png' /></div>
-                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/docker_tint.png' /></div>
-                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/gcp_tint.png' /></div>
-                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/git_tint.png' /></div>
+            <div className="d-flex w-700-center">
+                <div className="col-md-4 mx-auto">
+                    <img className='headshot' height="280" width="200" src='/static/images/basic/profile.jpg' />
                 </div>
-                <div className='interests-panel-image-row'>
-                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/hadoop_tint.png' /></div>
-                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/java_tint.png' /></div>
-                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/python_tint.png' /></div>
-                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/spark_tint.png' /></div>
+                <div className="col-md-4 mx-auto">
+                    <h4 className="text-left">Details</h4>
+                    <p className="font-size-110">
+                        <strong>Name:</strong><br />
+                        <span>Steven Schweinhart</span><br />
+                        <strong>Age:</strong><br />
+                        <span>{ getAge("1992/09/23") } years</span><br />
+                        <strong>Location:</strong><br />
+                        <span>Louisville, KY, USA</span>
+                    </p>
                 </div>
             </div>
-            <div className='d-flex' className="interests-panel-list-wrapper">
-                <div className='interests-panel-section'>
-                    <h4>Day to Day Experience</h4>
-                    <ul>
-                        <li>Data Engineering</li>
-                        <li>Natural Language Processing</li>
-                        <li>Serverless Computing</li>
-                        <li>NoSQL Databases</li>
-                        <li>Python</li>
-                        <li>Microsoft Azure</li>
-                        <li>Databricks</li>
-                        <li>Pyspark</li>
-                        <li>HTML5/CSS3</li>
-                        <li>Javascript/AJAX</li>
-                        <li>Git</li>
-                        <li>REST APIs</li>
-                        <li>Full Stack Web Development</li>
-                        <li>Azure Dev Ops</li>
-                        <li>Docker</li>
-                    </ul>
-                </div>
-                <div className='interests-panel-section'>
-                    <h4>Other Experience</h4>
-                    <ul>
-                        <li>Google Cloud Platform</li>
-                        <li>Machine Learning</li>
-                        <li>AngularJs</li>
-                        <li>Java</li>
-                        <li>C/C++</li>
-                        <li>C#</li>
-                        <li>Cyber Security</li>
-                    </ul>
-                </div>
+            <div className='w-700-center text-justify font-size-125'>
+                <p className='my-5'>I am a software engineer based in Louisville KY that enjoys building tools to solve problems. This includes building video games for school projects to this website.</p>
+                <p className='my-5'>Over the past decade as a programmer, I have built up a collection of projects scattered across my many computers. This has made it difficult to showcase my work at its best. I plan on using this domain to host all of my ideas in one place. </p>
+                <p className='my-5'>When I'm not sitting in front of a screen I find myself exploring on my bike, distracted online, enjoying a bottle of wine, or finding a way to eat Indian food (chicken curry and naan is my weakness).</p>
             </div>
         </div>
     ),
@@ -136,6 +118,58 @@ var homeSliderElements = {
     ),
     2: (
         <div className='slider-panel'>
+            <div className='interests-panel-section-whole'>
+                <div className='interests-panel-image-row'>
+                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/angularjs_tint.png' /></div>
+                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/docker_tint.png' /></div>
+                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/gcp_tint.png' /></div>
+                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/git_tint.png' /></div>
+                </div>
+                <div className='interests-panel-image-row'>
+                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/hadoop_tint.png' /></div>
+                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/java_tint.png' /></div>
+                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/python_tint.png' /></div>
+                    <div className='interests-image-wrap'><img className='interests-image' src='/static/images/logos/spark_tint.png' /></div>
+                </div>
+            </div>
+            <div className='d-flex' className="interests-panel-list-wrapper">
+                <div className='interests-panel-section'>
+                    <h4>Day to Day Experience</h4>
+                    <ul>
+                        <li>Data Engineering</li>
+                        <li>Natural Language Processing</li>
+                        <li>Serverless Computing</li>
+                        <li>NoSQL Databases</li>
+                        <li>Python</li>
+                        <li>Microsoft Azure</li>
+                        <li>Databricks</li>
+                        <li>Pyspark</li>
+                        <li>HTML5/CSS3</li>
+                        <li>Javascript/AJAX</li>
+                        <li>Git</li>
+                        <li>REST APIs</li>
+                        <li>Full Stack Web Development</li>
+                        <li>Azure Dev Ops</li>
+                        <li>Docker</li>
+                    </ul>
+                </div>
+                <div className='interests-panel-section'>
+                    <h4>Other Experience</h4>
+                    <ul>
+                        <li>Google Cloud Platform</li>
+                        <li>Machine Learning</li>
+                        <li>AngularJs</li>
+                        <li>Java</li>
+                        <li>C/C++</li>
+                        <li>C#</li>
+                        <li>Cyber Security</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    ),
+    3: (
+        <div className='slider-panel'>
             <div id='vol-table'>
                 <div className="vol-row">
                     <div className="vol-cell">
@@ -191,9 +225,10 @@ class MenuContainer extends React.Component {
   
     render() {
         return <div className='d-flex'>
-            <MenuClickable index={0} name="Skills" isActive={ this.state.activeIndex===0 } onClick={ this.homeSliderSelect } />
-            <MenuClickable index={1} name="Experience" isActive={ this.state.activeIndex===1 } onClick={ this.homeSliderSelect }/>
-            <MenuClickable index={2} name="Volunteerism" isActive={ this.state.activeIndex===2 } onClick={ this.homeSliderSelect }/>
+            <MenuClickable index={0} name="About Me" isActive={ this.state.activeIndex===0 } onClick={ this.homeSliderSelect } />
+            <MenuClickable index={1} name="Experience" isActive={ this.state.activeIndex===1 } onClick={ this.homeSliderSelect } />
+            <MenuClickable index={2} name="Skills" isActive={ this.state.activeIndex===2 } onClick={ this.homeSliderSelect }/>
+            <MenuClickable index={3} name="Volunteerism" isActive={ this.state.activeIndex===3 } onClick={ this.homeSliderSelect }/>
         </div>
     }
 }

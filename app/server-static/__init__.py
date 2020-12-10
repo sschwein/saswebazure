@@ -21,4 +21,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     mimetype = mimetypes.guess_type(f"{file_name}")
 
-    return func.HttpResponse(static_file, mimetype=mimetype[0], status_code=200)
+    return func.HttpResponse(
+        static_file,
+        mimetype=mimetype[0],
+        status_code=200,
+        headers={"Cache-Control": "max-age=1200, public"}
+    )
