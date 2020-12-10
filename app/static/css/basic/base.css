@@ -24,6 +24,7 @@
 .font-black-outline{text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;}
 
 /*Other Font Things*/
+.font-size-110{font-size:110%;}
 .font-size-115{font-size:115%;}
 .font-size-125{font-size:125%;}
 .font-size-135{font-size:135%;}
@@ -139,7 +140,7 @@ a:focus, a:hover{color:#B14c23;text-decoration:none;}
 .home-section-subhead2{margin:2px 0 8px;font-weight:bold;}
 .home-section-subhead{margin-top:32px;text-align:left;}
 .home-section-subhead3{margin-top:48px;}
-.interests-panel-section{width:300px;margin:24px auto;position:relative;}
+.interests-panel-section{width:250px;margin:24px auto;position:relative;}
 .interests-panel-section-whole{width:1000px;margin:48px auto 0;position:relative;}
 .interests-panel-section h4{text-align:left;}
 .interests-panel-image-row{display:flex;width:100%;padding:8px 5%;}
@@ -149,6 +150,7 @@ a:focus, a:hover{color:#B14c23;text-decoration:none;}
 #vol-table{width:100%;max-width:1100px;margin:0 auto;}
 .vol-row{display:flex;}
 .vol-cell{width:300px;position:relative;margin:0 auto;text-align:center;}
+.headshot{border-radius:50%;}
 
 @media only screen and (max-width: 1023px) {
 #home-slider-header{width:100%;}
