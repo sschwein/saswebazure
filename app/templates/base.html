@@ -27,22 +27,31 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link disabled" {#href="/api"#} href="#" target='_self'>API</a>
+                        <a class="nav-link" href="#home-slider-panel" target='_self'>About</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects" target='_self'>Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact" target='_self'>Contact</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link disabled" {#href="/api"#} href="#" target='_self'>API</a>
+                    </li> -->
                     <!-- <li class="nav-item" ng-show='{{is_logged_in}} == 0' ng-cloak>
                         <a class="nav-link disabled" {#href="/login"#} href="#" target='_self'>Login</a>
                     </li> -->
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link disabled" {#href="/congress/bill/search"#} href="#" target='_self'>Bill Search</a>
-                    </li>
+                    </li> -->
                     <!-- <li class="nav-item" ng-show='{{is_logged_in}} == 1' ng-cloak>
                         <a class="nav-link disabled" {#href="/api/profile"#} href="#" target='_self'>Profile</a>
                     </li> -->
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
+                {#<form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                </form>#}
             </div>
         </nav>
 
@@ -52,8 +61,8 @@
             {% endblock %}
         </div>
 
-        <div id='footer'>
-            © 2020 Steven Schweinhart, All Rights Reserved. Icons from: <a href="http://www.onlinewebfonts.com">Online Web Fonts</a>
+        <div id='footer' class="bg-dark-grey text-center">
+            © 2021 Steven Schweinhart, All Rights Reserved. Icons from: <a href="http://www.onlinewebfonts.com">Online Web Fonts</a>
         </div>
     </body>
 </html>

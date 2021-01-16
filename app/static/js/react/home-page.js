@@ -29,16 +29,13 @@ homeSliderElements = {
             React.createElement(
                 "div",
                 { className: "col-md-4 mx-auto" },
-                React.createElement("img", { className: "headshot", height: "280", width: "200", src: "/static/images/basic/profile.jpg" })
+                React.createElement("img", { className: "headshot", height: "280", width: "200", src: "/static/images/basic/headshot_2.png" })
             ),
             React.createElement(
                 "div",
                 { className: "col-md-4 mx-auto" },
-                React.createElement(
-                    "h4",
-                    { className: "text-left" },
-                    "Details"
-                ),
+                React.createElement("br", null),
+                React.createElement("br", null),
                 React.createElement(
                     "p",
                     { className: "font-size-110" },
@@ -97,7 +94,7 @@ homeSliderElements = {
             React.createElement(
                 "p",
                 { className: "my-5" },
-                "When I'm not sitting in front of a screen I find myself exploring on my bike, distracted online, enjoying a bottle of wine, or finding a way to eat Indian food (chicken curry and naan is my weakness)."
+                "When I'm not sitting in front of a screen I find myself exploring on my bike, distracted online, enjoying a bottle of wine, or finding an excuse to cook Indian food (chicken curry and naan is my weakness)."
             )
         )
     ),
@@ -137,7 +134,7 @@ homeSliderElements = {
                 React.createElement(
                     "div",
                     { className: "home-section-p" },
-                    "I worked as a Data Engineer inside the Retail Digital Health & Analytics Organization. My team created a data science platform for our data scientists and managed exiting data analytics solutions. My focus was automating legacy data solutions using Python; engineering new analytics solutions using frameworks like Airflow, Pyspark, and Django; and implementing Python packages to facilitate data science projects."
+                    "I worked as a Software Engineer inside the Digital Health & Analytics Organization. My team created a data science platform for our data scientists and managed exiting data analytics solutions. My focus was automating legacy data solutions using Python; engineering new analytics solutions using frameworks like Airflow, Pyspark, and Django; and implementing Python packages to facilitate data science projects."
                 )
             )
         ),
@@ -211,7 +208,7 @@ homeSliderElements = {
                 React.createElement(
                     "div",
                     { className: "home-section-p" },
-                    "I worked at Humana Military as a member of a BI reporting team. My responsibilities involved creating and maintaining reports for both government and business users. Data movement and ingestion was performed with SSIS, data querying was performed with MS SQL, and the reports were generated using Actuate E.Report software and Microsoft Excel."
+                    "At Humana Military I worked as a member of a BI reporting team. My responsibilities involved creating and maintaining reports for both government and business users. Data movement and ingestion was performed with SSIS, data querying was performed with MS SQL, and the reports were generated using Actuate E.Report software and Microsoft Excel."
                 )
             )
         ),
@@ -706,7 +703,7 @@ var MenuContainer = function (_React$Component) {
             return React.createElement(
                 "div",
                 { className: "d-flex" },
-                React.createElement(MenuClickable, { index: 0, name: "About Me", isActive: this.state.activeIndex === 0, onClick: this.homeSliderSelect }),
+                React.createElement(MenuClickable, { index: 0, name: "About", isActive: this.state.activeIndex === 0, onClick: this.homeSliderSelect }),
                 React.createElement(MenuClickable, { index: 1, name: "Experience", isActive: this.state.activeIndex === 1, onClick: this.homeSliderSelect }),
                 React.createElement(MenuClickable, { index: 2, name: "Skills", isActive: this.state.activeIndex === 2, onClick: this.homeSliderSelect }),
                 React.createElement(MenuClickable, { index: 3, name: "Volunteerism", isActive: this.state.activeIndex === 3, onClick: this.homeSliderSelect })

@@ -14,10 +14,10 @@ homeSliderElements = {
         <div className='slider-panel'>
             <div className="d-flex w-700-center">
                 <div className="col-md-4 mx-auto">
-                    <img className='headshot' height="280" width="200" src='/static/images/basic/profile.jpg' />
+                    <img className='headshot' height="280" width="200" src='/static/images/basic/headshot_2.png' />
                 </div>
                 <div className="col-md-4 mx-auto">
-                    <h4 className="text-left">Details</h4>
+                    <br /><br />
                     <p className="font-size-110">
                         <strong>Name:</strong><br />
                         <span>Steven Schweinhart</span><br />
@@ -31,7 +31,7 @@ homeSliderElements = {
             <div className='w-700-center text-justify font-size-125'>
                 <p className='my-5'>I am a software engineer based in Louisville KY that enjoys building tools to solve problems. This includes building video games for school projects to this website.</p>
                 <p className='my-5'>Over the past decade as a programmer, I have built up a collection of projects scattered across my many computers. This has made it difficult to showcase my work at its best. I plan on using this domain to host all of my ideas in one place. </p>
-                <p className='my-5'>When I'm not sitting in front of a screen I find myself exploring on my bike, distracted online, enjoying a bottle of wine, or finding a way to eat Indian food (chicken curry and naan is my weakness).</p>
+                <p className='my-5'>When I'm not sitting in front of a screen I find myself exploring on my bike, distracted online, enjoying a bottle of wine, or finding an excuse to cook Indian food (chicken curry and naan is my weakness).</p>
             </div>
         </div>
     ),
@@ -45,7 +45,7 @@ homeSliderElements = {
                     <h5 className='home-section-subhead'><a href='https://www.humana.com' target='_blank'>Humana</a></h5>
                     <div className='home-section-subhead1 font-green'>Software Engineer - Since 2018</div>
                     <div className='home-section-subhead2 font-grey'>Louisville, KY</div>
-                    <div className='home-section-p'>I worked as a Data Engineer inside the Retail Digital Health & Analytics Organization. My team created a data science platform for our data scientists and managed exiting data analytics solutions. My focus was automating legacy data solutions using Python; engineering new analytics solutions using frameworks like Airflow, Pyspark, and Django; and implementing Python packages to facilitate data science projects.</div>
+                    <div className='home-section-p'>I worked as a Software Engineer inside the Digital Health & Analytics Organization. My team created a data science platform for our data scientists and managed exiting data analytics solutions. My focus was automating legacy data solutions using Python; engineering new analytics solutions using frameworks like Airflow, Pyspark, and Django; and implementing Python packages to facilitate data science projects.</div>
                 </div>
             </div>
             <div className='experience-cell-wrap'>
@@ -67,7 +67,7 @@ homeSliderElements = {
                     <h5 className='home-section-subhead'><a href='https://www.humanamilitary.com/' target='_blank'>Humana Military</a></h5>
                     <div className='home-section-subhead1 font-green'>Applications Engineer – 2016-2018</div>
                     <div className='home-section-subhead2 font-grey'>Louisville, KY</div>
-                    <div className='home-section-p'>I worked at Humana Military as a member of a BI reporting team. My responsibilities involved creating and maintaining reports for both government and business users. Data movement and ingestion was performed with SSIS, data querying was performed with MS SQL, and the reports were generated using Actuate E.Report software and Microsoft Excel.</div>
+                    <div className='home-section-p'>At Humana Military I worked as a member of a BI reporting team. My responsibilities involved creating and maintaining reports for both government and business users. Data movement and ingestion was performed with SSIS, data querying was performed with MS SQL, and the reports were generated using Actuate E.Report software and Microsoft Excel.</div>
                 </div>
             </div>
             <div className='experience-cell-wrap'>
@@ -225,7 +225,7 @@ class MenuContainer extends React.Component {
   
     render() {
         return <div className='d-flex'>
-            <MenuClickable index={0} name="About Me" isActive={ this.state.activeIndex===0 } onClick={ this.homeSliderSelect } />
+            <MenuClickable index={0} name="About" isActive={ this.state.activeIndex===0 } onClick={ this.homeSliderSelect } />
             <MenuClickable index={1} name="Experience" isActive={ this.state.activeIndex===1 } onClick={ this.homeSliderSelect } />
             <MenuClickable index={2} name="Skills" isActive={ this.state.activeIndex===2 } onClick={ this.homeSliderSelect }/>
             <MenuClickable index={3} name="Volunteerism" isActive={ this.state.activeIndex===3 } onClick={ this.homeSliderSelect }/>
