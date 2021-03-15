@@ -1,0 +1,26 @@
+{
+    "indexingMode": "consistent",
+    "automatic": true,
+    "includedPaths": [
+        {
+            "path": "/*"
+        }
+    ],
+    "excludedPaths": [
+        {
+            "path": "/\"_etag\"/?"
+        },
+        {
+            "path": "/\"title_detail\"/*"
+        },
+        {
+            "path": "/\"links\"/*"
+        },
+        {
+            "path": "/\"summary_detail\"/*"
+        },
+        {
+            "path": "/\"published_parsed\"/*"
+        }
+    ]
+}

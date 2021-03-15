@@ -43,7 +43,7 @@ def write_queue_message(connection_string, queue, message):
     logging.debug(f"Wrote Queue message to {queue}")
 
 
-def upload_to_cosmos(uri, key, database_name, container_name, data):
+def write_to_cosmos(uri, key, database_name, container_name, data):
     client = CosmosClient(uri, key)
     database = client.get_database_client(database=database_name)
     container = database.get_container_client(container_name)
