@@ -2,11 +2,11 @@ import azure.functions as func
 import feedparser
 import logging
 import os
-from __app__.utils import write_to_cosmos
+from __app__.utils import generate_uuid, write_to_cosmos
 from datetime import datetime
 
 
-def main(rssTimer: func.TimerRequest) -> None:
+def main(rssTimer: func.TimerRequest):
     logging.info("starting rss timer function")
 
     feed = feedparser.parse(
@@ -19,6 +19,8 @@ def main(rssTimer: func.TimerRequest) -> None:
         record["published"] = datetime(*parsed_date[0:6]).isoformat()
         record["category"] = record["tags"][0]["term"]
         record["is_processed"] = 0
+        record["external_id"] = record["id"]
+        record["id"] = generate_uuid()
 
         try:
             write_to_cosmos(
@@ -28,6 +30,7 @@ def main(rssTimer: func.TimerRequest) -> None:
                 "rss-feed",
                 record
             )
-        except Exception:
+        except Exception as e:
+            logging.error(str(e))
             logging.warning("possible duplicate writing rss to cosmos")
             continue

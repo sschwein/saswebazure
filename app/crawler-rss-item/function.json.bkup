@@ -20,7 +20,7 @@
       "methods": [
         "get"
       ],
-      "route": "rss"
+      "route": "rssitem"
     },
     {
       "type": "http",

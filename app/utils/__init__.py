@@ -5,6 +5,11 @@ from azure.storage.blob import BlobServiceClient
 from azure.storage.queue import QueueClient
 from azure.cosmos import CosmosClient
 from datetime import datetime, date, time, timedelta
+from uuid import uuid4
+
+
+def generate_uuid():
+    return str(uuid4())
 
 
 def load_jinja_template(filename, **kwargs):
