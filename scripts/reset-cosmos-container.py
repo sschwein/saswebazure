@@ -1,11 +1,12 @@
+import os
 from azure.cosmos import CosmosClient
 
 # DEV
-COSMOS_URI = "https://sschwein-dev-cosmos.documents.azure.com:443/"
-COSMOS_KEY = "IZWL048ukGpmT9Lb2sVfORpvSLmf2nUJjOYu9Qbru0TEAAcxXYLmBL62Sx9soM93oQKdkm3bpaA5PwFH2xGPZA=="
+COSMOS_URI = os.environ["DEV_COSMOS_URI"]
+COSMOS_KEY = os.environ["DEV_COSMOS_KEY"]
 # PROD
-# COSMOS_URI = "https://sschwein-greenberg-cosmos-prod.documents.azure.com:443/"
-# COSMOS_KEY = "pNC4jxY3AQhRJX3biPVmHMT8CdeIubT9QtGkGYOJ7Lk1n1bSTopvB9Zm9jN8VReHWdnFjk0uNPe7faFqJpGmNg=="
+# COSMOS_URI = os.environ["PROD_COSMOS_URI"]
+# COSMOS_KEY = os.environ["PROD_COSMOS_KEY"]
 
 
 def query_cosmos(uri, key, database_name, container_name, query):

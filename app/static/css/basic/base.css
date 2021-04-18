@@ -94,6 +94,10 @@ a:focus, a:hover{color:#B14c23;text-decoration:none;}
 .quick-link-ul{list-style-type: none;}
 .quick-link-ul li{color:#d85c38;margin:8px 0;}
 
+/* Bootstrap extras */
+.w-80{width:80%;}
+.w-90{width:90%;}
+
 /*Home Page*/
 #soc-media-toolbar-wrap{margin:40px 0;justify-content:center;}
 #soc-media-toolbar{width:350px;}
