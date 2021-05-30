@@ -8,6 +8,7 @@ from time import sleep
 
 
 def main(rssTimer: func.TimerRequest):
+    logging.getLogger("azure").setLevel(logging.WARNING)
     logging.info("starting rss item timer function")
 
     items = query_cosmos(

@@ -7,6 +7,7 @@ from datetime import datetime
 
 
 def main(rssTimer: func.TimerRequest):
+    logging.getLogger("azure").setLevel(logging.WARNING)
     logging.info("starting rss timer function")
 
     feed = feedparser.parse(
