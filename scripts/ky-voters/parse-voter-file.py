@@ -4,7 +4,8 @@ import logging
 from datetime import date
 
 parser = argparse.ArgumentParser()
-parser.add_argument('filename')
+parser.add_argument('input_file')
+parser.add_argument('output_file')
 
 parties = {
     "D": "Democrat",
@@ -20,9 +21,20 @@ parties = {
 
 
 def set_voting_history(data):
-    for row in data[]
+    data = [
+        data[i*4:(i+1)*4]
+        for i in range(0, 5)
+    ]
+    parsed = []
 
-    return data
+    for row in data:
+        parsed.append({
+            "election_year": int(f"20{row[0:2]}"),
+            "primary": bool(int(row[2])),
+            "general": bool(int(row[3]))
+        })
+
+    return parsed
 
 
 def parse_voter(data):
@@ -34,13 +46,13 @@ def parse_voter(data):
             year=int(data[213:217]),
             month=int(data[209:211]),
             day=int(data[211:213])
-        )
+        ).isoformat()
     except ValueError:
         date_of_registration = date(
             year=1900,
             month=1,
             day=1
-        )
+        ).isoformat()
 
     parsed = {
         "county_code": data[0:3].strip(),
@@ -75,14 +87,15 @@ def parse_voter(data):
 
 
 def run(args):
-    with open(args.filename, "r") as _file:
+    with open(args.input_file, "r") as _file:
         voters = [
             parse_voter(row)
             for row in _file.readlines()
         ]
 
-    for row in voters[:10]:
-        logging.info(row)
+    print(json.dumps(voters[0], indent=4))
+    # with open(args.output_file, "w") as _file:
+    #     _file.write(json.dumps(voters))
 
 
 if __name__ == "__main__":
