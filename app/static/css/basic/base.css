@@ -93,6 +93,7 @@ a:focus, a:hover{color:#B14c23;text-decoration:none;}
 .w-700-center{width:700px;margin:0 auto;position:relative;}
 .quick-link-ul{list-style-type: none;}
 .quick-link-ul li{color:#d85c38;margin:8px 0;}
+#upload-form{width:400px;margin:0 auto;}
 
 /* Bootstrap extras */
 .w-80{width:80%;}

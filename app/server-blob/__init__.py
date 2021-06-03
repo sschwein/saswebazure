@@ -5,6 +5,7 @@ from __app__.utils import read_from_blob
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
+    logging.getLogger("azure").setLevel(logging.WARNING)
     container = req.route_params.get("container")
     file_name = req.route_params.get("filename")
     file_extension = req.route_params.get("extension")

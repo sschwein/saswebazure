@@ -5,11 +5,12 @@
       "authLevel": "anonymous",
       "type": "httpTrigger",
       "direction": "in",
-      "name": "req",
+      "name": "request",
       "methods": [
+        "get",
         "post"
       ],
-      "route": "api/voter/upload"
+      "route": "voter/upload"
     },
     {
       "type": "http",

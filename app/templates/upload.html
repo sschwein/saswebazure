@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Upload new Voter file</h1>
+<br><br>
+<form id="upload-form" action="/voter/upload" method="post" enctype="multipart/form-data">
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="gpx-file" name="filename">
+        <label class="custom-file-label" for="gpx-file">Choose file</label>
+    </div>
+    <br><br>
+    <div class="form-group">
+        <label for="title" class="col-form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password Here">
+    </div>
+    <input type="submit">
+    {% if is_error == "success-gpx" %}
+        <span style="color:green;">Success, voter file processing</span>
+    {% elif is_error == "password" %}
+        <span style="color:red;">Password incorrect</span>
+    {% elif is_error == "filetype" %}
+        <span style="color:red;">Unsupported file type, please only upload txt</span>
+    {% elif is_error == "generic" %}
+        <span style="color:red;">Upload Failed</span>
+    {% endif %}
+</form>
+
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+{% endblock %}

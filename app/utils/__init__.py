@@ -90,6 +90,18 @@ def read_all_from_cosmos(uri, key, database_name, container_name):
     return item
 
 
+def validate_password(client_password, server_password):
+    password_match = False
+
+    if len(server_password) == len(client_password):
+        password_match = True
+        for i, char in enumerate(client_password):
+            if char != server_password[i]:
+                password_match = False
+
+    return password_match
+
+
 class DateTimeEncoder(json.JSONEncoder):
 
     def default(self, obj):

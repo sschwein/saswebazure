@@ -4,6 +4,7 @@ import mimetypes
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
+    logging.getLogger("azure").setLevel(logging.WARNING)
     file_type = req.route_params.get("type")
     folder = req.route_params.get("folder")
     file_name = req.route_params.get("filename")
