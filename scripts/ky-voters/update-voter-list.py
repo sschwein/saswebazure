@@ -1,5 +1,5 @@
 import json
-from utils import trim_address
+from utils import clean_address, trim_address
 
 
 def nominatim_address_string(addr):
@@ -8,7 +8,12 @@ def nominatim_address_string(addr):
 
 
 def address_string(addr):
-    return f'{addr["street_address"]}; {addr["residence"]["city_address"]}, {addr["residence"]["state"]} {addr["residence"]["zip"][:5]}'
+    return f'{addr["street_address"]}; {addr["city_address"]}, {addr["state"]} {addr["zip"]}'
+
+
+def address_string_clean(addr):
+    clean_addr = clean_address(addr["street_address"])
+    return f'{clean_addr}; {addr["city_address"]}, {addr["state"]} {addr["zip"]}'
 
 
 def update_voter(voter):
@@ -19,44 +24,58 @@ def update_voter(voter):
         })
 
     voter.update({
-        "residence_string": address_string(voter["residence"]),
-        "mailing_string": address_string(voter["mailing"]),
+        "residence_string_raw": address_string(voter["residence"]),
+        "mailing_string_raw": address_string(voter["mailing"]),
+        "residence_string_clean": address_string_clean(voter["residence"]),
+        "mailing_string_clean": address_string_clean(voter["mailing"]),
         "voting_history": voter["voting_history"],
-        # ADD ESTIMATED AGE COLUMN
+        "nominatim_search_string": nominatim_address_string(voter["residence"]),
+        "estimated_age": 2022 - voter["year_of_birth"],
+        "gps": {
+            "latitude": None,
+            "longitude": None
+        }
     })
+
+    del voter["_rid"]
+    del voter["_self"]
+    del voter["_etag"]
+    del voter["_attachments"]
+    del voter["_ts"]
 
     return voter
 
 
-def filter_for_gps(item, voter):
-    return (
-        item["residence"] == voter["residence"] and
-        item["first_name"] == voter["first_name"] and
-        item["middle_name"] == voter["middle_name"] and
-        item["last_name"] == voter["last_name"] and
-        item["date_of_registration"] == voter["date_of_registration"]
-    )
-
-
 def join_gps_coords(voters, gps):
     for voter in voters:
-        coords = list(filter(lambda _: filter_for_gps(_, voter), gps))
-        if len(coords) > 1:
-            print(f'found gps conflict {json.dumps(voter, indent=4)}; {json.dumps(coords, indent=4)}')
-            break
-        else:
-            voter.update({"gps": coords["gps"]})
-
-    return voters
+        try:
+            result = gps[voter["nominatim_search_string"]]
+            if 'selected_address' in result.keys():
+                coords = {
+                    "latitude": result["selected_address"]["lat"],
+                    "longitude": result["selected_address"]["lon"],
+                }
+            else:
+                coords = {
+                    "latitude": result["result"][0]["lat"],
+                    "longitude": result["result"][0]["lon"],
+                }
+            voter["gps"] = coords
+            yield voter
+        except KeyError:
+            yield voter
 
 
 if __name__ == "__main__":
-    with open('voter-list-full.jsonl', 'r') as _file:
+    with open('voter-list-remaining.jsonl', 'r') as _file:
         voters = [update_voter(json.loads(row)) for row in _file.readlines()]
 
-    with open('gps-voters.jsonl', 'r') as _file:
-        gps = [json.loads(row) for row in _file.readlines()]
+    with open('gps-voters-2-parallel.jsonl', 'r') as _file:
+        gps = dict()
+        for row in _file.readlines():
+            row = json.loads(row)
+            gps[row["address"]] = row
 
-    voters = join_gps_coords(voters, gps)
-
-    print(json.dumps(voters[0], indent=4))
+    with open('voter-list-2-updated.jsonl', 'w') as _file:
+        for voter in join_gps_coords(voters, gps):
+            _file.write(f"{json.dumps(voter)}\n")

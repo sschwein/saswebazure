@@ -11,7 +11,7 @@ nominatim_search_template = 'nominatim search --project-dir /mnt/nas/sschwein/Dr
 
 def load_addresses():
     addresses = dict()
-    with open("voter-list-full.jsonl", "r") as _file:
+    with open("voter-list-remaining.jsonl", "r") as _file:
         for i, row in enumerate(_file.readlines()):
             voter = json.loads(row)
             trimmed_address = trim_address(voter["residence"]["street_address"])
@@ -41,10 +41,25 @@ def process_address(args):
         "nominatim_address": addr["nominatim_address"]
     }
 
-    if index % 25 == 0:
+    if index % 500 == 0:
         logging.info(f"Converted {index}th address")
 
     return result
+
+
+def reconcile_multi(orig_addr, addrs):
+    orig_street = orig_addr.split('; ')[0].split(' ')
+    orig_state = "KY,"
+    orig_zip = orig_addr.split('; ')[1].split(', ')[1]
+    for row in addrs:
+        display_name = row["display_name"].upper()
+        if len(orig_street) > 1:
+            if orig_street[0] in display_name and orig_street[1] in display_name and orig_state in display_name and orig_zip in display_name:
+                return row
+        else:
+            logging.info(f'orig_street too short {orig_street}')
+
+    return None
 
 
 def record_results(results):
@@ -54,28 +69,38 @@ def record_results(results):
                 "nominatim_address": result["nominatim_address"],
                 "message": result["stdout"]
             }
-            with open("gps-errors-parallel.jsonl", "a") as _file:
+            with open("gps-errors-2-parallel.jsonl", "a") as _file:
                 _file.write(f"{json.dumps(output)}\n")
         elif len(result["stdout"]) == 0:
             output = {
                 "nominatim_address": result["nominatim_address"],
                 "message": "No address found"
             }
-            with open("gps-errors-parallel.jsonl", "a") as _file:
+            with open("gps-errors-2-parallel.jsonl", "a") as _file:
                 _file.write(f"{json.dumps(output)}\n")
         elif len(result["stdout"]) > 1:
-            output = {
-                "nominatim_address": result["nominatim_address"],
-                "message": f"{len(result['stdout'])} addresses found"
-            }
-            with open("gps-errors-parallel.jsonl", "a") as _file:
-                _file.write(f"{json.dumps(output)}\n")
+            selected_addr = reconcile_multi(result["nominatim_address"], result["stdout"])
+            if selected_addr:
+                output = {
+                    "result": result["stdout"],
+                    "address": result["nominatim_address"],
+                    "selected_address": selected_addr
+                }
+                with open("gps-voters-2-parallel.jsonl", "a") as _file:
+                    _file.write(f"{json.dumps(output)}\n")
+            else:
+                output = {
+                    "nominatim_address": result["nominatim_address"],
+                    "message": f"{len(result['stdout'])} addresses found"
+                }
+                with open("gps-errors-2-parallel.jsonl", "a") as _file:
+                    _file.write(f"{json.dumps(output)}\n")
         else:
             output = {
                 "result": result["stdout"],
                 "address": result["nominatim_address"]
             }
-            with open("gps-voters-parallel.jsonl", "a") as _file:
+            with open("gps-voters-2-parallel.jsonl", "a") as _file:
                 _file.write(f"{json.dumps(output)}\n")
 
 
