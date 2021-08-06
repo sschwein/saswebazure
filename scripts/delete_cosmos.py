@@ -2,11 +2,11 @@ import os
 from azure.cosmos import CosmosClient
 
 # DEV
-COSMOS_URI = os.environ["DEV_COSMOS_URI"]
-COSMOS_KEY = os.environ["DEV_COSMOS_KEY"]
+# COSMOS_URI = os.environ["DEV_COSMOS_URI"]
+# COSMOS_KEY = os.environ["DEV_COSMOS_KEY"]
 # PROD
-# COSMOS_URI = os.environ["PROD_COSMOS_URI"]
-# COSMOS_KEY = os.environ["PROD_COSMOS_KEY"]
+COSMOS_URI = os.environ["PROD_COSMOS_URI"]
+COSMOS_KEY = os.environ["PROD_COSMOS_KEY"]
 
 
 def query_cosmos(uri, key, database_name, container_name, query):
@@ -28,8 +28,8 @@ def delete_from_cosmos(uri, key, database_name, container_name, doc_id, partitio
 cosmos_query = query_cosmos(
     COSMOS_URI,
     COSMOS_KEY,
-    "metro",
-    "rss-item",
+    "voters",
+    "addresses",
     "SELECT * FROM c"
 )
 
@@ -37,10 +37,10 @@ for i, item in enumerate(cosmos_query):
     delete_from_cosmos(
         COSMOS_URI,
         COSMOS_KEY,
-        "metro",
-        "rss-item",
+        "voters",
+        "addresses",
         item["id"],
-        item["title"]
+        item["address"]
     )
     if i % 25 == 0:
         print(f'deleted {i} docs')
