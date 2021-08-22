@@ -1,3 +1,4 @@
+import json
 import os
 from azure.cosmos import CosmosClient
 
@@ -18,29 +19,14 @@ def query_cosmos(uri, key, database_name, container_name, query):
     return items
 
 
-def delete_from_cosmos(uri, key, database_name, container_name, doc_id, partition_key):
-    client = CosmosClient(uri, key)
-    database = client.get_database_client(database=database_name)
-    container = database.get_container_client(container_name)
-    container.delete_item(item=doc_id, partition_key=partition_key)
-
-
 cosmos_query = query_cosmos(
     COSMOS_URI,
     COSMOS_KEY,
     "voters",
-    "addresses",
-    "SELECT * FROM c"
+    "raw-data",
+    "SELECT * FROM c where NOT IS_DEFINED(c.gps)"
 )
 
-for i, item in enumerate(cosmos_query):
-    delete_from_cosmos(
-        COSMOS_URI,
-        COSMOS_KEY,
-        "voters",
-        "addresses",
-        item["id"],
-        item["address"]
-    )
-    if i % 25 == 0:
-        print(f'deleted {i} docs')
+with open('voter-list-remaining.jsonl', 'w') as _file:
+    for row in cosmos_query:
+        _file.write(f"{json.dumps(row)}\n")
