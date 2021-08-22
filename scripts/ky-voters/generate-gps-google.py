@@ -1,17 +1,14 @@
+import json
 import logging
 import os
 from azure.cosmos import CosmosClient
-from datetime import datetime
-from multiprocessing.pool import Pool
-from utils import chunks
+from utils import geocode_address
 
 cosmos_query_str = """
     SELECT *
     FROM c
-    WHERE c.gps.latitude > '38.37295008285184'
-        OR c.gps.latitude < '37.99716815572792'
-        OR c.gps.longitude > '-85.94441794520358'
-        OR c.gps.longitude < '-85.40531360892128'
+    WHERE c.gps.latitude = null
+        OR c.gps.longitude = null
 """
 
 # DEV
@@ -28,8 +25,6 @@ def update_fields(item):
     del item["_etag"]
     del item["_attachments"]
     del item["_ts"]
-    item["gps"]["latitude"] = None
-    item["gps"]["longitude"] = None
 
     return item
 
@@ -50,7 +45,7 @@ def query_cosmos(uri, key, database_name, container_name, query):
     return items
 
 
-def load_voters(voter):
+def load_voter(voter):
     replace_cosmos(
         COSMOS_URI,
         COSMOS_KEY,
@@ -75,11 +70,24 @@ if __name__ == "__main__":
 
     data = [update_fields(item) for item in query]
     logging.info(f"total items pulled {len(data)}")
+    _cache = {}
 
-    start_time = datetime.now()
-    for batch in chunks(data, 5000):
-        with Pool(30) as pool:
-            results = pool.map(load_voters, batch)
+    for i, voter in enumerate(data):
+        if i % 25 == 0:
+            logging.info(f"Starting voter {i}")
 
-    end_time = datetime.now()
-    logging.info(f"Total time taken: {(end_time - start_time).total_seconds()}")
+        if voter["nominatim_search_string"] in _cache:
+            logging.info(f"using cache for {voter['nominatim_search_string']}")
+            voter["gps"]["latitude"] = _cache[voter["nominatim_search_string"]]["lat"]
+            voter["gps"]["longitude"] = _cache[voter["nominatim_search_string"]]["lng"]
+        else:
+            lat, lng, data = geocode_address(voter["nominatim_search_string"])
+            voter["gps"]["latitude"] = lat
+            voter["gps"]["longitude"] = lng
+            _cache[voter["nominatim_search_string"]] = {"lat": lat, "lng": lng}
+
+            with open('gps-google-data.jsonl', 'a') as _file:
+                _file.write(f"{json.dumps(data)}\n")
+
+        load_voter(voter)
+        # break
