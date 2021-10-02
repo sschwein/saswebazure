@@ -1,4 +1,7 @@
 import logging
+import os
+import requests
+import urllib
 
 
 def separate_number(addr):
@@ -157,3 +160,25 @@ def chunks(lst, n):
     for i in range(0, len(lst), n):
         logging.info(f"starting chunk {i}")
         yield lst[i:i + n]
+
+
+def geocode_address(address):
+    url = os.getenv("GOOGLE_GEOCODING_URL")
+    api_key = os.getenv("GOOGLE_MAPS_API_KEY")
+    bounds = "38.37295008285184,-85.94441794520358,37.99716815572792,-85.40531360892128"
+
+    parsed_address = urllib.parse.quote(address)
+    full_url = f"{url}address={parsed_address}&key={api_key}&bounds={bounds}&language=en"
+    response = requests.get(full_url)
+
+    if response.status_code == 200:
+        data = response.json()
+        if len(data["results"]) == 0:
+            return (None, None)
+
+        gps_coords = data["results"][0]["geometry"]["location"]
+        logging.info(f"Geocoded address: {address} at gps coordinates: {gps_coords}")
+        return (gps_coords["lat"], gps_coords["lng"], data)
+    else:
+        logging.warning("Failed to geocode address")
+        return (None, None)

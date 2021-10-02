@@ -3,6 +3,7 @@ import requests
 import json
 
 url = "https://www.zillow.com/homedetails/1433-Saint-James-Ct-APT-6-Louisville-KY-40208/73587398_zpid/"
+
 cookies = {
     "abtes": "3|DAJKFaiD9ZHosSwxTw",
     "zguid": "23|%24ccc4c603-1a2f-48e6-bd11-4a0bba954bd1",
