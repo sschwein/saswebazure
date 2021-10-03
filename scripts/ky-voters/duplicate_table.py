@@ -1,6 +1,7 @@
 import logging
 import json
 import os
+from azure import cosmos
 from azure.cosmos import CosmosClient
 from datetime import datetime
 from multiprocessing.pool import Pool
@@ -17,9 +18,11 @@ COSMOS_KEY = os.environ["PROD_COSMOS_KEY"]
 IMPACTKY_COSMOS_URI = os.environ["IMPACTKY_COSMOS_URI"]
 IMPACTKY_COSMOS_KEY = os.environ["IMPACTKY_COSMOS_KEY"]
 
-BATCH_SIZE = 5000
-output_file_name = "addresses-2021-10-02.jsonl"
-ids_query = "SELECT c.address FROM c"
+BATCH_SIZE = 10000
+output_file_name = "addresses-2021-10-03.jsonl"
+id_col_name = "id"
+ids_query = f"SELECT c.{id_col_name} FROM c"
+main_query = "SELECT * FROM c WHERE c.{id_col} in ({id_list})"
 
 source_uri = COSMOS_URI
 source_key = COSMOS_KEY
@@ -41,24 +44,24 @@ def trim_item(item):
     return item
 
 
-def replace_cosmos(uri, key, database_name, container_name, doc_id, doc):
+def upsert_cosmos(uri, key, database_name, container_name, doc):
     client = CosmosClient(uri, key)
     database = client.get_database_client(database=database_name)
     container = database.get_container_client(container_name)
-    container.replace_item(doc_id, doc)
+    container.upsert_item(doc)
 
 
 def load_voters(voter):
     try:
-        replace_cosmos(
+        upsert_cosmos(
             destination_uri,
             destination_key,
             destination_database,
             destination_container,
-            voter["id"],
             voter
         )
-    except Exception:
+    except Exception as e:
+        logging.warning(str(e))
         pass
 
 
@@ -75,19 +78,54 @@ if __name__ == "__main__":
     logging.getLogger().setLevel(logging.INFO)
     logging.getLogger("azure").setLevel(logging.WARNING)
 
-    cosmos_query = query_cosmos(
+    source_id_query = query_cosmos(
         source_uri,
         source_key,
         source_database,
         source_container,
-        "SELECT TOP 2 * FROM c"
+        ids_query
     )
+    source_ids = [row[id_col_name] for row in source_id_query]
 
-    data = [row for row in cosmos_query]
-    with open(output_file_name, 'w') as _file:
-        for row in data:
-            _file.write(f"{json.dumps(row)}\n")
+    destination_id_query = query_cosmos(
+        destination_uri,
+        destination_key,
+        destination_database,
+        destination_container,
+        ids_query
+    )
+    destination_ids = [row[id_col_name] for row in destination_id_query]
+    rows_remaining = len(source_ids) - len(destination_ids)
 
-    for batch in chunks(data, BATCH_SIZE):
+    while rows_remaining > 0:
+        logging.info(f"rows to move: {len(source_ids)}, rows already moved: {len(destination_ids)}, rows remaining: {rows_remaining}")
+        ids_to_move = list(set(source_ids).difference(set(destination_ids)))[:BATCH_SIZE]
+        id_list_substr = "','".join(ids_to_move)
+        id_list_str = f"'{id_list_substr}'"
+        batch_query = main_query.format(id_col=id_col_name, id_list=id_list_str)
+        batch = query_cosmos(
+            source_uri,
+            source_key,
+            source_database,
+            source_container,
+            batch_query
+        )
+
+        docs_to_move = [trim_item(row) for row in batch]
+        with open(output_file_name, 'a') as _file:
+            for row in docs_to_move:
+                _file.write(f"{json.dumps(row)}\n")
+
+        # for batch in chunks(docs_to_move, BATCH_SIZE):
         with Pool(30) as pool:
-            results = pool.map(load_voters, batch)
+            results = pool.map(load_voters, docs_to_move)
+
+        destination_id_query = query_cosmos(
+            destination_uri,
+            destination_key,
+            destination_database,
+            destination_container,
+            ids_query
+        )
+        destination_ids = [row[id_col_name] for row in destination_id_query]
+        rows_remaining = len(source_ids) - len(destination_ids)
