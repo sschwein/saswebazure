@@ -25,15 +25,15 @@ homeSliderElements = {
         { className: "slider-panel" },
         React.createElement(
             "div",
-            { className: "d-flex w-700-center" },
+            { className: "d-flex w-800-center" },
             React.createElement(
                 "div",
                 { className: "col-md-4 mx-auto" },
-                React.createElement("img", { className: "headshot", height: "280", width: "200", src: "/static/images/basic/headshot_2.png" })
+                React.createElement("img", { className: "headshot", height: "280", width: "280", src: "/static/images/basic/headshot_new_400.jpg" })
             ),
             React.createElement(
                 "div",
-                { className: "col-md-4 mx-auto" },
+                { className: "col-md-6 mx-auto" },
                 React.createElement("br", null),
                 React.createElement("br", null),
                 React.createElement(
@@ -54,14 +54,19 @@ homeSliderElements = {
                     React.createElement(
                         "strong",
                         null,
-                        "Age:"
+                        "Education:"
                     ),
                     React.createElement("br", null),
                     React.createElement(
                         "span",
                         null,
-                        getAge("1992/09/23"),
-                        " years"
+                        "Masters of Engineering"
+                    ),
+                    React.createElement("br", null),
+                    React.createElement(
+                        "span",
+                        null,
+                        "Computer Engineering & Computer Science"
                     ),
                     React.createElement("br", null),
                     React.createElement(
@@ -101,6 +106,43 @@ homeSliderElements = {
     1: React.createElement(
         "div",
         { className: "slider-panel" },
+        React.createElement(
+            "div",
+            { className: "experience-cell-wrap" },
+            React.createElement(
+                "div",
+                { className: "experience-cell-left" },
+                React.createElement("img", { src: "/static/images/logos/impact_kentucky.png" })
+            ),
+            React.createElement(
+                "div",
+                { className: "experience-cell-right" },
+                React.createElement(
+                    "h5",
+                    { className: "home-section-subhead" },
+                    React.createElement(
+                        "a",
+                        { href: "https://impact-ky.com", target: "_blank" },
+                        "Impact Kentucky"
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "home-section-subhead1 font-green" },
+                    "CTO/Cofounder - Since 2020"
+                ),
+                React.createElement(
+                    "div",
+                    { className: "home-section-subhead2 font-grey" },
+                    "Louisville, KY"
+                ),
+                React.createElement(
+                    "div",
+                    { className: "home-section-p" },
+                    "Impact Kentucky was founded in 2020 to help political candidates running for office. We currently offer services for data consulting, audience targetting, and digital advertising. As CTO my focus is on developing the technical architecture of our digital platforms hosted in Microsoft's Azure and Power Platform."
+                )
+            )
+        ),
         React.createElement(
             "div",
             { className: "experience-cell-wrap" },
@@ -155,7 +197,7 @@ homeSliderElements = {
                     React.createElement(
                         "a",
                         { href: "https://glasscapitol.org", target: "_blank" },
-                        "The Glass Capitol"
+                        "Glass Capitol"
                     )
                 ),
                 React.createElement(
@@ -171,7 +213,7 @@ homeSliderElements = {
                 React.createElement(
                     "div",
                     { className: "home-section-p" },
-                    "The Glass Capitol is a digital civic engagement platform dedicated to helping grassroots organizations effectively leverage the voices of their members. As CTO my focus was leading the development of the website's technical framework.  This included designing and building the site back-end using Google App Engine's Python web framework; leading a team of developers with site development; and helping to create the site front-end using HTML5, CSS, and AngularJS. "
+                    "Glass Capitol is a digital civic engagement platform dedicated to helping grassroots organizations effectively leverage the voices of their members. As CTO my focus was leading the development of the website's technical framework.  This included designing and building the site back-end using Google App Engine's Python web framework; leading a team of developers with site development; and helping to create the site front-end using HTML5, CSS, and AngularJS. "
                 )
             )
         ),
@@ -531,6 +573,11 @@ homeSliderElements = {
                     React.createElement(
                         "li",
                         null,
+                        "React"
+                    ),
+                    React.createElement(
+                        "li",
+                        null,
                         "AngularJs"
                     ),
                     React.createElement(
@@ -582,7 +629,7 @@ homeSliderElements = {
                     React.createElement(
                         "div",
                         { className: "home-section-subhead2 font-grey" },
-                        "Since 2017; Louisville, KY"
+                        "2017-2021; Louisville, KY"
                     )
                 ),
                 React.createElement(
@@ -670,6 +717,36 @@ homeSliderElements = {
     )
 };
 
+projectSliderElements = {
+    0: React.createElement(
+        "div",
+        { className: "slider-panel" },
+        React.createElement(
+            "h3",
+            null,
+            "Run With Craig"
+        )
+    ),
+    1: React.createElement(
+        "div",
+        { className: "slider-panel" },
+        React.createElement(
+            "h3",
+            null,
+            "Rachel Roarx for Kentucky 38"
+        )
+    ),
+    2: React.createElement(
+        "div",
+        { className: "slider-panel" },
+        React.createElement(
+            "h3",
+            null,
+            "Schweinhart Farms"
+        )
+    )
+};
+
 var MenuContainer = function (_React$Component) {
     _inherits(MenuContainer, _React$Component);
 
@@ -714,23 +791,77 @@ var MenuContainer = function (_React$Component) {
     return MenuContainer;
 }(React.Component);
 
-var MenuClickable = function (_React$Component2) {
-    _inherits(MenuClickable, _React$Component2);
+var ProjectContainer = function (_React$Component2) {
+    _inherits(ProjectContainer, _React$Component2);
 
-    function MenuClickable() {
+    function ProjectContainer() {
         var _ref2;
 
         var _temp2, _this2, _ret2;
 
-        _classCallCheck(this, MenuClickable);
+        _classCallCheck(this, ProjectContainer);
 
         for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
             args[_key2] = arguments[_key2];
         }
 
-        return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_ref2 = MenuClickable.__proto__ || Object.getPrototypeOf(MenuClickable)).call.apply(_ref2, [this].concat(args))), _this2), _this2.homeSliderSelect = function () {
-            return _this2.props.onClick(_this2.props.index);
+        return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_ref2 = ProjectContainer.__proto__ || Object.getPrototypeOf(ProjectContainer)).call.apply(_ref2, [this].concat(args))), _this2), _this2.state = {
+            activeIndex: 0
+        }, _this2.projectSliderSelect = function (index) {
+            _this2.setState({ activeIndex: index });
+            ReactDOM.render(projectSliderElements[index], document.getElementById('projectSliderSelect'));
+            document.getElementById("project-slider-panel").scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth"
+            });
         }, _temp2), _possibleConstructorReturn(_this2, _ret2);
+    }
+
+    _createClass(ProjectContainer, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                { className: "d-flex" },
+                React.createElement(
+                    "div",
+                    { className: "left-menu-button", onClick: this.projectSliderSelect(0) },
+                    " ",
+                    "<<",
+                    " "
+                ),
+                React.createElement(
+                    "div",
+                    { className: "right-menu-button", onClick: this.projectSliderSelect(1) },
+                    " ",
+                    ">>",
+                    " "
+                )
+            );
+        }
+    }]);
+
+    return ProjectContainer;
+}(React.Component);
+
+var MenuClickable = function (_React$Component3) {
+    _inherits(MenuClickable, _React$Component3);
+
+    function MenuClickable() {
+        var _ref3;
+
+        var _temp3, _this3, _ret3;
+
+        _classCallCheck(this, MenuClickable);
+
+        for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+            args[_key3] = arguments[_key3];
+        }
+
+        return _ret3 = (_temp3 = (_this3 = _possibleConstructorReturn(this, (_ref3 = MenuClickable.__proto__ || Object.getPrototypeOf(MenuClickable)).call.apply(_ref3, [this].concat(args))), _this3), _this3.homeSliderSelect = function () {
+            return _this3.props.onClick(_this3.props.index);
+        }, _temp3), _possibleConstructorReturn(_this3, _ret3);
     }
 
     _createClass(MenuClickable, [{
@@ -759,3 +890,8 @@ var MenuClickable = function (_React$Component2) {
 
 ReactDOM.render(homeSliderElements[0], document.getElementById('home-slider-panel-wrap'));
 ReactDOM.render(React.createElement(MenuContainer, null), document.getElementById('home-slider-header'));
+// ReactDOM.render(
+//     projectSliderElements[0],
+//     document.getElementById('project-slider-panel-wrap')
+// );
+ReactDOM.render(React.createElement(ProjectContainer, null), document.getElementById('project-slider-panel-wrap'));

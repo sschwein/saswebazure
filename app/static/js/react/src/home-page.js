@@ -12,17 +12,17 @@ function getAge(dateString) {
 homeSliderElements = {
     0:(
         <div className='slider-panel'>
-            <div className="d-flex w-700-center">
+            <div className="d-flex w-800-center">
                 <div className="col-md-4 mx-auto">
-                    <img className='headshot' height="280" width="200" src='/static/images/basic/headshot_2.png' />
+                    <img className='headshot' height="280" width="280" src='/static/images/basic/headshot_new_400.jpg' />
                 </div>
-                <div className="col-md-4 mx-auto">
+                <div className="col-md-6 mx-auto">
                     <br /><br />
                     <p className="font-size-110">
                         <strong>Name:</strong><br />
                         <span>Steven Schweinhart</span><br />
-                        <strong>Age:</strong><br />
-                        <span>{ getAge("1992/09/23") } years</span><br />
+                        <strong>Education:</strong><br />
+                        <span>Masters of Engineering</span><br /><span>Computer Engineering & Computer Science</span><br />
                         <strong>Location:</strong><br />
                         <span>Louisville, KY, USA</span>
                     </p>
@@ -39,6 +39,17 @@ homeSliderElements = {
         <div className='slider-panel'>
             <div className='experience-cell-wrap'>
                 <div className='experience-cell-left'>
+                    <img src='/static/images/logos/impact_kentucky.png' />
+                </div>
+                <div className='experience-cell-right'>
+                    <h5 className='home-section-subhead'><a href='https://impact-ky.com' target='_blank'>Impact Kentucky</a></h5>
+                    <div className='home-section-subhead1 font-green'>CTO/Cofounder - Since 2020</div>
+                    <div className='home-section-subhead2 font-grey'>Louisville, KY</div>
+                    <div className='home-section-p'>Impact Kentucky was founded in 2020 to help political candidates running for office. We currently offer services for data consulting, audience targetting, and digital advertising. As CTO my focus is on developing the technical architecture of our digital platforms hosted in Microsoft's Azure and Power Platform.</div>
+                </div>
+            </div>
+            <div className='experience-cell-wrap'>
+                <div className='experience-cell-left'>
                     <img src='/static/images/logos/humana.png' />
                 </div>
                 <div className='experience-cell-right'>
@@ -53,10 +64,10 @@ homeSliderElements = {
                     <img src='/static/images/logos/glasscapitol.png' />
                 </div>
                 <div className='experience-cell-right'>
-                    <h5 className='home-section-subhead'><a href='https://glasscapitol.org' target='_blank'>The Glass Capitol</a></h5>
+                    <h5 className='home-section-subhead'><a href='https://glasscapitol.org' target='_blank'>Glass Capitol</a></h5>
                     <div className='home-section-subhead1 font-green'>CTO/Cofounder - 2016-2018</div>
                     <div className='home-section-subhead2 font-grey'>Louisville, KY</div>
-                    <div className='home-section-p'>The Glass Capitol is a digital civic engagement platform dedicated to helping grassroots organizations effectively leverage the voices of their members. As CTO my focus was leading the development of the website's technical framework.  This included designing and building the site back-end using Google App Engine's Python web framework; leading a team of developers with site development; and helping to create the site front-end using HTML5, CSS, and AngularJS. </div>
+                    <div className='home-section-p'>Glass Capitol is a digital civic engagement platform dedicated to helping grassroots organizations effectively leverage the voices of their members. As CTO my focus was leading the development of the website's technical framework.  This included designing and building the site back-end using Google App Engine's Python web framework; leading a team of developers with site development; and helping to create the site front-end using HTML5, CSS, and AngularJS. </div>
                 </div>
             </div>
             <div className='experience-cell-wrap'>
@@ -158,6 +169,7 @@ homeSliderElements = {
                     <ul>
                         <li>Google Cloud Platform</li>
                         <li>Machine Learning</li>
+                        <li>React</li>
                         <li>AngularJs</li>
                         <li>Java</li>
                         <li>C/C++</li>
@@ -175,7 +187,7 @@ homeSliderElements = {
                     <div className="vol-cell">
                         <h5 className='home-section-subhead3 font-orange'>Kentuckians for the Commonwealth</h5>
                         <div className='home-section-subhead1 font-green'>Member and Work Team Coordinator</div>
-                        <div className='home-section-subhead2 font-grey'>Since 2017; Louisville, KY</div>
+                        <div className='home-section-subhead2 font-grey'>2017-2021; Louisville, KY</div>
                     </div>
                     <div className="vol-cell">
                         <h5 className='home-section-subhead3 font-orange'>Code Louisville</h5>
@@ -205,6 +217,24 @@ homeSliderElements = {
     )
 };
 
+projectSliderElements = {
+    0:(
+        <div className='slider-panel'>
+            <h3>Run With Craig</h3>
+        </div>
+    ),
+    1:(
+        <div className='slider-panel'>
+            <h3>Rachel Roarx for Kentucky 38</h3>
+        </div>
+    ),
+    2:(
+        <div className='slider-panel'>
+            <h3>Schweinhart Farms</h3>
+        </div>
+    ),
+};
+
 class MenuContainer extends React.Component {
     state = {
         activeIndex: 0
@@ -232,6 +262,33 @@ class MenuContainer extends React.Component {
         </div>
     }
 }
+
+class ProjectContainer extends React.Component {
+    state = {
+        activeIndex: 0
+    }
+  
+    projectSliderSelect = (index) => {
+        this.setState({ activeIndex: index });
+        ReactDOM.render(
+            projectSliderElements[index],
+            document.getElementById('projectSliderSelect')
+        );
+        document.getElementById("project-slider-panel").scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+        });
+    };
+  
+    render() {
+        return <div className='d-flex'>
+            {/* <MenuClickable index={0} name="About" isActive={ this.state.activeIndex===0 } onClick={ this.projectSliderSelect } /> */}
+            <div className="left-menu-button" onClick={ this.projectSliderSelect(0) }> {"<<"} </div>
+            <div className="right-menu-button" onClick={ this.projectSliderSelect(1) }> {">>"} </div>
+        </div>
+    }
+}
   
 class MenuClickable extends React.Component {
     homeSliderSelect = () => this.props.onClick(this.props.index)
@@ -254,3 +311,8 @@ ReactDOM.render(
     document.getElementById('home-slider-panel-wrap')
 );
 ReactDOM.render(<MenuContainer />, document.getElementById('home-slider-header'))
+// ReactDOM.render(
+//     projectSliderElements[0],
+//     document.getElementById('project-slider-panel-wrap')
+// );
+ReactDOM.render(<ProjectContainer />, document.getElementById('project-slider-panel-wrap'))
