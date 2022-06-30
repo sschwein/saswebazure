@@ -79,7 +79,7 @@ a:focus, a:hover{color:#B14c23;text-decoration:none;}
 .centered-300{margin:0 auto;position:relative;width:300px;}
 .centered-150{margin:0 auto;position:relative;width:150px;}
 .radio input{margin:0 5px;}
-#content{min-height:calc(100vh - 100px);padding:50px 0;}
+#content{min-height:100vh;padding:50px 0;}
 .ul-no-dot{list-style-type:none;padding-left:0;}
 .ul-no-dot li{margin:0;height:32px;}
 .error-text{text-align:center;color:red;}
@@ -91,6 +91,7 @@ a:focus, a:hover{color:#B14c23;text-decoration:none;}
 .w-1000-center{width:1000px;margin:0 auto;position:relative;}
 .w-700-header{width:700px;margin:0 auto 32px;border-bottom:solid 1px #d9d9d9;padding:0 100px 16px;}
 .w-700-center{width:700px;margin:0 auto;position:relative;}
+.w-800-center{width:800px;margin:0 auto;position:relative;}
 .quick-link-ul{list-style-type: none;}
 .quick-link-ul li{color:#d85c38;margin:8px 0;}
 #upload-form{width:400px;margin:0 auto;}
@@ -128,7 +129,7 @@ a:focus, a:hover{color:#B14c23;text-decoration:none;}
 .slider-teaser-img{max-width:600px;max-height:350px;margin:20px auto;display:block;}
 
 /*New Home Page*/
-#home-landing-text{padding:calc(50vh - 79px) 0;}
+#home-landing-text{padding:calc(50vh - 60px) 0;}
 #projects{min-height:calc(100vh - 56px);padding:100px;}
 #contact{width:100%;text-align:center;position:relative;padding:140px 0px;color:#f5f5f5;}
 .static-background{background-color: #6C7278;background-repeat: no-repeat;background-attachment: fixed;}
@@ -158,6 +159,9 @@ a:focus, a:hover{color:#B14c23;text-decoration:none;}
 .vol-row{display:flex;}
 .vol-cell{width:300px;position:relative;margin:0 auto;text-align:center;}
 .headshot{border-radius:50%;}
+#project-slider-panel-wrap{background:#F4F9FA}
+.left-menu-button{left:10px;top:331px;border:solid 2px #6C7278;border-radius:4px;position:absolute;cursor:pointer;height:38px;padding:0 4px;}
+.right-menu-button{right:10px;top:331px;border:solid 2px #6C7278;border-radius:4px;position:absolute;cursor:pointer;height:38px;padding:0 4px;}
 
 @media only screen and (max-width: 1023px) {
 #home-slider-header{width:100%;font-size:100%;}
@@ -176,5 +180,5 @@ a:focus, a:hover{color:#B14c23;text-decoration:none;}
 .experience-cell-wrap{padding:12px;}
 .experience-cell-left{display:none;}
 .experience-cell-right{width:100%;}
-.headshot{width:150px;height:210px;}
+.headshot{width:150px;height:150px;}
 }
