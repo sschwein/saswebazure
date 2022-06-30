@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 node_modules/
-scripts/ky-voters/barnett0169.txt
+scripts/ky-voters/*.txt
+scripts/ky-voters/*.json
