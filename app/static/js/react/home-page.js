@@ -725,6 +725,22 @@ projectSliderElements = {
             "h3",
             null,
             "Run With Craig"
+        ),
+        React.createElement(
+            "div",
+            { className: "slider-panel-img" },
+            React.createElement("img", { src: "/static/images/scrn/runwithcraig.png" })
+        ),
+        React.createElement(
+            "p",
+            { className: "font-size-110" },
+            "Run With Craig is an interactive map that was used by the Greenberg 2022 Mayoral campaign. It tracks all of the routes that Craig Greenberg ran with consitiuents while campaigning. The map uses the Google Maps Javascript API to plot the routes, and Geopandas for route processing and aggregation.",
+            React.createElement("br", null),
+            React.createElement(
+                "a",
+                { className: "font-weight-bold", href: "https://greenberg-api-dev.azurewebsites.net/map", target: "_new" },
+                "Explore"
+            )
         )
     ),
     1: React.createElement(
@@ -734,6 +750,22 @@ projectSliderElements = {
             "h3",
             null,
             "Rachel Roarx for Kentucky 38"
+        ),
+        React.createElement(
+            "div",
+            { className: "slider-panel-img" },
+            React.createElement("img", { src: "/static/images/scrn/rachelroarx.png" })
+        ),
+        React.createElement(
+            "p",
+            { className: "font-size-110" },
+            "This is a campaign website I designed and built in 2022 for Rachel Roarx's candidacy for KY State House. The landing page is made with HTML5 and CSS hosted in Microsoft's Azure Platform",
+            React.createElement("br", null),
+            React.createElement(
+                "a",
+                { className: "font-weight-bold", href: "https://rachelroarx.com", target: "_new" },
+                "Explore"
+            )
         )
     ),
     2: React.createElement(
@@ -743,6 +775,22 @@ projectSliderElements = {
             "h3",
             null,
             "Schweinhart Farms"
+        ),
+        React.createElement(
+            "div",
+            { className: "slider-panel-img" },
+            React.createElement("img", { src: "/static/images/scrn/schweinhartfarms.png" })
+        ),
+        React.createElement(
+            "p",
+            { className: "font-size-110" },
+            "Schweinhart Farms is a fun website I built for myself and my family to host and share recipes with each other. The website is made using HTML5 and CSS using a NoSQL database as the backend.",
+            React.createElement("br", null),
+            React.createElement(
+                "a",
+                { className: "font-weight-bold", href: "https://schweinhartfarms.com", target: "_new" },
+                "Explore"
+            )
         )
     )
 };
@@ -807,14 +855,22 @@ var ProjectContainer = function (_React$Component2) {
 
         return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_ref2 = ProjectContainer.__proto__ || Object.getPrototypeOf(ProjectContainer)).call.apply(_ref2, [this].concat(args))), _this2), _this2.state = {
             activeIndex: 0
-        }, _this2.projectSliderSelect = function (index) {
-            _this2.setState({ activeIndex: index });
-            ReactDOM.render(projectSliderElements[index], document.getElementById('projectSliderSelect'));
-            document.getElementById("project-slider-panel").scrollTo({
-                top: 0,
-                left: 0,
-                behavior: "smooth"
-            });
+        }, _this2.projectSliderDecrement = function () {
+            if (_this2.state.activeIndex > 0) {
+                var new_index = _this2.state.activeIndex - 1;
+                _this2.setState({ activeIndex: new_index });
+                ReactDOM.render(projectSliderElements[new_index], document.getElementById('project-slider-panel'));
+            } else {
+                console.log("already at the bottom");
+            }
+        }, _this2.projectSliderIncrement = function () {
+            if (_this2.state.activeIndex < 2) {
+                var new_index = _this2.state.activeIndex + 1;
+                _this2.setState({ activeIndex: new_index });
+                ReactDOM.render(projectSliderElements[new_index], document.getElementById('project-slider-panel'));
+            } else {
+                console.log("already at the top");
+            }
         }, _temp2), _possibleConstructorReturn(_this2, _ret2);
     }
 
@@ -826,18 +882,19 @@ var ProjectContainer = function (_React$Component2) {
                 { className: "d-flex" },
                 React.createElement(
                     "div",
-                    { className: "left-menu-button", onClick: this.projectSliderSelect(0) },
+                    { className: "left-menu-button font-size-125", onClick: this.projectSliderDecrement },
                     " ",
                     "<<",
                     " "
                 ),
                 React.createElement(
                     "div",
-                    { className: "right-menu-button", onClick: this.projectSliderSelect(1) },
+                    { className: "right-menu-button font-size-125", onClick: this.projectSliderIncrement },
                     " ",
                     ">>",
                     " "
-                )
+                ),
+                React.createElement("div", { id: "project-slider-panel" })
             );
         }
     }]);
@@ -890,8 +947,5 @@ var MenuClickable = function (_React$Component3) {
 
 ReactDOM.render(homeSliderElements[0], document.getElementById('home-slider-panel-wrap'));
 ReactDOM.render(React.createElement(MenuContainer, null), document.getElementById('home-slider-header'));
-// ReactDOM.render(
-//     projectSliderElements[0],
-//     document.getElementById('project-slider-panel-wrap')
-// );
 ReactDOM.render(React.createElement(ProjectContainer, null), document.getElementById('project-slider-panel-wrap'));
+ReactDOM.render(projectSliderElements[0], document.getElementById('project-slider-panel'));
