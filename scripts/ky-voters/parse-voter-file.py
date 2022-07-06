@@ -1,7 +1,10 @@
 import json
 import argparse
 import logging
+import os
 from datetime import date
+from azure.cosmos import CosmosClient
+from uuid import uuid4
 
 parser = argparse.ArgumentParser()
 parser.add_argument('input_file')
@@ -18,6 +21,10 @@ parties = {
     "S": "Socialist Workers",
     "I": "Independent"
 }
+
+
+def generate_uuid():
+    return str(uuid4())
 
 
 def set_voting_history(data):
@@ -80,26 +87,51 @@ def parse_voter(data):
         "year_of_birth": int(data[205:209]),
         "date_of_registration": date_of_registration,
         "voting_history": set_voting_history(data[217:237]),
-        "other": data[237:].strip()
+        "inactive": True if data[238] == "*" else False
     }
 
     return parsed
 
 
+def write_to_cosmos(uri, key, database_name, container_name, data):
+    client = CosmosClient(uri, key)
+    database = client.get_database_client(database=database_name)
+    container = database.get_container_client(container_name)
+    container.upsert_item(data)
+
+    logging.debug(f"Uploaded Cosmos item to {database_name}.{container_name}")
+
+
 def run(args):
-    with open(args.input_file, "r") as _file:
+    with open(args.input_file, "rb") as _file:
         voters = [
-            parse_voter(row)
+            parse_voter(row.decode("utf-8"))
             for row in _file.readlines()
         ]
 
-    print(json.dumps(voters[0], indent=4))
-    # with open(args.output_file, "w") as _file:
-    #     _file.write(json.dumps(voters))
+    voters = list(filter(lambda _: _["party_code"] == "D", voters))
+
+    with open(args.output_file, "w") as _file:
+        _file.write(json.dumps(voters))
+
+    # for i, voter in enumerate(voters):
+    #     voter["uuid"] = generate_uuid()
+
+    #     if i % 100 == 0:
+    #         logging.info(f"voters loaded: {i}")
+
+    #     write_to_cosmos(
+    #         os.getenv("COSMOS_URI"),
+    #         os.getenv("COSMOS_KEY"),
+    #         "voters",
+    #         "raw-data",
+    #         voter
+    #     )
 
 
 if __name__ == "__main__":
     logging.getLogger().setLevel(logging.INFO)
+    logging.getLogger("azure").setLevel(logging.WARNING)
 
     args = parser.parse_args()
     run(args)
