@@ -759,7 +759,7 @@ projectSliderElements = {
         React.createElement(
             "p",
             { className: "font-size-110" },
-            "This is a campaign website I designed and built in 2022 for Rachel Roarx's candidacy for KY State House. The landing page is made with HTML5 and CSS hosted in Microsoft's Azure Platform",
+            "This is a campaign website I designed and built in 2022 for Rachel Roarx's candidacy for KY State House. The landing page is made with HTML5/CSS and hosted in Microsoft's Azure Platform",
             React.createElement("br", null),
             React.createElement(
                 "a",
@@ -784,7 +784,7 @@ projectSliderElements = {
         React.createElement(
             "p",
             { className: "font-size-110" },
-            "Schweinhart Farms is a fun website I built for myself and my family to host and share recipes with each other. The website is made using HTML5 and CSS using a NoSQL database as the backend.",
+            "Schweinhart Farms is a fun website I built for myself and my family to host and share recipes with each other. The website is made using HTML5/CSS using a NoSQL database as the backend.",
             React.createElement("br", null),
             React.createElement(
                 "a",
