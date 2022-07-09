@@ -12,8 +12,25 @@ function getAge(dateString) {
 homeSliderElements = {
     0:(
         <div className='slider-panel'>
-            <div className="d-flex w-800-center">
+            <div className="d-flex w-800-center desktop-only">
                 <div className="col-md-4 mx-auto">
+                    <img className='headshot' height="280" width="280" src='/static/images/basic/headshot_new_400.jpg' />
+                </div>
+                <div className="col-md-6 mx-auto">
+                    <br /><br />
+                    <p className="font-size-110">
+                        <strong>Name:</strong><br />
+                        <span>Steven Schweinhart</span><br />
+                        <strong>Education:</strong><br />
+                        <span>Masters of Engineering</span><br /><span>Computer Engineering & Computer Science</span><br />
+                        <strong>Location:</strong><br />
+                        <span>Louisville, KY, USA</span>
+                    </p>
+                </div>
+            </div>
+            <div className="w-800-center mobile-only">
+                <br />
+                <div className="col-md-4 mx-auto text-center">
                     <img className='headshot' height="280" width="280" src='/static/images/basic/headshot_new_400.jpg' />
                 </div>
                 <div className="col-md-6 mx-auto">

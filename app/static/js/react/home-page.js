@@ -25,10 +25,71 @@ homeSliderElements = {
         { className: "slider-panel" },
         React.createElement(
             "div",
-            { className: "d-flex w-800-center" },
+            { className: "d-flex w-800-center desktop-only" },
             React.createElement(
                 "div",
                 { className: "col-md-4 mx-auto" },
+                React.createElement("img", { className: "headshot", height: "280", width: "280", src: "/static/images/basic/headshot_new_400.jpg" })
+            ),
+            React.createElement(
+                "div",
+                { className: "col-md-6 mx-auto" },
+                React.createElement("br", null),
+                React.createElement("br", null),
+                React.createElement(
+                    "p",
+                    { className: "font-size-110" },
+                    React.createElement(
+                        "strong",
+                        null,
+                        "Name:"
+                    ),
+                    React.createElement("br", null),
+                    React.createElement(
+                        "span",
+                        null,
+                        "Steven Schweinhart"
+                    ),
+                    React.createElement("br", null),
+                    React.createElement(
+                        "strong",
+                        null,
+                        "Education:"
+                    ),
+                    React.createElement("br", null),
+                    React.createElement(
+                        "span",
+                        null,
+                        "Masters of Engineering"
+                    ),
+                    React.createElement("br", null),
+                    React.createElement(
+                        "span",
+                        null,
+                        "Computer Engineering & Computer Science"
+                    ),
+                    React.createElement("br", null),
+                    React.createElement(
+                        "strong",
+                        null,
+                        "Location:"
+                    ),
+                    React.createElement("br", null),
+                    React.createElement(
+                        "span",
+                        null,
+                        "Louisville, KY, USA"
+                    )
+                )
+            )
+        ),
+        React.createElement(
+            "div",
+            { className: "w-800-center mobile-only" },
+            React.createElement("br", null),
+            React.createElement(
+                "div",
+                { className: "col-md-4 mx-auto text-center" },
                 React.createElement("img", { className: "headshot", height: "280", width: "280", src: "/static/images/basic/headshot_new_400.jpg" })
             ),
             React.createElement(
