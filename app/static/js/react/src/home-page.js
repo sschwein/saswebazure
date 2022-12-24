@@ -12,8 +12,25 @@ function getAge(dateString) {
 homeSliderElements = {
     0:(
         <div className='slider-panel'>
-            <div className="d-flex w-800-center">
+            <div className="d-flex w-800-center desktop-only">
                 <div className="col-md-4 mx-auto">
+                    <img className='headshot' height="280" width="280" src='/static/images/basic/headshot_new_400.jpg' />
+                </div>
+                <div className="col-md-6 mx-auto">
+                    <br /><br />
+                    <p className="font-size-110">
+                        <strong>Name:</strong><br />
+                        <span>Steven Schweinhart</span><br />
+                        <strong>Education:</strong><br />
+                        <span>Masters of Engineering</span><br /><span>Computer Engineering & Computer Science</span><br />
+                        <strong>Location:</strong><br />
+                        <span>Louisville, KY, USA</span>
+                    </p>
+                </div>
+            </div>
+            <div className="w-800-center mobile-only">
+                <br />
+                <div className="col-md-4 mx-auto text-center">
                     <img className='headshot' height="280" width="280" src='/static/images/basic/headshot_new_400.jpg' />
                 </div>
                 <div className="col-md-6 mx-auto">
@@ -221,16 +238,31 @@ projectSliderElements = {
     0:(
         <div className='slider-panel'>
             <h3>Run With Craig</h3>
+            <div className="slider-panel-img"><img src="/static/images/scrn/runwithcraig.png"></img></div>
+            <p className="font-size-110">
+                Run With Craig is an interactive map that was used by the Greenberg 2022 Mayoral campaign. It tracks all of the routes that Craig Greenberg ran with consitiuents while campaigning. The map uses the Google Maps Javascript API to plot the routes, and Geopandas for route processing and aggregation.
+                <br /><a className="font-weight-bold" href="https://greenberg-api-dev.azurewebsites.net/map" target="_new">Explore</a>
+            </p>
         </div>
     ),
     1:(
         <div className='slider-panel'>
             <h3>Rachel Roarx for Kentucky 38</h3>
+            <div className="slider-panel-img"><img src="/static/images/scrn/rachelroarx.png"></img></div>
+            <p className="font-size-110">
+                This is a campaign website I designed and built in 2022 for Rachel Roarx's candidacy for KY State House. The landing page is made with HTML5/CSS and hosted in Microsoft's Azure Platform
+                <br /><a className="font-weight-bold" href="https://rachelroarx.com" target="_new">Explore</a>
+            </p>
         </div>
     ),
     2:(
         <div className='slider-panel'>
             <h3>Schweinhart Farms</h3>
+            <div className="slider-panel-img"><img src="/static/images/scrn/schweinhartfarms.png"></img></div>
+            <p className="font-size-110">
+                Schweinhart Farms is a fun website I built for myself and my family to host and share recipes with each other. The website is made using HTML5/CSS using a NoSQL database as the backend. 
+                <br /><a className="font-weight-bold" href="https://schweinhartfarms.com" target="_new">Explore</a>
+            </p>
         </div>
     ),
 };
@@ -268,24 +300,37 @@ class ProjectContainer extends React.Component {
         activeIndex: 0
     }
   
-    projectSliderSelect = (index) => {
-        this.setState({ activeIndex: index });
-        ReactDOM.render(
-            projectSliderElements[index],
-            document.getElementById('projectSliderSelect')
-        );
-        document.getElementById("project-slider-panel").scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "smooth"
-        });
+    projectSliderDecrement = () => {
+        if (this.state.activeIndex > 0) {
+            var new_index = this.state.activeIndex - 1
+            this.setState({ activeIndex: new_index });
+            ReactDOM.render(
+                projectSliderElements[new_index],
+                document.getElementById('project-slider-panel')
+            );
+        } else {
+            console.log("already at the bottom")
+        }
+    };
+    
+    projectSliderIncrement = () => {
+        if (this.state.activeIndex < 2) {
+            var new_index = this.state.activeIndex + 1
+            this.setState({ activeIndex: new_index });
+            ReactDOM.render(
+                projectSliderElements[new_index],
+                document.getElementById('project-slider-panel')
+            );
+        } else {
+            console.log("already at the top")
+        }
     };
   
     render() {
         return <div className='d-flex'>
-            {/* <MenuClickable index={0} name="About" isActive={ this.state.activeIndex===0 } onClick={ this.projectSliderSelect } /> */}
-            <div className="left-menu-button" onClick={ this.projectSliderSelect(0) }> {"<<"} </div>
-            <div className="right-menu-button" onClick={ this.projectSliderSelect(1) }> {">>"} </div>
+            <div className="left-menu-button font-size-125" onClick={ this.projectSliderDecrement }> {"<<"} </div>
+            <div className="right-menu-button font-size-125" onClick={ this.projectSliderIncrement }> {">>"} </div>
+            <div id="project-slider-panel"></div>
         </div>
     }
 }
@@ -311,8 +356,8 @@ ReactDOM.render(
     document.getElementById('home-slider-panel-wrap')
 );
 ReactDOM.render(<MenuContainer />, document.getElementById('home-slider-header'))
-// ReactDOM.render(
-//     projectSliderElements[0],
-//     document.getElementById('project-slider-panel-wrap')
-// );
 ReactDOM.render(<ProjectContainer />, document.getElementById('project-slider-panel-wrap'))
+ReactDOM.render(
+    projectSliderElements[0],
+    document.getElementById('project-slider-panel')
+);

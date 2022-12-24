@@ -1,5 +1,9 @@
 import os
+import logging
 from azure.cosmos import CosmosClient
+
+logging.getLogger().setLevel(logging.INFO)
+logging.getLogger("azure").setLevel(logging.WARNING)
 
 # DEV
 # COSMOS_URI = os.environ["DEV_COSMOS_URI"]
@@ -54,4 +58,4 @@ for i, item in enumerate(cosmos_query):
         item[partition_col_name]
     )
     if i % 25 == 0:
-        print(f'deleted {i} docs')
+        logging.info(f'deleted {i} docs')
