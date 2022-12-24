@@ -133,3 +133,5 @@ scripts/ky-voters/barnett0169.txt
 scripts/ky-voters/*.jsonl
 scripts/ky-voters/*.json
 scripts/ky-voters/*.txt
+package-lock.json
+package.json
